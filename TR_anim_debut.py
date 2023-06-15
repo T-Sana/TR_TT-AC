@@ -1,5 +1,4 @@
 from outils.cvt import *
-from outils.souris import TRsouris as souris
 from outils.quit import quitter
 from TR_VARS import *
 
@@ -11,7 +10,6 @@ if True: ## Vars ##
     if True: ## Anim.vars ##
         p_dep = [1700, 100]
         p_arr = [200, 300]
-        arng = 500
     if True: ## Ciel.vars ##
         dist_nuages = 2000
         vitesses= (0.50, 1.00, 0.75, 1.25, 0.50, 1.00)
@@ -24,10 +22,10 @@ if True: ## Vars ##
         pmp1 = cg  ## Position Maison Perso 1 ##
         pmp2 = ctg ## Position Maison Perso 2 ##
     if True: ## Joueurs ##
-        j1 = joueur('j1', pmp1, [blanc, blanc], 1.5)
-        j2 = joueur('j2', pmp2, [blanc, blanc], 1.5)
+        j1.place(pmp1)
+        j2.place(pmp2)
 if True: ## Imageaison ##
-    def img(pt=0, nuages=True, persos=True, monts=True):
+    def img(pt=0, nuages=True, persos=True, monts=True, j1=j1, j2=j2):
         pd = pt_sg(hd, bd, 9, 4)
         img = image(remplissage=nouvelle_couleur('e08030'))
         soleil(img, [hd[0]-dtt, hd[1]+dtt], rot=pt/4)
@@ -62,31 +60,27 @@ if True: ## Imageaison ##
                 pass
         if monts: ## Montagnes ##
             montagnette(img)
+            htr = pd[1]
+            for i in range(0, 1920, 132): montagnette(img, [i, htr])
+            for i in range(33, 1920, 66): montagnette(img, [i, htr])
+            for i in range(66, 1920, 132): montagnette(img, [i, htr])
         return(img)
 def anim_debut(anim=True, v=5):
     cc = 0
-    if anim: #True: ## Animation début ##
+    if anim: ## Animation début ##
         for i in points_segment(p_dep, p_arr)[::v]:
-            montre_img(zoom_at(img(cc-arng), 2, coord=i), nf)
+            montre_img(zoom_at(img(cc), 2, coord=i), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
             cc += 1
         pts = points_segment(p_arr, ct)
         zp = 1/len(pts)
         cnt = 0
-        for j in pts[::v]:
-            montre_img(zoom_at(img(cc-arng), 2-zp*cnt, coord=j), nf)
+        v2 = round(v/2)
+        for j in pts[::v2]:
+            montre_img(zoom_at(img(cc), 2-zp*cnt, coord=j), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
-            cnt+=1
+            cnt += v2
             cc += 1
-    return(j1, j2, zoom_at(img(cc-arng), 2-zp*cnt, coord=j))
-    while True:
-        wk = souris_sur_image(img(cc-arng), souris.get_souris_, nf, 1, False)
-        j1.deplace([cc%21-10, 0])
-        j1.deplace([0, cc%51-25])
-        j2.deplace([0, cc%51-25])
-        if wk == 27: quitter()
-        elif wk != -1: print(wk)
-        cc += 1
-        j1.place(souris.pos if souris.pos != souris.dehors else None)
+    return(j1, j2, cc)

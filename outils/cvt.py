@@ -40,7 +40,6 @@ if oui: ## Tout ##
             else:
                 return(p4)
         def coosEllipse(pt, rayons, an, angleEllipse=0):
-            an -= 180
             b, a = rayons
             a, b = abs(round(a)), abs(round(b))
             if a == b:
@@ -551,7 +550,7 @@ if oui: ## Tout ##
             diffX = x1 - x2
             diffY = y1 - y2
             rotation = math.degrees(math.atan2(diffY, diffX))
-            return(rotation)
+            return(rotation+180)
         def coosCercle(ct, rayon, angle):
             '''
             Prend:
@@ -999,7 +998,6 @@ if oui: ## Tout ##
             rotation = angleEntrePoints(p1, p2)
             if rayon < 0:
                 rayon = abs(rayon)
-                rotation += 180
             elif rayon == 0:
                 if epaisseur == 0:
                     epaisseur = -1
@@ -1133,18 +1131,17 @@ if oui: ## Tout ##
             rotation = angleEntrePoints(p1, p2)
             if sagitta < 0:
                 sagitta = abs(sagitta)
-                rotation += 180
             elif sagitta == 0:
                 abs(epaisseur)
                 cv2.line(img, p1, p2, couleur, epaisseur)
                 return(img)
             if epaisseur < 0:
                 try:
-                    cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 0, 180, couleur, abs(epaisseur))
+                    cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 180, 360, couleur, abs(epaisseur))
                 except:
                     pass
                 epaisseur = -1
-            cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 0, 180, couleur, epaisseur)
+            cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 180, 360, couleur, epaisseur)
             return(img)
         def arc_dist(img, p1=ct, dist=25, sagitta=25, couleur=noir, epaisseur=epaisseur):
             '''
@@ -1724,7 +1721,7 @@ if oui: ## Tout ##
             if attente >= 0:
                 quoi = cv2.waitKeyEx(attente)
                 return(quoi)
-        def souris_sur_image(img, fonction, nomFenetre='img', attente=0, destroy=True):
+        def souris_sur_image(img, fonction, nomFenetre='img', attente=0, destroy=True, param=None):
             '''
             Prend:
             ------
@@ -1739,7 +1736,7 @@ if oui: ## Tout ##
             cv2.namedWindow(nomFenetre, cv2.WND_PROP_FULLSCREEN)
             cv2.setWindowProperty(nomFenetre, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
             cv2.imshow(nomFenetre, img)
-            cv2.setMouseCallback(nomFenetre, fonction)
+            cv2.setMouseCallback(nomFenetre, fonction, param)
             wk = cv2.waitKeyEx(attente)
             if destroy == True:
                 cv2.destroyWindow(nomFenetre)
