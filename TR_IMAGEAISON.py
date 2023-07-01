@@ -112,6 +112,7 @@ if True: ## Img2 ## @@ Ville @@
                             c_porte.append([i+dx2, j+dy])
                 truc = not truc
         if True: ## Porte ##
+            c_porte = [c_porte[0], [c_porte[1][0], c_porte[0][1]], [c_porte[0][0], c_porte[1][1]], c_porte[1]]
             for i in c_porte:
                 point(img, i)
         if True: ## Crénaux ##
