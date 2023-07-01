@@ -130,7 +130,7 @@ class tableau:
             cv2.setMouseCallback(nom, s.souris.get_souris)
             cv2.imshow(nom, img)
             wk = cv2.waitKey(10)
-            if wk == 27: cv2.destroyAllWindows(); raise SystemExit
+            if wk == 27: cv2.destroyAllWindows(); quitter()
             x, y = s.souris.case_clicked_in(self.files, self.colonnes)
             if x != -1 and y != -1:
                 break
@@ -145,7 +145,7 @@ class tableau:
             cv2.setMouseCallback(nom, s.souris.get_souris)
             cv2.imshow(nom, img)
             wk = cv2.waitKey(10)
-            if wk == 27: cv2.destroyAllWindows(); raise SystemExit
+            if wk == 27: cv2.destroyAllWindows(); quitter()
             x = s.souris.clicked_in_list_bts(self.colonnes)
             if x != -1:
                 break
@@ -160,7 +160,7 @@ class tableau:
             cv2.setMouseCallback(nom, s.souris.get_souris)
             cv2.imshow(nom, img)
             wk = cv2.waitKey(10)
-            if wk == 27: cv2.destroyAllWindows(); raise SystemExit
+            if wk == 27: cv2.destroyAllWindows(); quitter()
             y = s.souris.clicked_in_list_bts(self.file)
             if y != -1:
                 break
@@ -168,7 +168,7 @@ class tableau:
         return(y)
     def montre(self):
         wk = montre(self.img(), self.nom)
-        if wk == 27: cv2.destroyAllWindows(); raise SystemExit
+        if wk == 27: cv2.destroyAllWindows(); quitter()
     def place(self, x=0, y=0, place=None, cond=None):
         if place == None: return(False)
         if cond != None:

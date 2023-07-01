@@ -1,6 +1,7 @@
 from outils.cvt import *
 from TR_VARS import *
 from outils.functs import *
+from outils.quit import *
 
 
 if True: ## Img1 ## @@ Campagne @@
@@ -82,12 +83,13 @@ def img_cart1() -> None:
 def img_cart2() -> None:
     sauve_image(n_img2, img2(), f'{dir}/{imgs}')
 
-img_cart2()
-im2 = ouvre_image(f'{dir}/{imgs}/{n_img2}')
-for i in range(0, d[0]-haut+1, 2):
-    wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
-    if wk == 27: raise SystemExit
-for i in range(0, d[0]-haut+1, 2)[::-1]:
-    wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
-    if wk == 27: raise SystemExit
-montre_part(im2)
+def demo_img2():
+    img_cart2()
+    im2 = ouvre_image(f'{dir}/{imgs}/{n_img2}')
+    for i in range(0, d[0]-haut+1, 2):
+        wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
+        if wk == 27: quitter()
+    for i in range(0, d[0]-haut+1, 2)[::-1]:
+        wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
+        if wk == 27: quitter()
+    montre_part(im2)
