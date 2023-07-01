@@ -52,8 +52,11 @@ if True: ## Img2 ## @@ Ville @@
             tla, tlb, tlc, tld, tle, tlf = tailles
             dtt = 100
         if True: ## Mur.vars ##
-            mur = [pt_sg(hg, bg, 9, 5), pt_sg(hd, bd, 4, 9)]
+            mur = [pt_sg(hg, bg, 9, 5), pt_sg(hd, bd, 4, 9), 5]
             crenaux = [pt_sg(hg, bg, 9, 4), pt_sg(hd, bd, 9, 5), 19] ## Merlets [CATALÀ] ##
+            porte = 4
+            c_porte = []
+            d_porte = 12
         d = [haut*2, long, 3]
         hg, hd, bg, bd = [0, 0], [d[1], 0], [0, d[0]], [d[1], d[0]]
         ct = ct_cr(hg, hd, bg, bd)
@@ -67,15 +70,58 @@ if True: ## Img2 ## @@ Ville @@
             nuage(img, [cth[0]+100, cth[1]-100], tlc)
             nuage(img, [hd[0]-300, hd[1]+150], tle)
             nuage(img, [hd[0]-150, hd[1]+200], tlf)
-        rectangle(img, [0, d[0]], pt_sg(hd, bd, 9, 4), nouvelle_couleur('80e030'), 0) ## Terre (rectangle vert) ##
-        rectangle(img, mur[0], mur[1], nouvelle_couleur('404040'), 0)
-        distance = diff(crenaux[0][0], crenaux[1][0])/crenaux[2]
-        dra = True
-        for i in range2(crenaux[0][0], crenaux[1][0], distance):
-            if dra: rectangle(img, [i, crenaux[0][1]], [i+distance, crenaux[1][1]], noir, 0)
-            dra = not dra
-        for i in [crenaux[0], crenaux[1]]:
-            point(img, i, rouge)
+        if True: ## Sol ##
+            rectangle(img, [0, d[0]], pt_sg(hd, bd, 9, 4), nouvelle_couleur('80e030'), 0) ## Terre (rectangle vert) ##
+        if True: ## Mur ##
+            dy = diff(mur[0][1], mur[1][1])/mur[2]
+            dx = diff(mur[0][0], mur[1][0])/crenaux[2]
+            truc = False
+            for a, j in enumerate(range2(mur[0][1], mur[1][1], dy)):
+                for b, i in enumerate(range2(mur[0][0] - (dx//2 if truc else 0), mur[1][0] + (dx//2 if truc else 0), dx)):
+                    t = True
+                    if truc:
+                        ls = [n for n in range(d_porte, d_porte+porte+1)]
+                        if b == d_porte:
+                            rectangle(img, [i, j], [i+dx/2, j+dy], nouvelle_couleur('404040'), 0)
+                            rectangle(img, [i, j], [i+dx/2, j+dy], noir, 3)
+                        elif b == d_porte+porte:
+                            rectangle(img, [i+dx/2, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
+                            rectangle(img, [i+dx/2, j], [i+dx, j+dy], noir, 3)
+                    else:
+                        ls = [n for n in range(d_porte, d_porte+porte)]
+                    if a == 2:
+                        if truc: dx2 = dx/2
+                        else: dx2 = 0
+                        if b == d_porte:
+                            c_porte.append([i+dx2, j])
+                            triangle(img, [i+dx2, j], [i+dx+dx2, j], [i+dx2, j+dy], nouvelle_couleur('404040'), 0)
+                            triangle(img, [i+dx2, j], [i+dx+dx2, j], [i+dx2, j+dy], noir, 3)
+                        elif b == d_porte+porte-1:
+                            triangle(img, [i+dx2, j], [i+dx+dx2, j], [i+dx+dx2, j+dy], nouvelle_couleur('404040'), 0)
+                            triangle(img, [i+dx2, j], [i+dx+dx2, j], [i+dx+dx2, j+dy], noir, 3)
+                    for el in ls:
+                        if b == el:
+                            t = False
+                    if t or a == 0 or a == 1:
+                        rectangle(img, [i, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
+                        rectangle(img, [i, j], [i+dx, j+dy], noir, 3)
+                    if diff(j, mur[1][1]) < dy:
+                        if b == d_porte+porte:
+                            if truc: dx2 = dx/2
+                            else: dx2 = 0
+                            c_porte.append([i+dx2, j+dy])
+                truc = not truc
+        if True: ## Porte ##
+            for i in c_porte:
+                point(img, i)
+        if True: ## Crénaux ##
+            distance = diff(crenaux[0][0], crenaux[1][0])/crenaux[2]
+            dra = True
+            for i in range2(crenaux[0][0]-distance/2, crenaux[1][0]+distance/2, distance):
+                if dra:
+                    rectangle(img, [i, crenaux[0][1]], [i+distance, crenaux[1][1]], nouvelle_couleur('404040'), 0)
+                    rectangle(img, [i, crenaux[0][1]], [i+distance, crenaux[1][1]], noir, 3)
+                dra = not dra
         return(img)
 
 def img_cart1() -> None:

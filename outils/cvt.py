@@ -1337,6 +1337,10 @@ if oui: ## Tout ##
             Soit: ``img = rectangle(···)``\n
             Soit: ``rectangle(···)``
             '''
+            p1 = [round(i) for i in p1]
+            p2 = [round(i) for i in p2]
+            p3 = [round(i) for i in p3]
+
             epaisseur = int(epaisseur)
             if epaisseur <= 0:
                 if epaisseur == 0:
