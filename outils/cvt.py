@@ -262,8 +262,10 @@ if oui: ## Tout ##
         class pt_img_cartee:
             pt = (960, 540)
     if oui: ########################### Imports ### ## Licences ######
-        '''from dependances import Get_ecrans ######## ## None (mine) ###'''
-        import Dependances.Text_samples as sm ##### ## None (mine) ###
+        '''
+        from dependances import Get_ecrans ######## ## None (mine) ###'''
+        try: import Dependances.Text_samples as sm# ## None (mine) ###
+        except: import outils.Dependances.Text_samples as sm
         import cv2 ## Dessins, affichage... ####### ## Apache 2.0 ####
         import numpy as np ######### Arrays ####### ## BSD-3-Clause ##
         import math ######### Mathématiques ####### ## Builded-in ####
@@ -1426,18 +1428,18 @@ if oui: ## Tout ##
                     ct = coosCercle(cto, i, j + rotation)
                     vortex(img, ct, taille_spirale, 'lineere', couleur, plein, c_ep, bras, rotation_spirales, tours, step)
             return(img)
-        def grille(img, epaisseur1=5, epaisseur2=2, pto=pt_img_cartee.pt, couleur=noir):
+        def grille(img, epaisseur1=5, epaisseur2=2, pto=pt_img_cartee.pt, couleur=noir, d=[haut, long]):
             x, y = pto
-            ligne(img, [x, 0], [x, haut], couleur, epaisseur1)
-            ligne(img, [0, y], [long, y], couleur, epaisseur1)
+            ligne(img, [x, 0], [x, d[0]], couleur, epaisseur1)
+            ligne(img, [0, y], [d[1], y], couleur, epaisseur1)
             for i in range(x, 0, -50):
-                ligne(img, [i, 0], [i, haut], couleur, epaisseur2)
-            for i in range(x, long, 50):
-                ligne(img, [i, 0], [i, haut], couleur, epaisseur2)
+                ligne(img, [i, 0], [i, d[0]], couleur, epaisseur2)
+            for i in range(x, d[1], 50):
+                ligne(img, [i, 0], [i, d[0]], couleur, epaisseur2)
             for i in range(y, 0, -50):
-                ligne(img, [0, i], [long, i], couleur, epaisseur2)
-            for i in range(y, haut, 50):
-                ligne(img, [0, i], [long, i], couleur, epaisseur2)
+                ligne(img, [0, i], [d[1], i], couleur, epaisseur2)
+            for i in range(y, d[0], 50):
+                ligne(img, [0, i], [d[1], i], couleur, epaisseur2)
             return(img)
         def parabole(img, a=1, b=0, c=0, puissance=2, couleur=bleu, epaisseur=10):
             p = puissance
@@ -1577,7 +1579,7 @@ if oui: ## Tout ##
             ``img`` (``np.array``)
             '''
             img = image(dimensions, remplissage)
-            grille(img, couleur_lignes, point_debut, dimensions[0:2], 25, 5)
+            grille(img, pto=point_debut, couleur=couleur_lignes, d=dimensions[0:2])
             return(img)
         def image_cadre(dimensions=(haut, long, 3), remplissage=blanc, couleur_cadre=noir):
             '''
@@ -1688,6 +1690,9 @@ if oui: ## Tout ##
             if destroy == True:
                 cv2.destroyWindow(nomFenetre)
             return(wk)
+        def montre_part(img, pto=[0, 0], t=[long-1, haut-1], nomFenetre='img', attente=0, destroy=True, dists=relocate_img()):
+            im = img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]
+            return(montre(im, nomFenetre, attente, destroy, dists))
         def attend_touche(attente):
             if attente >= 0:
                 quoi = cv2.waitKeyEx(attente)

@@ -5,6 +5,10 @@ from outils.cvt import *
 dir = get_dir()
 imgs = 'Imgs'
 n_img1 = 'img1.jpg'
+n_img2 = 'img2.jpg'
+n_img3 = 'img3.jpg'
+n_img4 = 'img4.jpg'
+n_img5 = 'img5.jpg'
 ## noms ##
 nf = 'JEU_TR'
 aut1 = 'Anna Camps'

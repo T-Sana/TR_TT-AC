@@ -1,5 +1,6 @@
+try: from functs import *
+except: from outils.functs import *
 import numpy as np
-from multimethod import multimethod
 from outils.cvt import *
 try:
     import outils.souris as s
@@ -9,22 +10,6 @@ except:
 marron_clair = [77, 113, 181]
 marron_clair2 = [30, 60, 120]
 marron_fonce = [37, 53, 101]
-
-@multimethod
-def range2(start, stop, step: int=1):
-    return(range(start, stop, step))
-@multimethod
-def range2(start, stop, step: float):
-    if step == 0: return([])
-    out = [start]
-    a = start
-    while True:
-        a += step
-        if a >= stop and step > 0:
-            return(out)
-        elif a <= stop and step < 0:
-            return(out)
-        out.append(a)
 
 class tableau:
     def __array__(self):
