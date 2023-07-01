@@ -262,23 +262,20 @@ if oui: ## Tout ##
         class pt_img_cartee:
             pt = (960, 540)
     if oui: ########################### Imports ### ## Licences ######
-        '''from dependances import Get_ecrans ######## ## None (mine) ###
-        import dependances.Text_samples as sm ##### ## None (mine) ###'''
+        '''from dependances import Get_ecrans ######## ## None (mine) ###'''
+        import Dependances.Text_samples as sm ##### ## None (mine) ###
         import cv2 ## Dessins, affichage... ####### ## Apache 2.0 ####
         import numpy as np ######### Arrays ####### ## BSD-3-Clause ##
         import math ######### Mathématiques ####### ## Builded-in ####
-        import imutils ###### Outils divers ####### ## MIT ###########
         import random as rd ### Aleatoireté ####### ## Builded-in ####
         import time ## Chronos, heure etc... ###### ## Builded-in ####
         from datetime import date, datetime ####### ## Builded-in ####
         import os ## Outils systeme ############### ## Builded-in ####
-        import pyautogui as kb ## clavier ######### ## BSD-3-Clause ##
         import copy ## Duplie les [] et les {} #### ## Builded-in ####
-        from screeninfo import get_monitors ####### ## ???????????? ##
     if oui: ################ Samples à scripter ###
-        '''samples = sm.samples()
+        samples = sm.samples()
         samples1 = samples[0]
-        samples2 = samples[1]'''
+        samples2 = samples[1]
     if oui: ############################ Format ###
         def suivant(ou, texte, ind=0):
             if type(ou) == int:
@@ -757,37 +754,6 @@ if oui: ## Tout ##
                     return(pas_bougee) #([0, -1080])
             return(pas_bougee)
         relocaliser_l_image = relocate_img()
-        def tape(touche, repetition=1, intervalle=0.0, attente=None):
-            '''
-            :touche: ``str`` or ``list`` of ``str``\n
-            :repetition: ``int``\n
-            :intervalle: ``float``\n
-            :attente: ``float``
-            '''
-            repetition = abs(repetition)
-            kb.press(touche, repetition, intervalle, False, attente)
-        def appuie(touche, attente=None):
-            '''
-            :touche: ``str`\n
-            :attente: ``float``
-            '''
-            kb.keyDown(touche, False, attente)
-        def appuie(touche, attente=None):
-            '''
-            :touche: ``str`\n
-            :attente: ``float``
-            '''
-            kb.keyUp(touche, False, attente)
-        def raccourci_clavier(touches, intervalle=0.0):
-            kb.hotkey(touches, logScreenshot=False, interval=intervalle)
-        def presse(touche, attente=None):
-            '''
-            :touche: ``str` or ``list`` of ``str``\n
-            :attente: ``float``
-            '''
-            kb.hold(touche, False, attente)
-        def ecris_sur_clavier(texte, intervalle=0.0, attente=None):
-            kb.write(texte, intervalle, False, attente)
     if oui: ############################ Formes ###
         def lune(img, pt=ct, taille=1, couleur=[0, 200, 255], couleur2=[0, 128, 255], rot=0):
             for i in range(1, int(taille*40)):
@@ -1674,8 +1640,13 @@ if oui: ## Tout ##
             '''
             img = cv2.imread(chemin)
             return(img)
-        def sauve_image(nom_fichier, img):
+        def sauve_image(nom_fichier, img, path=''):
+            if path != '':
+                r = os.getcwd()
+                os.chdir(path)
             cv2.imwrite(nom_fichier, img)
+            if path != '':
+                os.chdir(r)
     if oui: ########## Fonctions sur les images ###
         def zoom_at(img, zoom=1, angle=0, coord=None):
             cy, cx = [ i/2 for i in img.shape[:-1] ] if coord is None else coord[::-1]

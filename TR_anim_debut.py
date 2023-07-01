@@ -2,10 +2,6 @@ from outils.cvt import *
 from outils.quit import quitter
 from TR_VARS import *
 
-if True: ## Functs ##
-    pass
-if True: ## Classes ##
-    pass
 if True: ## Vars ##
     if True: ## Anim.vars ##
         p_dep = [1700, 100]
@@ -25,7 +21,7 @@ if True: ## Vars ##
         j1.place(pmp1)
         j2.place(pmp2)
 if True: ## Imageaison ##
-    def img(pt=0, nuages=True, persos=True, monts=True, j1=j1, j2=j2):
+    def imag(pt=0, nuages=True, persos=True, monts=True, j1=j1, j2=j2):
         pd = pt_sg(hd, bd, 9, 4)
         img = image(remplissage=nouvelle_couleur('e08030'))
         soleil(img, [hd[0]-dtt, hd[1]+dtt], rot=pt/4)
@@ -52,12 +48,6 @@ if True: ## Imageaison ##
         if True: ## Maisons ##
             maison(img, pmp1)
             maison(img, pmp2)
-        if persos: ## Persos ##
-            if True: ## Joueurs ##
-                j1.dessine(img)
-                j2.dessine(img)
-            if True: ## PNJ ##
-                pass
         if monts: ## Montagnes ##
             montagnette(img)
             htr = pd[1]
@@ -65,22 +55,21 @@ if True: ## Imageaison ##
             for i in range(33, 1920, 66): montagnette(img, [i, htr])
             for i in range(66, 1920, 132): montagnette(img, [i, htr])
         return(img)
+sauve_image(n_img1, imag(), f'{dir}/{imgs}')
+img = ouvre_image(f'{dir}/{imgs}/{n_img1}')
 def anim_debut(anim=True, v=5):
-    cc = 0
     if anim: ## Animation début ##
         for i in points_segment(p_dep, p_arr)[::v]:
-            montre_img(zoom_at(img(cc), 2, coord=i), nf)
+            montre_img(zoom_at(img, 2, coord=i), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
-            cc += 1
         pts = points_segment(p_arr, ct)
         zp = 1/len(pts)
         cnt = 0
         v2 = round(v/2)
         for j in pts[::v2]:
-            montre_img(zoom_at(img(cc), 2-zp*cnt, coord=j), nf)
+            montre_img(zoom_at(img, 2-zp*cnt, coord=j), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
             cnt += v2
-            cc += 1
-    return(j1, j2, cc)
+    return(j1, j2)

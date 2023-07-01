@@ -1,14 +1,15 @@
 from outils.cvt import *
 from outils.quit import *
-from TR_anim_debut import *
+from TR_anim_debut import img
 from TR_VARS import *
+
+im = copy.deepcopy(img)
 
 def titre(t=9):
     t2 = 5
     marron = nouvelle_couleur('122336')
     a, b = 3, 2
     if t < t2: t = t2+1
-    im = img(0, persos=non)
     pg = pt_sg(hg, bg, 6)
     pg2 = pt_sg(hg, bg, 6, 4)
     pt1, pt2, pt3, pt4 = pt_sg(hg, ct, a, b), pt_sg(hd, ct, a, b), pt_sg(bg, ct, a, b), pt_sg(bd, ct, a, b)
