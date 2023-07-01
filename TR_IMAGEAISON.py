@@ -54,13 +54,15 @@ if True: ## Img2 ## @@ Ville @@
         if True: ## Mur.vars ##
             mur = [pt_sg(hg, bg, 9, 5), pt_sg(hd, bd, 4, 9), 5]
             crenaux = [pt_sg(hg, bg, 9, 4), pt_sg(hd, bd, 9, 5), 19] ## Merlets [CATALÀ] ##
+        if True: ## Porte.vars ##
             porte = 4
-            c_porte = []
             d_porte = 12
-        d = [haut*2, long, 3]
-        hg, hd, bg, bd = [0, 0], [d[1], 0], [0, d[0]], [d[1], d[0]]
-        ct = ct_cr(hg, hd, bg, bd)
+        if True: ## VARS ##
+            d = [haut*2, long, 3]
+            hg, hd, bg, bd = [0, 0], [d[1], 0], [0, d[0]], [d[1], d[0]]
+            ct = ct_cr(hg, hd, bg, bd)
     def img2():
+        c_porte = []
         img = image(remplissage=nouvelle_couleur('e08030'), dimensions=d)
         soleil(img, [hd[0]-dtt, hd[1]+dtt])
         if True: ## Nuages ##
@@ -73,6 +75,7 @@ if True: ## Img2 ## @@ Ville @@
         if True: ## Sol ##
             rectangle(img, [0, d[0]], pt_sg(hd, bd, 9, 4), nouvelle_couleur('80e030'), 0) ## Terre (rectangle vert) ##
         if True: ## Mur ##
+            
             dy = diff(mur[0][1], mur[1][1])/mur[2]
             dx = diff(mur[0][0], mur[1][0])/crenaux[2]
             truc = False
