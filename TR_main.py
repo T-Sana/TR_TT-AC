@@ -6,8 +6,6 @@ if True: ## Packages ##
     from TR_cartes import *
     from TR_titre import *
     from TR_vars import *
-if True: ## Building | Etc ##
-    pass
 if True: ## Main ##
     '''titre()
     trs.shade(img)
