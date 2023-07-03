@@ -3,6 +3,8 @@ import sys
 
 def install(package) -> None:
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def uninstall(package) -> None:
+    subprocess.check_call([sys.executable, "-m", "pip", "uninstall", package])
 def update(package) -> None:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
 def install_updated(package) -> None:

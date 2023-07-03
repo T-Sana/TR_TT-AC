@@ -1,3 +1,4 @@
+from dotenv import load_dotenv; load_dotenv()
 try: from outils.cvt import *
 except: from cvt import *
 import os
@@ -33,23 +34,35 @@ if True: ## persos ##
     class joueur:
         def __str__(self):
             return(self.nom)
-        def __init__(self, nom: str, coos=ct, clrs=[blanc, blanc], t=1, o=0, keys=[key_arr_u, key_arr_d, key_arr_r, key_arr_l]) -> None:
-            print(keys, len(keys), type(keys))
+        def __init__(self, nom: str, coos=ct, clrs=[blanc, blanc], t=1, o=0, keys=[key_arr_u, key_arr_d, key_arr_r, key_arr_l], ou_peut_etre=[hg, bd], ou_ne_peut_etre=[]) -> None:
+            self.ou_peut_etre = [ou_peut_etre if type(ou_peut_etre[0][0]) == int or type(ou_peut_etre[0][0]) == float else i for i in ou_peut_etre]
+            self.ou_ne_peut_etre = ou_ne_peut_etre
             self.keys = keys
             self.k_h, self.k_b, self.k_d, self.k_g = self.keys
+            print([self.k_h, self.k_b, self.k_d, self.k_g])
             self.nom = nom
             self.pos = coos # [x, y]
             self.clrs = clrs
             self.t = t
             self.o = o
         def deplace(self, mouvement=[0, 0]) -> None:
-            if clicked_in([self.pos[0]+mouvement[0], self.pos[1]+mouvement[1]], [hg, bd]):
-                self.pos = [self.pos[0]+mouvement[0], self.pos[1]+mouvement[1]]
+            for i in self.ou_peut_etre:
+                if clicked_in([self.pos[0]+mouvement[0], self.pos[1]+mouvement[1]], i):
+                    for i in self.ou_ne_peut_etre:
+                        if clicked_in([self.pos[0]+mouvement[0], self.pos[1]+mouvement[1]], i):
+                            return(None)
+                    self.pos = list([self.pos[0]+mouvement[0], self.pos[1]+mouvement[1]])
+                    return(None)
         def dessine(self, img=image()) -> None:
             perso(img, self.pos, self.t, self.o, self.clrs[0], self.clrs[1])
             return(img)
         def place(self, pos=None):
             if pos != None:
-                self.pos = pos
-j1 = joueur('j1', clrs=[blanc, blanc], t=1.5)
-j2 = joueur('j2', clrs=[blanc, blanc], t=1.5)
+                self.pos = list(pos)
+if True: ## Keys.vars ##
+    with open('./Config/keys.txt', 'r') as file:
+        keys = file.read()
+        print(keys)
+    configKeys = eval(keys)
+j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])
+j2 = joueur('j2', clrs=[blanc, blanc], t=1.5, keys=configKeys['keysj2'])

@@ -1,9 +1,9 @@
-from dotenv import load_dotenv; load_dotenv()
-from outils.paths__names__etc import *
-from TR_imageaison import img_cart1, img_cart2, Maine
-from outils.cvt import *
+from TR__init import *
 from outils.pip import *
 from inspect import currentframe
+from outils.paths__names__etc import *
+from TR_imageaison import img_cart1, img_cart2, img_chrg
+from outils.cvt import *
 
 nf = os.getenv('nomJeu') # nf = NomFenêtre
 if True: ## KeyConfig ##
@@ -35,20 +35,6 @@ if True: ## Format.vars ##
     bold_green = f'{green}{bold}'
     normal = '\033[00m'
 if True: ## Functs ##
-    def install_dependencies(packages_to_install=[], packages_to_update=[], steps=0) -> None:
-        for i in ['pip']:
-            update(i)
-            montre_img_charg(f'Updating {i}', steps)
-            steps += 1
-        for i in packages_to_install:
-            install(i)
-            montre_img_charg(f'Installing {i}', steps)
-            steps += 1
-        for i in packages_to_update:
-            update(i)
-            montre_img_charg(f'Updating {i}', steps)
-            steps += 1
-        return(steps)
     def create_dir_if_unexisting(name, path='./', where='./') -> None:
         v_dir = os.listdir(where)
         try: v_dir.index(name)
@@ -58,20 +44,12 @@ if True: ## Functs ##
 ##########
 def setup():
     steps = 0
-    if True: ## Packages.vars ##
-        montre_img_charg(f'Creating Packages.vars', steps)
-        steps += 1
-        packages_to_install = ['opencv-python', 'numpy', 'python-dotenv']
-        packages_installed = get_installed_packages()
-        c_packages_to_install = copy.deepcopy(packages_to_install)
     if True: ## Imgs.vars ##
         montre_img_charg(f'Creating Imgs.vars', steps)
-        steps += 1
         line = currentframe().f_lineno+1
-        imgs_to_create = {n_img1: img_cart1, n_img2: img_cart2}
+        imgs_to_create = {n_img1: img_cart1, n_img2: img_cart2, n_img_chargement: img_chrg}
     if True: ## Checking Imgs/ ##
         create_dir_if_unexisting('Imgs')
-    Maine() ################## Creates the chrg_img (À y changer d'endroit et de nom)
     montre_img_charg(f'Checking ./Imgs/', steps)
     steps += 1
     if True: ## Checking imgs to create in Imgs/ ##
@@ -92,15 +70,6 @@ def setup():
             imgs_to_create[i]()
             montre_img_charg(f'Creating {i}', steps)
             steps += 1
-    if True: ## Discard installed packages ##
-        for i in c_packages_to_install:
-            for j in packages_installed:
-                if j == i:
-                    packages_to_install.remove(i)
-                    montre_img_charg(f'Checking {j} == {i}', steps)
-                    steps += 1
-    if True: ## Install required packages
-        steps = install_dependencies(packages_to_install, [], steps)
     if True: ## Checking Config ##
         montre_img_charg(f'Checking ./Config/', steps)
         steps += 1
@@ -111,11 +80,11 @@ def setup():
         except:
             with open("./Config/keys.txt", "w") as file:
                 file.write(str(keyConfig))
-setup()
-time.sleep(2)
-montre_img_charg('Finishing', 18)
-time.sleep(0.5)
-montre_img_charg('Finished!', 20)
-while True:
-    wk = attend_touche(1)
-    if wk == 27: break
+    time.sleep(2)
+    montre_img_charg('Finishing', 18)
+    time.sleep(0.5)
+    montre_img_charg('Finished!', 20)
+    while True:
+        wk = attend_touche(1)
+        if wk != -1: break
+#setup()

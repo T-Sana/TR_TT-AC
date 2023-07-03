@@ -1697,6 +1697,8 @@ if oui: ## Tout ##
         def montre_part(img, pto=[0, 0], t=[long-1, haut-1], nomFenetre='img', attente=0, destroy=True, dists=relocate_img()):
             im = img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]
             return(montre(im, nomFenetre, attente, destroy, dists))
+        def img_part(img, pto=[0, 0], t=[long-1, haut-1]):
+            return(img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]])
         def attend_touche(attente):
             if attente >= 0:
                 quoi = cv2.waitKeyEx(attente)

@@ -9,8 +9,9 @@ if True: ## Packages ##
 if True: ## Building | Etc ##
     pass
 if True: ## Main ##
-    titre()
+    '''titre()
     trs.shade(img)
-    j1, j2 = anim_debut()
+    anim_debut()
     trs.shade(img)
-    carte1(j1, j2)    
+    carte1(j1, j2)'''
+    carte2(j1, j2)
