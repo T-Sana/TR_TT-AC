@@ -1,6 +1,6 @@
 from outils.cvt import *
 from outils.quit import quitter
-from TR_VARS import *
+from TR_vars import *
 
 
 img = ouvre_image(f'{dir}/{imgs}/{n_img1}')

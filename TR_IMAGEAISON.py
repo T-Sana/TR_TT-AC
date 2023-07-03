@@ -1,9 +1,10 @@
 from outils.cvt import *
-from TR_VARS import *
 from outils.functs import *
+from outils.paths__names__etc import *
 from outils.quit import *
 
-
+if True: ## Noms.vars ##
+    n_img_chargement='img_chrg.jpg';n_img1='img1.jpg';n_img2='img2.jpg';n_img3='img3.jpg';n_img4='img4.jpg';n_img5='img5.jpg';imgs='Imgs'
 if True: ## Img1 ## @@ Campagne @@
     if True: ## Vars ##
         if True: ## Ciel.vars ##
@@ -151,4 +152,13 @@ def demo_img2():
         wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
         if wk == 27: quitter()
     montre_part(im2)
-demo_img2()
+
+
+def Maine() -> None: ## MAIN ##
+    if True: ## ImgChargement ##
+        img = img1(); a, b = 8, 9
+        pt1, pt2 = pt_sg(hg, ct, a, b), pt_sg(pt_sg(ct_sg(hd, bd), bd, a, b), ct, a, b)
+        rectangle(img, pt1, pt2, nouvelle_couleur('72A4CA'), 0)
+        rectangle(img, pt1, pt2, nouvelle_couleur('225070'), 10)
+        ecris(img, nf, pt1, pt2, 4, nouvelle_couleur('152030'))
+        sauve_image(n_img_chargement, img, f'{dir}/{imgs}')

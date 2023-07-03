@@ -4,3 +4,4 @@ __pycache__
 outils/__pycache__
 outils/Depandances/__pycache__
 essais.py
+.env

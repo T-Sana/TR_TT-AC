@@ -1,7 +1,7 @@
 from outils.cvt import *
 from outils.quit import *
 from TR_anim_debut import img
-from TR_VARS import *
+from TR_vars import *
 
 im = copy.deepcopy(img)
 

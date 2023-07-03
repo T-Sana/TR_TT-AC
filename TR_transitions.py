@@ -1,6 +1,6 @@
 import cv2
 from outils.cvt import montre
-from TR_VARS import nf
+from TR_vars import nf
 from outils.quit import quitter
 import copy
 
