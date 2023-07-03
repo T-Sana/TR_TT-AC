@@ -60,5 +60,4 @@ def carte2(j1=j1, j2=j2):
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
             print(wk)
-#carte1()
-carte2(j1, j2)
+#carte2(j1, j2)
