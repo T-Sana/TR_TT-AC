@@ -1,4 +1,4 @@
-from TR_setup import setup; #setup()
+from TR_setup import setup; setup()
 if True: ## Packages ##
     import TR_transitions as trs
     from TR_anim_debut import *

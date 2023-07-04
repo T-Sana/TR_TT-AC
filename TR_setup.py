@@ -6,8 +6,6 @@ from TR_imageaison import img_cart1, img_cart2, img_chrg
 from outils.cvt import *
 
 nf = os.getenv('nomJeu') # nf = NomFenêtre
-if True: ## KeyConfig ##
-    keyConfig = {'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97]}
 if True: ## Format + def montre_img_charg() ##
     print('\n', end='')
     def montre_img_charg(action='', steps=0, taille=1.2) -> None:
@@ -35,11 +33,6 @@ if True: ## Format.vars ##
     bold_blue = f'{blue}{bold}'
     bold_green = f'{green}{bold}'
     normal = '\033[00m'
-if True: ## Functs ##
-    def create_dir_if_unexisting(name, path='./', where='./') -> None:
-        v_dir = os.listdir(where)
-        try: v_dir.index(name)
-        except: os.mkdir(f"{path}{name}")
 ##########
 ## MAIN ##
 ##########
@@ -47,7 +40,7 @@ def setup():
     steps = 0
     if True: ## Imgs.vars ##
         line = currentframe().f_lineno+1
-        imgs_to_create = {n_img_chargement: img_chrg, n_img1: img_cart1, n_img2: img_cart2}
+        imgs_to_create = {n_img1: img_cart1, n_img_chargement: img_chrg, n_img2: img_cart2}
     if True: ## Checking Imgs/ ##
         create_dir_if_unexisting('Imgs')
     if True: ## Checking imgs to create in Imgs/ ##
@@ -64,18 +57,6 @@ def setup():
                 print(f"{error}: {path}\n{file} {filename} {expla}\n{issue}\n")
         for i in imgs_to_create:
             imgs_to_create[i]()
-            montre_img_charg(f'Creating {i}', steps)
-            steps += 1
-    if True: ## Checking Config ##
-        montre_img_charg(f'Checking ./Config/', steps)
-        steps += 1
-        create_dir_if_unexisting('Config')
-    if True: ## Creating Config/keys.txt ##
-        v_dir = os.listdir('./Config')
-        try: v_dir.index('keys.txt')
-        except:
-            with open("./Config/keys.txt", "w") as file:
-                file.write(str(keyConfig))
     time.sleep(rd.random()*1.3)
     montre_img_charg('Finishing', 18)
     time.sleep(rd.random()*0.5)

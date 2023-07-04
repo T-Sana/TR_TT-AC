@@ -5,6 +5,21 @@ import os
 
 def get_dir() -> str:
     return(os.getcwd())
+def create_dir_if_unexisting(name, path='./', where='./') -> None:
+    v_dir = os.listdir(where)
+    try: v_dir.index(name)
+    except: os.mkdir(f"{path}{name}")
+
+if True: ## KeyConfig ##
+    keyConfig = {'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97]}
+if True: ## Checking Config ##
+    create_dir_if_unexisting('Config')
+    if True: ## Creating Config/keys.txt ##
+        v_dir = os.listdir('./Config')
+        try: v_dir.index('keys.txt')
+        except:
+            with open("./Config/keys.txt", "w") as file:
+                file.write(str(keyConfig))
 if True: ## keys ##
     key_a = 97
     key_d = 100

@@ -85,13 +85,14 @@ if True: ## Img2 ## @@ Ville @@
             if True: ## Porte.vars ##
                 porte = 4
                 d_porte = 35
-            d = [haut*2, long, 3]
-            hg2 = [0, 0]
-            bg2 = [0, haut]
-            hd2 = [long, 0]
-            bd2 = [long, haut]
-            c_porte = []
-            img = image(remplissage=nouvelle_couleur('e08030'), dimensions=d)
+            if True: ## Vars - others ##
+                d = [haut*2, long, 3]
+                hg2 = [0, 0]
+                bg2 = [0, haut]
+                hd2 = [long, 0]
+                bd2 = [long, haut]
+                c_porte = []
+                img = image(remplissage=nouvelle_couleur('e08030'), dimensions=d)
         soleil(img, [hd2[0]-dtt, hd2[1]+dtt])
         if True: ## Nuages ##
             nuage(img, [cth[0]+200, cth[1]+75], tld, [220, 220, 220])
@@ -102,53 +103,81 @@ if True: ## Img2 ## @@ Ville @@
             nuage(img, [hd[0]-150, hd[1]+200], tlf)
         if True: ## Sol ##
             rectangle(img, [0, d[0]], pt_sg(hd2, bd2, 9, 4), nouvelle_couleur('80e030'), 0) ## Terre (rectangle vert) ##
-        if True: ## Mur ##
-            mult = 2
-            dy = diff(mur[0][1], mur[1][1])/mur[2]
-            dx = diff(mur[0][0], mur[1][0])/crenaux[2]/mur[2]*mult
-            truc = False
-            t_porte = []
-            for a, j in enumerate(range2(mur[0][1], mur[1][1], dy)):
-                for b, i in enumerate(range2(mur[0][0] - (dx//2 if truc else 0), mur[1][0] + (dx//2 if truc else 0), dx)):
-                    t = True
-                    if truc:
-                        ls = [n for n in range(d_porte, d_porte+porte+1)]
-                        if b == d_porte:
-                            rectangle(img, [i, j], [i+dx/2, j+dy], nouvelle_couleur('404040'), 0)
-                            rectangle(img, [i, j], [i+dx/2, j+dy], noir, 3)
-                        elif b == d_porte+porte:
-                            rectangle(img, [i+dx/2, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
-                            rectangle(img, [i+dx/2, j], [i+dx, j+dy], noir, 3)
-                    else:
-                        ls = [n for n in range(d_porte, d_porte+porte)]
-                    if a == 2:
-                        if truc: dx2 = dx/2
-                        else: dx2 = 0
-                        if b == d_porte:
-                            c_porte.append([i+dx2, j])
-                            t_porte.append([[i+dx2, j], [i+dx+dx2, j], [i+dx2, j+dy]])
-                        elif b == d_porte+porte-1:
-                            t_porte.append([[i+dx2, j], [i+dx+dx2, j], [i+dx+dx2, j+dy]])
-                    for el in ls:
-                        if b == el:
-                            t = False
-                    if t or a == 0 or a == 1:
-                        rectangle(img, [i, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
-                        rectangle(img, [i, j], [i+dx, j+dy], noir, 3)
-                    if diff(j, mur[1][1]) <= dy:
-                        if b == d_porte+porte:
+        if True: ## Muraille ##
+            if True: ## Mur ##
+                mult = 2
+                c_dy = dy = diff(mur[0][1], mur[1][1])/mur[2]
+                dx = diff(mur[0][0], mur[1][0])/crenaux[2]/mur[2]*mult
+                truc = False
+                t_porte = []
+                for a, j in enumerate(range2(mur[0][1], mur[1][1], dy)):
+                    for b, i in enumerate(range2(mur[0][0] - (dx//2 if truc else 0), mur[1][0] + (dx//2 if truc else 0), dx)):
+                        t = True
+                        if truc:
+                            ls = [n for n in range(d_porte, d_porte+porte+1)]
+                            if b == d_porte:
+                                rectangle(img, [i, j], [i+dx/2, j+dy], nouvelle_couleur('404040'), 0)
+                                rectangle(img, [i, j], [i+dx/2, j+dy], noir, 3)
+                            elif b == d_porte+porte:
+                                rectangle(img, [i+dx/2, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
+                                rectangle(img, [i+dx/2, j], [i+dx, j+dy], noir, 3)
+                        else:
+                            ls = [n for n in range(d_porte, d_porte+porte)]
+                        if a == 2:
                             if truc: dx2 = dx/2
                             else: dx2 = 0
-                            c_porte.append([i+dx2, j+dy])
-                truc = not truc
+                            if b == d_porte:
+                                c_porte.append([i+dx2, j])
+                                t_porte.append([[i+dx2, j], [i+dx+dx2, j], [i+dx2, j+dy]])
+                            elif b == d_porte+porte-1:
+                                t_porte.append([[i+dx2, j], [i+dx+dx2, j], [i+dx+dx2, j+dy]])
+                        for el in ls:
+                            if b == el:
+                                t = False
+                        if t or a == 0 or a == 1:
+                            rectangle(img, [i, j], [i+dx, j+dy], nouvelle_couleur('404040'), 0)
+                            rectangle(img, [i, j], [i+dx, j+dy], noir, 3)
+                        if diff(j, mur[1][1]) <= dy:
+                            if b == d_porte+porte:
+                                if truc: dx2 = dx/2
+                                else: dx2 = 0
+                                c_porte.append([i+dx2, j+dy])
+                    truc = not truc
             if True: ## Porte ##
+                a, b = 7, 2
                 c_porte = [c_porte[0], [c_porte[1][0], c_porte[0][1]], [c_porte[0][0], c_porte[1][1]], c_porte[1]]
-                ## TODO ## Dessin du pont levis, de la herse ... ##
-                t = 1.25; ecris(img, 'Dessin', c_porte[0], c_porte[3], t, noir, 10/4*t)
+                c_porte = [[round(i[0]), round(i[1])] for i in c_porte]
+                rectangle(img, c_porte[0], c_porte[3], nouvelle_couleur('80e030'), 0)
+                rectangle(img, pt_sg(c_porte[0], c_porte[2], 5, 4), pt_sg(c_porte[3], c_porte[1], 8, 1), bleu, 0)
+                for i, j in [[c_porte[2], c_porte[0]], [c_porte[0], c_porte[1]], [c_porte[1], c_porte[3]]]:
+                    ligne(img, i, j, noir, 3)
+                base_pont = [pt_sg(c_porte[2], c_porte[3], a, b), pt_sg(c_porte[3], c_porte[2], a, b)]
+                haut_pont = [coosCercle(i, dist(base_pont[0], base_pont[1])/2, -70) for i in base_pont]
+                dy = 1
+                for i in points_segment(base_pont[0], haut_pont[0])[::dy]:
+                    rectangle(img, i, [i[0]+diff(base_pont[0][0], base_pont[1][0]), i[1]+dy], nouvelle_couleur('122336'), 0)
+                dy = 5
+                for i in points_segment(base_pont[0], haut_pont[0])[::dy]:
+                    rectangle(img, i, [i[0]+diff(base_pont[0][0], base_pont[1][0]), i[1]+dy], noir, 1)
+                for i in range(2):
+                    arc(img, haut_pont[i], [base_pont[i][0], c_porte[0][1]], 5, noir, 2)
+                dst = dist(c_porte[0], c_porte[2])/2.7; esp = 15
+                for i in points_segment(c_porte[0], c_porte[1])[::esp]: ## HERSE ##
+                    p = [i[0], i[1]+dst]; t=7
+                    p2 = coosCercle(p, dst/t, -45)
+                    p3 = coosCercle(p, dst/t, 180+45)
+                    for j in [i, p2, p3]:
+                        ligne(img, p, j, noir, 2)
+                dst = dist(c_porte[0], c_porte[1])
+                pt_h = pt_sg(c_porte[0], c_porte[2], 2.7)
+                for i in points_segment(c_porte[0], pt_h)[::esp-2]:
+                    p = [i[0]+dst, i[1]]
+                    ligne(img, i, p, noir, 2)
                 for i in t_porte:
                     triangle(img, i[0], i[1], i[2], nouvelle_couleur('404040'), 0)
                     triangle(img, i[0], i[1], i[2], noir, 3)
             if True: ## Crénaux ##
+                dy = c_dy
                 dra = True
                 chng = False
                 distance *= mult
@@ -218,7 +247,6 @@ def img_cart1() -> None:
     sauve_image(n_img1, img1(), f'{dir}/{imgs}')
 def img_cart2() -> None:
     sauve_image(n_img2, img2(), f'{dir}/{imgs}')
-img_cart2() ################## À suppr
 def demo_img2():
     img_cart2()
     d = [haut*2, long, 3]
@@ -231,15 +259,8 @@ def demo_img2():
         if wk == 27: quitter()
     montre_part(im2)
 
-
+img_cart2()
 def img_chrg() -> None: ## MAIN ##
-    '''if True: ## ImgChargement ##
-        img = img1(); a, b = 8, 9
-        pt1, pt2 = pt_sg(hg, ct, a, b), pt_sg(pt_sg(ct_sg(hd, bd), bd, a, b), ct, a, b)
-        rectangle(img, pt1, pt2, nouvelle_couleur('72A4CA'), 0)
-        rectangle(img, pt1, pt2, nouvelle_couleur('225070'), 10)
-        ecris(img, nf, pt1, pt2, 4, nouvelle_couleur('152030'))
-        sauve_image(n_img_chargement, img, f'{dir}/{imgs}')'''
     img = ouvre_image(f'{dir}/{imgs}/{n_img1}')
     marron = nouvelle_couleur('122336')
     t=9

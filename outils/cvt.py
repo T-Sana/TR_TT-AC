@@ -39,20 +39,6 @@ if oui: ## Tout ##
                 return(p3)
             else:
                 return(p4)
-        def coosEllipse(pt, rayons, an, angleEllipse=0):
-            b, a = rayons
-            a, b = abs(round(a)), abs(round(b))
-            if a == b:
-                return(coosCercle(pt, a, an))
-            x, y = pt
-            f1 = (x + racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y + racine_carree(pow(a, 2) - pow(b, 2)))
-            f2 = (x - racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y - racine_carree(pow(a, 2) - pow(b, 2)))
-            p = ellipsed(pt, rayons, an)
-            angl = angleEntrePoints(pt, p)
-            p = coosCercle(pt, dist(p, pt), angl + angleEllipse)
-            return(p)
-        def diff(a, b):
-            return(abs(a - b))
     if oui: ########################### Classes ###
         class save_pos:
             d = ''
@@ -416,6 +402,20 @@ if oui: ## Tout ##
         def heure(format='%H:%M:%S'):
             return(datetime.now().strftime(format))
     if oui: ############## Fonctions de calculs ###
+        def coosEllipse(pt, rayons, an, angleEllipse=0):
+            b, a = rayons
+            a, b = abs(round(a)), abs(round(b))
+            if a == b:
+                return(coosCercle(pt, a, an))
+            x, y = pt
+            f1 = (x + racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y + racine_carree(pow(a, 2) - pow(b, 2)))
+            f2 = (x - racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y - racine_carree(pow(a, 2) - pow(b, 2)))
+            p = ellipsed(pt, rayons, an)
+            angl = angleEntrePoints(pt, p)
+            p = coosCercle(pt, dist(p, pt), angl + angleEllipse)
+            return(p)
+        def diff(a, b):
+            return(abs(a - b))
         def nouvelle_couleur(hexadecimal, type='bgr'):
             match type:
                 case 'rbg': r, b, g = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
@@ -446,13 +446,13 @@ if oui: ## Tout ##
             ------
             :pt1: ``tuple (x, y)``\n
             :pt2: ``tuple (x, y)``\n
-            :mult1: ``int``\n
-            :mult2: ``int``\n
+            :mult1: ``float`` or ``int``\n
+            :mult2: ``float`` or ``int``\n
             Renvoie:
             --------
             ``ct``: ``tuple (x, y)``
             '''
-            total = int(mult1) + int(mult2)
+            total = mult1 + mult2
             if total == 0:
                 return((0, 0))
             pt = (int((pt1[0] * mult1 + pt2[0] * mult2) / total), int((pt1[1] * mult1 + pt2[1] * mult2) / total))
