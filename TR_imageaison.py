@@ -259,7 +259,7 @@ def demo_img2():
         if wk == 27: quitter()
     montre_part(im2)
 
-img_cart2()
+#img_cart2()
 def img_chrg() -> None: ## MAIN ##
     img = ouvre_image(f'{dir}/{imgs}/{n_img1}')
     marron = nouvelle_couleur('122336')
