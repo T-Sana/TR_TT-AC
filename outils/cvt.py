@@ -262,8 +262,6 @@ if oui: ## Tout ##
         class pt_img_cartee:
             pt = (960, 540)
     if oui: ########################### Imports ### ## Licences ######
-        '''
-        from dependances import Get_ecrans ######## ## None (mine) ###'''
         try: import Dependances.Text_samples as sm# ## None (mine) ###
         except: import outils.Dependances.Text_samples as sm
         import cv2 ## Dessins, affichage... ####### ## Apache 2.0 ####
@@ -419,10 +417,14 @@ if oui: ## Tout ##
             return(datetime.now().strftime(format))
     if oui: ############## Fonctions de calculs ###
         def nouvelle_couleur(hexadecimal, type='bgr'):
-            if type == 'rgb':
-                r, g, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-            else:
-                b, g, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+            match type:
+                case 'rbg': r, b, g = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case 'rgb': r, g, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case 'grb': g, r, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case 'gbr': g, b, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case 'brg': b, r, g = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case 'bgr': b, g, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+                case _: raise ValueError('Unknown type of colour!')
             return([b, g, r])
         def ct_sg(pt1, pt2):
             '''
@@ -464,22 +466,11 @@ if oui: ## Tout ##
             --------
             ``str`` de len() spécifiée
             '''
-            ctrl = 0
-            out = ''
-            while ctrl < num:
-                out += 'a'
-                ctrl += 1
+            if num > 0:
+                out = 'a'*round(num)
+            else:
+                out = ''
             return(out)
-        def list_nums_petits(num):
-            '''
-            Prend:
-            ------
-            :num: ``int``\n
-            Renvoie:
-            --------
-            ``list`` de ``int`` plus petits (jusqu'au 0)
-            '''
-            return(range(num))
         def points_segment(p1, p2):
             '''
             Prend:
@@ -496,7 +487,7 @@ if oui: ## Tout ##
             xb, yb = int(xb), int(yb)'''
             if xa == xb:
                 dif = ya - yb
-                numbs = list_nums_petits(abs(dif))
+                numbs = range(abs(dif))
                 out = []
                 if dif < 0:
                     for i in numbs:
@@ -849,7 +840,7 @@ if oui: ## Tout ##
             if n_cotes > 100:
                 n_cotes = 100
             points = []
-            for i in list_nums_petits(n_cotes):
+            for i in range(n_cotes):
                 rot = (360 / n_cotes) * i + rotation
                 points.append(coosCercle(ct, rayon_vertex, rot))
             if epaisseur < 0:
@@ -1405,7 +1396,7 @@ if oui: ## Tout ##
             '''
             rayon, epaisseur = int(rayon), int(epaisseur)
             a = 1
-            for i in list_nums_petits(tours):
+            for i in range(tours):
                 a /= 2
             step = 1 + a
             color = couleur
@@ -1423,7 +1414,7 @@ if oui: ## Tout ##
                 mult += 1
             return(img)
         def vortex(img, ct=ct, rayon=rayon, t_dist='lineere', couleur='random', epaisseur=epaisseur, c_ep=0, nºbras=4, rotation=0, angle=1, step=1):
-            for i in list_nums_petits(nºbras):
+            for i in range(nºbras):
                 spirale(img, ct, rayon, t_dist, couleur, epaisseur, c_ep, 360 / nºbras * i + rotation, angle, step)
             return(img)
         def vortex_vortex(img, cto=ct, dists=[0], angles=[0, 90, 180, 270], couleur='random', taille_spirale=25, rotation_spirales=0, rotation=0, c_ep=0, bras=4, tours=1, step=1):
@@ -1552,8 +1543,13 @@ if oui: ## Tout ##
                         pass
                     ctrl += 1
             return(img)
+        def cadre(img, pt1, pt2, cl=blanc, cl2=noir, ep_b=3, rot=0):
+            rectangle(img, pt1, pt2, cl, 0, rot)
+            rectangle(img, pt1, pt2, cl2, ep_b, rot)
+            return(img)
         def point(img, pt, cl=rouge):
             cercle(img, pt, 10, cl, 0)
+            return(img)
     if oui: ############################ Images ###
         def image(dimensions=(haut, long, 3), remplissage=blanc):
             '''

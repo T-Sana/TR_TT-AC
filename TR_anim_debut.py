@@ -1,6 +1,6 @@
 from outils.cvt import *
 from outils.quit import quitter
-from TR_vars import *
+from outils.paths__names__etc import *
 
 if True: ## Vars ##
     if True: ## Anim.vars ##

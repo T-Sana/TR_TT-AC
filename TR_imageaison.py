@@ -3,6 +3,31 @@ from outils.functs import *
 from outils.paths__names__etc import *
 from outils.quit import *
 
+if True: ## Pieces d'échecs ##
+    def dessine_roi(ep, img, pt1, pt2, pt3, pt4, col1, col2, echec=False): ############## Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c2 = pt_sg(pt2, ct)
+        c3 = pt_sg(pt3, ct)
+        c4 = pt_sg(pt4, ct)
+        cg = pt_sg(c1, c3)
+        cd = pt_sg(c2, c4)
+        cb = pt_sg(c3, c4)
+        ch = pt_sg(c1, c2)
+        if echec:
+            rectangle(img, pt1, pt4, rouge, 0)
+        a, b = 7, 5
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        rectangle(img, ct_sg(pt1, c1), ct_sg(c1, cg), col1, 0)
+        rectangle(img, ct_sg(pt2, c2), ct_sg(c2, cd), col1, 0)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col1, 0)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col2, ep)
+        rectangle(img, ct_sg(pt1, c1), ct_sg(c1, cg), col2, ep)
+        rectangle(img, ct_sg(pt2, c2), ct_sg(c2, cd), col2, ep)
+        ligne(img, ct_sg(ch, ct), ct_sg(cb, ct), col2, ep)
+        ligne(img, ct_sg(cg, ct), ct_sg(cd, ct), col2, ep)
+        return(img)
 if True: ## Noms.vars ##
     n_img_chargement='img_chrg.jpg';n_img1='img1.jpg';n_img2='img2.jpg';n_img3='img3.jpg';n_img4='img4.jpg';n_img5='img5.jpg';imgs='Imgs'
 if True: ## Img1 ## @@ Campagne @@
@@ -59,7 +84,7 @@ if True: ## Img2 ## @@ Ville @@
                 distance = diff(crenaux[0][0], crenaux[1][0])/crenaux[2]/2
             if True: ## Porte.vars ##
                 porte = 4
-                d_porte = 12
+                d_porte = 35
             d = [haut*2, long, 3]
             hg2 = [0, 0]
             bg2 = [0, haut]
@@ -134,16 +159,66 @@ if True: ## Img2 ## @@ Ville @@
                     if chng:
                         dra = not dra
                     chng = not chng
+        if True: ## Chemin ##
+            a, b = 7, 2
+            dst = 170
+            dir = 90
+            c_t1 = [pt_sg(c_porte[2], c_porte[3], a, b), pt_sg(c_porte[3], c_porte[2], a, b)]
+            c_t1.append(coosCercle(c_t1[0], dst, dir))
+            c_t1.append(coosCercle(c_t1[1], dst, dir))
+            cadre(img, c_t1[0], c_t1[3], nouvelle_couleur('72A4CA'), nouvelle_couleur('22648A'))
+            dst = 520
+            dir = 180
+            c_t2 = [c_t1[2], coosCercle(c_t1[2], dist(c_t1[0], c_t1[1]), dir-90)]
+            c_t2.append(coosCercle(c_t2[0], dst, dir))
+            c_t2.append(coosCercle(c_t2[1], dst, dir))
+            cadre(img, c_t2[0], c_t2[3], nouvelle_couleur('72A4CA'), nouvelle_couleur('22648A'))
+            triangle(img, c_t2[0], c_t2[1], c_t1[3], nouvelle_couleur('72A4CA'), -3)
+            cercle(img, c_t1[2], dist(c_t1[2], c_t1[3]), nouvelle_couleur('72A4CA'), 0, 0, 90)
+            cercle(img, c_t1[2], dist(c_t1[2], c_t1[3]), nouvelle_couleur('22648A'), 3, 0, 90)
+            for p in [c_t2[0], c_t2[1], c_t1[3]]:
+                rectangle(img, [i-2 for i in p], [i+2 for i in p], nouvelle_couleur('22648A'), 0)
+            dst = 500
+            dir = 90
+            c_t3 = [coosCercle(c_t2[3], dist(c_t2[0], c_t2[1]), dir+90), c_t2[3]]
+            c_t3.append(coosCercle(c_t3[0], dst, dir))
+            c_t3.append(coosCercle(c_t3[1], dst, dir))
+            cadre(img, c_t3[0], c_t3[3], nouvelle_couleur('72A4CA'), nouvelle_couleur('22648A'))
+            triangle(img, c_t2[2], c_t2[3], c_t3[0], nouvelle_couleur('72A4CA'), -3)
+            cercle(img, c_t2[3], dist(c_t2[2], c_t2[3]), nouvelle_couleur('72A4CA'), 0, 0, 90, 180)
+            cercle(img, c_t2[3], dist(c_t2[2], c_t2[3]), nouvelle_couleur('22648A'), 3, 0, 90, 180)
+            for p in [c_t2[2], c_t2[3], c_t3[0]]:
+                rectangle(img, [i-2 for i in p], [i+2 for i in p], nouvelle_couleur('22648A'), 0)
         if True: ## VARS update ##
             hg2, hd2, bg2, bd2 = [0, 0], [d[1], 0], [0, d[0]], [d[1], d[0]]
             ct = ct_cr(hg, hd, bg, bd)
+        if True: ## Echiquier ##
+            echq = [pt_sg(pt_sg(bg, bd, 15), pt_sg(hg, hd, 15), 4), ctg]
+            dx = diff(echq[0][0], echq[1][0])/9
+            dy = diff(echq[0][1], echq[1][1])/5
+            for i, x in enumerate(range2(echq[0][0], echq[1][0], dx)):
+                for j, y in enumerate(range2(echq[1][1], echq[0][1]-20, dy)):
+                    if j == 2:
+                        match i:
+                            case 3:
+                                rectangle(img, [x, y], [x+dx*3, y+dy], nouvelle_couleur('72A4CA'), 0)
+                                rectangle(img, [x, y], [x+dx*3, y+dy], noir, 5)
+                                dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('DFDFDF'), nouvelle_couleur('202020'))
+                            case 4: pass
+                            case 5: dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('202020'), nouvelle_couleur('DFDFDF'))
+                            case _:
+                                rectangle(img, [x, y], [x+dx, y+dy], nouvelle_couleur('202020') if i%2 == j%2 else nouvelle_couleur('DFDFDF'), 0)
+                        
+                    else:
+                        rectangle(img, [x, y], [x+dx, y+dy], nouvelle_couleur('202020') if i%2 == j%2 else nouvelle_couleur('DFDFDF'), 0)
+            rectangle(img, echq[0], echq[1], noir, 3)
         return(img)
 
 def img_cart1() -> None:
     sauve_image(n_img1, img1(), f'{dir}/{imgs}')
 def img_cart2() -> None:
     sauve_image(n_img2, img2(), f'{dir}/{imgs}')
-
+img_cart2() ################## À suppr
 def demo_img2():
     img_cart2()
     d = [haut*2, long, 3]
