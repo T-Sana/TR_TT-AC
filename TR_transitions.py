@@ -1,7 +1,7 @@
 import cv2
-from outils.cvt import montre
-from outils.paths__names__etc import *
-from outils.quit import quitter
+from Depandances.Outils.cvt import montre
+from Depandances.Outils.paths__names__etc import *
+from Depandances.Outils.quit import quitter
 import copy
 
 def shade(img):

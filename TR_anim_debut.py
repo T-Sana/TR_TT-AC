@@ -1,12 +1,12 @@
-from outils.cvt import *
-from outils.quit import quitter
-from outils.paths__names__etc import *
+from Depandances.Outils.cvt import *
+from Depandances.Outils.quit import quitter
+from Depandances.Outils.paths__names__etc import *
 
 if True: ## Vars ##
     if True: ## Anim.vars ##
         p_dep = [1700, 100]
         p_arr = [200, 300]
-    img = ouvre_image(f'{dir}/{imgs}/{n_img1}')
+    img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
 def anim_debut(anim=True, v=5) -> None:
     if anim: ## Animation début ##
         for i in points_segment(p_dep, p_arr)[::v]:

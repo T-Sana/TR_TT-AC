@@ -1,8 +1,9 @@
-Imgs
-Config
-__pycache__
-outils/__pycache__
-outils/Depandances/__pycache__
 .env
 test.py
 essais.py
+__pycache__
+Depandances/Imgs
+Depandances/Trash
+Depandances/Config
+Depandances/outils/__pycache__
+Depandances/outils/Dependances/__pycache__

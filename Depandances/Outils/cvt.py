@@ -249,7 +249,9 @@ if oui: ## Tout ##
             pt = (960, 540)
     if oui: ########################### Imports ### ## Licences ######
         try: import Dependances.Text_samples as sm# ## None (mine) ###
-        except: import outils.Dependances.Text_samples as sm
+        except:
+            try: import Outils.Dependances.Text_samples as sm
+            except: import Depandances.Outils.Dependances.Text_samples as sm
         import cv2 ## Dessins, affichage... ####### ## Apache 2.0 ####
         import numpy as np ######### Arrays ####### ## BSD-3-Clause ##
         import math ######### Mathématiques ####### ## Builded-in ####

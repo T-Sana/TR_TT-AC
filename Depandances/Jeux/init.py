@@ -1,0 +1,1 @@
+jeux_dispos = ['shogi']

@@ -1,4 +1,4 @@
-from outils.pip import *
+from Depandances.Outils.pip import *
 import copy
 
 if True: ## Packages.vars ##

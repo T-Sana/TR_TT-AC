@@ -1,6 +1,6 @@
 from TR_transitions import *
-from outils.cvt import *
-from outils.paths__names__etc import *
+from Depandances.Outils.cvt import *
+from Depandances.Outils.paths__names__etc import *
 from TR_imageaison import img_cart2; img_cart2()
 
 def img(im, j1, j2):
@@ -30,7 +30,7 @@ def deplace_js(wk, j1, j2, cam=[0, 0]):
 
 def carte1(j1=j1, j2=j2):
     while True:
-        wk = montre(img(ouvre_image(f'{dir}/{imgs}/{n_img1}'), j1, j2), nf, 100, non)
+        wk = montre(img(ouvre_image(f'{dir}/{imgs_path}/{n_img1}'), j1, j2), nf, 100, non)
         if wk == 27: quitter()
         elif wk != -1:
             deplace_js(wk, j1, j2)
@@ -61,7 +61,7 @@ def carte2(j1=j1, j2=j2):
         hg_bd_img2 = [cam, [long, cam[1]+haut]]
         j1.ou_peut_etre.append(hg_bd_img2)
         j2.ou_peut_etre.append(hg_bd_img2)
-        wk = montre(img_part(img(ouvre_image(f'{dir}/{imgs}/{n_img2}'), j1, j2), cam), nf, 100, non)
+        wk = montre(img_part(img(ouvre_image(f'{dir}/{imgs_path}/{n_img2}'), j1, j2), cam), nf, 100, non)
         if wk == 27: quitter()
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)

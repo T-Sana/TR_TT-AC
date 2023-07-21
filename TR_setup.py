@@ -1,9 +1,10 @@
 from TR__init import *
-from outils.pip import *
+from Depandances.Outils.pip import *
 from inspect import currentframe
-from outils.paths__names__etc import *
+from Depandances.Outils.paths__names__etc import *
 from TR_imageaison import img_cart1, img_cart2, img_chrg
-from outils.cvt import *
+from Depandances.Outils.cvt import *
+import shutil
 
 nf = os.getenv('nomJeu') # nf = NomFenêtre
 if True: ## Format + def montre_img_charg() ##
@@ -11,7 +12,7 @@ if True: ## Format + def montre_img_charg() ##
     def montre_img_charg(action='', steps=0, taille=1.2) -> None:
         t_steps = 20
         if steps > t_steps: steps = t_steps
-        img_chrg = ouvre_image(f'{dir}/{imgs}/{n_img_chargement}')
+        img_chrg = ouvre_image(f'{dir}/{imgs_path}/{n_img_chargement}')
         a, b = 3, 7; dst = 75
         b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b), pt_sg(cd, ct_sg(bg, bd), a, b)]
         b1, b2 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[1][0], b_c_c[1][1]+25]]
@@ -23,40 +24,36 @@ if True: ## Format + def montre_img_charg() ##
         ecris(img_chrg, action, [b1[0], b1[1]+dst], [b2[0], b2[1]+dst], taille, noir, 10/5*taille)
         montre(img_chrg, nf, 1, non)
         time.sleep(rd.random()*0.1)
-if True: ## Format.vars ##
-    red = '\033[91m'
-    green = '\033[92m'
-    blue = '\033[96m'
-    bold = '\033[1m'
-    underlined = '\033[4m'
-    bold_red = f'{red}{bold}'
-    bold_blue = f'{blue}{bold}'
-    bold_green = f'{green}{bold}'
-    normal = '\033[00m'
 ##########
 ## MAIN ##
 ##########
 def setup():
     steps = 0
+    if True: ## Trash dir ##
+        create_dir_if_unexisting(trash, f'.\{depts_path}')
     if True: ## Imgs.vars ##
         line = currentframe().f_lineno+1
         imgs_to_create = {n_img1: img_cart1, n_img_chargement: img_chrg, n_img2: img_cart2}
     if True: ## Checking Imgs/ ##
-        create_dir_if_unexisting('Imgs')
+        create_dir_if_unexisting(imgs, f'.\{depts_path}')
     if True: ## Checking imgs to create in Imgs/ ##
-        for i in os.listdir(".\Imgs"):
+        for i in os.listdir(f".\{imgs_path}"):
             try: imgs_to_create.pop(i); steps += 1
             except:
-                path = f'{bold_blue}{os.getcwd()}\IMGS{normal}'
-                path_here = f'{bold_blue}{os.getcwd()}\TR_setup.py, line {line}{normal}'
-                filename = f'{underlined}{bold_green}{i}{normal}'
-                file = f'{bold_red}FILE{normal}'
-                error = f'{bold_red}ERROR WHILE SCANING DIRECTORY{normal}'
-                expla = f'{bold_red}SHOULD {underlined}NOT{normal+bold_red} BE HERE{normal} ({path})'
-                issue = f'If {filename} {bold_red}SHOULD{normal} be in {path}:\nAdd {filename} into "imgs_to_create" -> {path_here}'
-                print(f"{error}: {path}\n{file} {filename} {expla}\n{issue}\n")
+                try: raise invalidPlace(i, line)
+                except: shutil.move(f'./{imgs_path}/{i}', f'./{trash_path}')
         for i in imgs_to_create:
             imgs_to_create[i]()
+    if True: ## KeyConfig ##
+        keyConfig = {'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97]}
+    if True: ## Checking Config ##
+        create_dir_if_unexisting(config, f'.\{depts_path}')
+        if True: ## Creating Config/keys.txt ##
+            v_dir = os.listdir(f'.\{config_path}')
+            try: v_dir.index('keys.txt')
+            except:
+                with open(f"./{config_path}/keys.txt", "w") as file:
+                    file.write(str(keyConfig))
     time.sleep(rd.random()*1.3)
     montre_img_charg('Finishing', 18)
     time.sleep(rd.random()*0.5)
