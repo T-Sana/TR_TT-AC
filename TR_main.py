@@ -8,7 +8,7 @@ if True: ## Packages ##
 if True: ## Functs ##
     def runEvent(ev):
         match ev:
-            case i if i in jeux_dispos: print(ev)
+            case i if i in list(jeux_dispos.keys): print(jeux_dispos[ev])
             case None: print('Error')
             case _: raise ValueError(f'Var <ev> of type {type(ev)} with value {ev} has a wrong value!')
 if True: ## Main ##
