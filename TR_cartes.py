@@ -1,7 +1,6 @@
 from TR_transitions import *
 from Depandances.Outils.cvt import *
 from Depandances.Outils.paths__names__etc import *
-from TR_imageaison import img_cart2; img_cart2()
 
 def img(im, j1, j2):
     j1.dessine(im)
@@ -35,7 +34,7 @@ def carte1(j1=j1, j2=j2):
         elif wk != -1:
             deplace_js(wk, j1, j2)
             print(wk)
-def carte2(j1=j1, j2=j2):
+def carteVille(j1=j1, j2=j2): ## Carte de Img2 ##
     dst = 400
     dst2 = 400
     cam = [0, 0]

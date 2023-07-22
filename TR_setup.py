@@ -1,3 +1,6 @@
+from tkinter import *
+from tkinter.ttk import *
+from PIL import ImageTk, Image
 from TR__init import *
 from Depandances.Outils.pip import *
 from inspect import currentframe
@@ -27,7 +30,9 @@ if True: ## Format + def montre_img_charg() ##
 ##########
 ## MAIN ##
 ##########
-def setup():
+class rt:
+    def destroy(self) -> None: pass
+def setup_(root=rt()):
     steps = 0
     if True: ## Trash dir ##
         create_dir_if_unexisting(trash, f'.\{depts_path}')
@@ -56,9 +61,35 @@ def setup():
                     file.write(str(keyConfig))
     time.sleep(rd.random()*1.3)
     montre_img_charg('Finishing', 18)
+    root.destroy()
     time.sleep(rd.random()*0.5)
     montre_img_charg('Finished!', 20)
     while True:
         wk = attend_touche(1)
         if wk != -1: break
-#setup()
+def setup():
+    root = Tk()
+    class imag:
+        def __init__(self, t_steps=100, steps=5, action='Installing pip', image_path=f'./Depandances/Imgs/img_chrg.jpg'):
+            bgr_img_chrg = ouvre_image(image_path)
+            a, b = 3, 7; dst = 75
+            b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b), pt_sg(cd, ct_sg(bg, bd), a, b)]
+            b1, b2 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[1][0], b_c_c[1][1]+25]]
+            b3, b4 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[0][0]+(b_c_c[1][0]-b_c_c[0][0])/t_steps*steps, b_c_c[1][1]+25]]
+            rectangle(bgr_img_chrg, b3, b4, rouge, 0)
+            rectangle(bgr_img_chrg, b1, b2, noir)
+            ecris(bgr_img_chrg, f'{round(steps/t_steps*100)}%', [b1[0], b1[1]+dst], [b2[0], b2[1]+dst], 2.7/2, noir, 10/2/4*2.7)
+            b1, b2 = [[b1[0], b1[1]+dst], [b2[0], b2[1]+dst]]; dst = 50
+            ecris(bgr_img_chrg, action, [b1[0], b1[1]+dst], [b2[0], b2[1]+dst], taille, noir, 10/5*taille)
+            rgb_img_chrg = bgr_img_chrg[::, ::, ::-1]
+            self.img = ImageTk.PhotoImage(Image.fromarray(rgb_img_chrg))       
+    root.title('JEU_TR')
+    p1 = PhotoImage(file = 'Favicon.ico')
+    root.iconphoto(False, p1)
+    root.attributes('-fullscreen',True)
+    image = imag()
+    panel = Label(root, image = image.img)
+    panel.pack(side = "top", fill = "both", expand = True)
+    root.update_idletasks()
+    root.update()
+    setup_(root)

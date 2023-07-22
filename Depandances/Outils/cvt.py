@@ -403,6 +403,8 @@ if oui: ## Tout ##
             return(out)
         def heure(format='%H:%M:%S'):
             return(datetime.now().strftime(format))
+        def maintenant(formatDeLHeure='%H:%M:%S', formatDuJour='normal', link=' '):
+            return(f'{heure(formatDeLHeure)}{link}{aujourdhui(formatDuJour)}')
     if oui: ############## Fonctions de calculs ###
         def coosEllipse(pt, rayons, an, angleEllipse=0):
             b, a = rayons

@@ -4,7 +4,7 @@ if True: ## Packages ##
     from TR_anim_debut import *
     from TR_cartes import *
     from Depandances.Outils.paths__names__etc import *
-    from Depandances.Jeux.init import *
+    from Depandances._init import *
 if True: ## Functs ##
     def runEvent(ev):
         match ev:
@@ -16,6 +16,5 @@ if True: ## Main ##
     anim_debut()
     trs.shade(ouvre_image(f'./{imgs_path}/{n_img1}'))'''
     while True:
-        event = carte1(j1, j2)
+        event = carteVille(j1, j2)
         runEvent(event)
-    #carte2(j1, j2)
