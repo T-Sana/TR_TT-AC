@@ -6,6 +6,8 @@
 ## TODO Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
 
+## ***TODO*** Faire l'horloge sybyllienne ##
+
 ######################################
 ### À régler : ###########################################
 ### Il faut remonter les majuscules pour que le bas ######
