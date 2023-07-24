@@ -84,7 +84,7 @@ def setup():
             rgb_img_chrg = bgr_img_chrg[::, ::, ::-1]
             self.img = ImageTk.PhotoImage(Image.fromarray(rgb_img_chrg))       
     root.title('JEU_TR')
-    p1 = PhotoImage(file = 'Favicon.ico')
+    p1 = PhotoImage(file = './Infos/Favicon.ico')
     root.iconphoto(False, p1)
     root.attributes('-fullscreen',True)
     image = imag()

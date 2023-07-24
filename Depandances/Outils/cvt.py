@@ -2,7 +2,7 @@
 ### Auteur : Tim Tamet -- Martínez ###
 ### Nom pr : cvt.py ##################
 
-## TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO ##
+## *_* TODO *_* ##
 ## TODO Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
 
@@ -461,7 +461,7 @@ if oui: ## Tout ##
                 return((0, 0))
             pt = (int((pt1[0] * mult1 + pt2[0] * mult2) / total), int((pt1[1] * mult1 + pt2[1] * mult2) / total))
             return(pt)
-        def str_long_de(num):
+        def str_long_de(num: int):
             '''
             Prend:
             ------
@@ -693,7 +693,7 @@ if oui: ## Tout ##
             magenta = (255, 0, 255)
             ## Autres couleurs ##
             turquoise = (255//2, 255//2, 0)
-            bois = [80, 150, 190]
+            bois = (80, 150, 190)
         if oui: ## Noms des touches ##
             tabulationKey, newLineKey, returnLineKey, spaceBarKey, exclamationMarkKey, doubleQuotesKey = '\t', '\n', '\r', ' ', '!', '"'
             hashTagKey, dollarSignKey, perCentKey, esperluetteKey, singleQuoteKey, openingParentesisKey = '#', '$', '%', '&', "'", '('
@@ -3523,7 +3523,7 @@ if oui: ## Tout ##
                     break
             return(img)
     if oui: ######################## Animations ###
-        def defilement(img=image(), texte='Texte d\'essai.', wk=27):
+        def defilement(img=image(), texte='Texte d\'essai.', wk=27, help=False):
             sens = True
             a = '                          '
             if sens:
@@ -3532,16 +3532,28 @@ if oui: ## Tout ##
                 texte = a + texte
             wtk = 0
             while wtk != wk:
-                wtk = montre(scripte(image(), (0, 0), texte, combine=True), 'img', 300, False)
+                wtk = montre(scripte(copy.deepcopy(img), (0, 0), texte, combine=True, help=help), 'img', 300, False)
                 if sens:
                     texte = texte[1:len(texte)] + texte[0]
                 else:
                     texte = texte[-1] + texte[0:len(texte) - 1]
-        def horloge(img=image(), couleur=turquoise, sep1='h', sep2=':', wk=27):
+        def horloge(img=image(), couleur=turquoise, sep1='h', sep2=':', wk=27, help=False):
             wtk = 0
             format = f'%H{sep1}%M{sep2}%S'
             while wtk != wk:
-                wtk = montre(scripte(image(), ct, f'\r\f{heure(format)}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur), 'img', 300, False)
+                wtk = montre(scripte(copy.deepcopy(img), ct, f'\r\f{heure(format)}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur, help=help), 'img', 300, False)
+        def syb_time(heure):
+            h, m, s = heure.split(':')
+            temps = [int(i) for i in (h, m, s)]
+            t = 0
+            types = [3600, 60, 1]
+            for type_, valeur in enumerate(temps):
+                t += types[type_]*valeur
+            return(t)
+        def horloge_sybylline(img=image(), couleur=turquoise, wk=27, help=False):
+            wtk = 0; frmt = '%H:%M:%S'
+            while wtk != wk:
+                wtk = montre(scripte(copy.deepcopy(img), ct, f'\r\f{syb_time(datetime.now().strftime(frmt))}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur, help=help), 'img', 300, False)
         def coos_de_la_souris(event, x, y, flags, params):
             souris.x, souris.y = x, y
         def coos_souris(img=image(), couleur=turquoise, wk=27):
@@ -3623,8 +3635,6 @@ if oui: ## Tout ##
             max_h = haut
             min_e = 0
             max_e = 30
-            diffs = []
-            mindiff = ''
             while wk != 27:
                 a, b = rd.randint(0, 1000000), rd.randint(0, 1000000)
                 if a == b:
@@ -3827,4 +3837,6 @@ if oui: ## Tout ##
             if exec:
                 demo(help)
 if oui: ## Main ##
-    main(exec=non, help=False)
+    #main(exec=non, help=False)
+    #horloge(help=oui)
+    print(syb_time(datetime.now().strftime('%H:%M:%S')))

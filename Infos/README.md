@@ -1,4 +1,4 @@
-<h1 align="center" style="color: #00D0D0"><b><u>Jeu_TR</b></u></h1>
+<h1 align="center" style="color: #00D0D0"><img src="./favicon.jpg" style="max-width: 25px; max-height: 25px"> <b><u>Jeu_TR</b></u> <img src="./favicon.ico" style="max-width: 25px; max-height: 25px"></h1>
 
 ## <b><r style="color: #A040A0; text-decoration: underline">FR</r></b>
 > Pour lancer le jeu, executez simplement le fichier <b><u style="color: #22B278">TR_main.py</u></b>.<br>
