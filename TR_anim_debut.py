@@ -7,7 +7,8 @@ if True: ## Vars ##
         p_dep = [1700, 100]
         p_arr = [200, 300]
     img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
-def anim_debut(anim=True, v=5) -> None:
+def anim_debut(img=None, anim=True, v=5) -> None:
+    if type(img) == None: img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
     if anim: ## Animation début ##
         for i in points_segment(p_dep, p_arr)[::v]:
             montre_img(zoom_at(img, 2, coord=i), nf)

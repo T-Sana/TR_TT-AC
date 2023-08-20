@@ -60,8 +60,11 @@ def carteVille(j1=j1, j2=j2): ## Carte de Img2 ##
         hg_bd_img2 = [cam, [long, cam[1]+haut]]
         j1.ou_peut_etre.append(hg_bd_img2)
         j2.ou_peut_etre.append(hg_bd_img2)
-        wk = montre(img_part(img(ouvre_image(f'{dir}/{imgs_path}/{n_img2}'), j1, j2), cam), nf, 100, non)
+        imag = img_part(img(ouvre_image(f'{dir}/{imgs_path}/{n_img2}'), j1, j2), cam)
+        wk = montre(imag, nf, 100, non)
         if wk == 27: quitter()
+        elif wk == 32:
+            return('echecs', imag)
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
             print(j1.ou_peut_etre)

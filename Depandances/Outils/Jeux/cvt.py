@@ -2,11 +2,9 @@
 ### Auteur : Tim Tamet -- Martínez ###
 ### Nom pr : cvt.py ##################
 
-## *_* TODO *_* ##
+## TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO ##
 ## TODO Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
-
-## ***TODO*** Faire l'horloge sybyllienne ##
 
 ######################################
 ### À régler : ###########################################
@@ -41,6 +39,21 @@ if oui: ## Tout ##
                 return(p3)
             else:
                 return(p4)
+        def coosEllipse(pt, rayons, an, angleEllipse=0):
+            an -= 180
+            b, a = rayons
+            a, b = abs(round(a)), abs(round(b))
+            if a == b:
+                return(coosCercle(pt, a, an))
+            x, y = pt
+            f1 = (x + racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y + racine_carree(pow(a, 2) - pow(b, 2)))
+            f2 = (x - racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y - racine_carree(pow(a, 2) - pow(b, 2)))
+            p = ellipsed(pt, rayons, an)
+            angl = angleEntrePoints(pt, p)
+            p = coosCercle(pt, dist(p, pt), angl + angleEllipse)
+            return(p)
+        def diff(a, b):
+            return(abs(a - b))
     if oui: ########################### Classes ###
         class save_pos:
             d = ''
@@ -250,22 +263,17 @@ if oui: ## Tout ##
         class pt_img_cartee:
             pt = (960, 540)
     if oui: ########################### Imports ### ## Licences ######
-        try: import Dependances.Text_samples as sm# ## None (mine) ###
-        except:
-            try: import Outils.Dependances.Text_samples as sm
-            except: import Depandances.Outils.Dependances.Text_samples as sm
         import cv2 ## Dessins, affichage... ####### ## Apache 2.0 ####
         import numpy as np ######### Arrays ####### ## BSD-3-Clause ##
         import math ######### Mathématiques ####### ## Builded-in ####
+        import imutils ###### Outils divers ####### ## MIT ###########
         import random as rd ### Aleatoireté ####### ## Builded-in ####
         import time ## Chronos, heure etc... ###### ## Builded-in ####
         from datetime import date, datetime ####### ## Builded-in ####
         import os ## Outils systeme ############### ## Builded-in ####
+        import pyautogui as kb ## clavier ######### ## BSD-3-Clause ##
         import copy ## Duplie les [] et les {} #### ## Builded-in ####
-    if oui: ################ Samples à scripter ###
-        samples = sm.samples()
-        samples1 = samples[0]
-        samples2 = samples[1]
+        from screeninfo import get_monitors ####### ## ???????????? ##
     if oui: ############################ Format ###
         def suivant(ou, texte, ind=0):
             if type(ou) == int:
@@ -324,7 +332,12 @@ if oui: ## Tout ##
                     return(texte)
             return(texte)
         def ordre_alphabetique(texte):
-            return(''.join(i for i in list(texte).sort))
+            texte = list(texte)
+            texte.sort()
+            a = ''
+            for i in texte:
+                a += i
+            return(a)
     if oui: ####################### Temporalité ###
         def jour_semaine(jour):
             '''Transforme un nombre entre 0 et 6 en jour de\nla semaine et traduit les anglais en français.'''
@@ -400,32 +413,12 @@ if oui: ## Tout ##
             return(out)
         def heure(format='%H:%M:%S'):
             return(datetime.now().strftime(format))
-        def maintenant(formatDeLHeure='%H:%M:%S', formatDuJour='normal', link=' '):
-            return(f'{heure(formatDeLHeure)}{link}{aujourdhui(formatDuJour)}')
     if oui: ############## Fonctions de calculs ###
-        def coosEllipse(pt, rayons, an, angleEllipse=0):
-            b, a = rayons
-            a, b = abs(round(a)), abs(round(b))
-            if a == b:
-                return(coosCercle(pt, a, an))
-            x, y = pt
-            f1 = (x + racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y + racine_carree(pow(a, 2) - pow(b, 2)))
-            f2 = (x - racine_carree(pow(b, 2) - pow(a, 2)), y) if b > a else (x, y - racine_carree(pow(a, 2) - pow(b, 2)))
-            p = ellipsed(pt, rayons, an)
-            angl = angleEntrePoints(pt, p)
-            p = coosCercle(pt, dist(p, pt), angl + angleEllipse)
-            return(p)
-        def diff(a, b):
-            return(abs(a - b))
         def nouvelle_couleur(hexadecimal, type='bgr'):
-            match type:
-                case 'rbg': r, b, g = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case 'rgb': r, g, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case 'grb': g, r, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case 'gbr': g, b, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case 'brg': b, r, g = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case 'bgr': b, g, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
-                case _: raise ValueError('Unknown type of colour!')
+            if type == 'rgb':
+                r, g, b = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
+            else:
+                b, g, r = int(hexadecimal[0:2], base=16), int(hexadecimal[2:4], base=16), int(hexadecimal[4:6], base=16)
             return([b, g, r])
         def ct_sg(pt1, pt2):
             '''
@@ -447,18 +440,18 @@ if oui: ## Tout ##
             ------
             :pt1: ``tuple (x, y)``\n
             :pt2: ``tuple (x, y)``\n
-            :mult1: ``float`` or ``int``\n
-            :mult2: ``float`` or ``int``\n
+            :mult1: ``int``\n
+            :mult2: ``int``\n
             Renvoie:
             --------
             ``ct``: ``tuple (x, y)``
             '''
-            total = mult1 + mult2
+            total = int(mult1) + int(mult2)
             if total == 0:
                 return((0, 0))
             pt = (int((pt1[0] * mult1 + pt2[0] * mult2) / total), int((pt1[1] * mult1 + pt2[1] * mult2) / total))
             return(pt)
-        def str_long_de(num: int):
+        def str_long_de(num):
             '''
             Prend:
             ------
@@ -467,11 +460,22 @@ if oui: ## Tout ##
             --------
             ``str`` de len() spécifiée
             '''
-            if num > 0:
-                out = 'a'*round(num)
-            else:
-                out = ''
+            ctrl = 0
+            out = ''
+            while ctrl < num:
+                out += 'a'
+                ctrl += 1
             return(out)
+        def list_nums_petits(num):
+            '''
+            Prend:
+            ------
+            :num: ``int``\n
+            Renvoie:
+            --------
+            ``list`` de ``int`` plus petits (jusqu'au 0)
+            '''
+            return(range(num))
         def points_segment(p1, p2):
             '''
             Prend:
@@ -488,7 +492,7 @@ if oui: ## Tout ##
             xb, yb = int(xb), int(yb)'''
             if xa == xb:
                 dif = ya - yb
-                numbs = range(abs(dif))
+                numbs = list_nums_petits(abs(dif))
                 out = []
                 if dif < 0:
                     for i in numbs:
@@ -541,7 +545,7 @@ if oui: ## Tout ##
             diffX = x1 - x2
             diffY = y1 - y2
             rotation = math.degrees(math.atan2(diffY, diffX))
-            return(rotation+180)
+            return(rotation)
         def coosCercle(ct, rayon, angle):
             '''
             Prend:
@@ -690,7 +694,7 @@ if oui: ## Tout ##
             magenta = (255, 0, 255)
             ## Autres couleurs ##
             turquoise = (255//2, 255//2, 0)
-            bois = (80, 150, 190)
+            bois = [80, 150, 190]
         if oui: ## Noms des touches ##
             tabulationKey, newLineKey, returnLineKey, spaceBarKey, exclamationMarkKey, doubleQuotesKey = '\t', '\n', '\r', ' ', '!', '"'
             hashTagKey, dollarSignKey, perCentKey, esperluetteKey, singleQuoteKey, openingParentesisKey = '#', '$', '%', '&', "'", '('
@@ -748,6 +752,37 @@ if oui: ## Tout ##
                     return(pas_bougee) #([0, -1080])
             return(pas_bougee)
         relocaliser_l_image = relocate_img()
+        def tape(touche, repetition=1, intervalle=0.0, attente=None):
+            '''
+            :touche: ``str`` or ``list`` of ``str``\n
+            :repetition: ``int``\n
+            :intervalle: ``float``\n
+            :attente: ``float``
+            '''
+            repetition = abs(repetition)
+            kb.press(touche, repetition, intervalle, False, attente)
+        def appuie(touche, attente=None):
+            '''
+            :touche: ``str`\n
+            :attente: ``float``
+            '''
+            kb.keyDown(touche, False, attente)
+        def appuie(touche, attente=None):
+            '''
+            :touche: ``str`\n
+            :attente: ``float``
+            '''
+            kb.keyUp(touche, False, attente)
+        def raccourci_clavier(touches, intervalle=0.0):
+            kb.hotkey(touches, logScreenshot=False, interval=intervalle)
+        def presse(touche, attente=None):
+            '''
+            :touche: ``str` or ``list`` of ``str``\n
+            :attente: ``float``
+            '''
+            kb.hold(touche, False, attente)
+        def ecris_sur_clavier(texte, intervalle=0.0, attente=None):
+            kb.write(texte, intervalle, False, attente)
     if oui: ############################ Formes ###
         def lune(img, pt=ct, taille=1, couleur=[0, 200, 255], couleur2=[0, 128, 255], rot=0):
             for i in range(1, int(taille*40)):
@@ -776,45 +811,6 @@ if oui: ## Tout ##
                 a = 120*taille
                 ellipse(img, pt, (taille*a, taille*a/2.4), couleur, 0)
             return(img)
-        def montagnette(img, ct=ct, t=1, o=0):
-            o -= 90
-            triangle(img, coosCercle(ct, 60*t, 0+o), coosCercle(ct, 50*t, 120+o), coosCercle(ct, 50*t, 240+o), nouvelle_couleur('809d9d'), 0)
-            triangle(img, coosCercle(ct, 60*t, 0+o), coosCercle(ct, 50*t, 120+o), coosCercle(ct, 50*t, 240+o), noir, 3)
-            return(img)
-        def maison(img, ct=ct, t=1, o=0, cl=nouvelle_couleur('506d6d'), cl2=nouvelle_couleur('405050'), clp=bois):
-            o -= 90
-            phd = coosCercle(ct, 50*t, o+45)
-            phg = coosCercle(ct, 50*t, o-45)
-            pbd = coosCercle(ct, 50*t, o+135)
-            pbg = coosCercle(ct, 50*t, o+225)
-            pbcg = pt_sg(pbg, pbd, 7, 4)
-            rectangle(img, phg, pbd, cl, 0)
-            rectangle(img, phg, pbd, noir, 3)
-            triangle(img, phg, phd, coosCercle(ct_sg(phg, phd), 60*t, o), cl2, 0)
-            triangle(img, phg, phd, coosCercle(ct_sg(phg, phd), 60*t, o), noir, 3)
-            rectangle(img, pbcg, pt_sg(pbg, phd, 4, 7), clp, 0)
-            rectangle(img, pbcg, pt_sg(pbg, phd, 4, 7), noir, 3)
-            return(img)
-        def perso(img, ctt=ct, t=1, o=0, clt=blanc, clv=blanc):
-            h, w = 20*t, 10*t
-            ct = coosCercle(ctt, 25*t, 90+o)
-            pttb = coosCercle(ctt, round(w/3), 90)
-            cg, cd = coosCercle(ct, w, 180+0), coosCercle(ct, w, 0+o)
-            ellipse(img, ct, (w, h), clv, 0, 180, angle=o)
-            ellipse(img, ct, (w, h), noir, 2, 180, angle=o)
-            ligne(img, coosCercle(ct, w, 180+o), coosCercle(ct, w, 0+o), noir, 2)
-            triangle(img, cg, ct, coosCercle(ct_sg(cg, ct), h, 90+o), clv, 0)
-            triangle(img, cg, ct, coosCercle(ct_sg(cg, ct), h, 90+o), noir, 2)
-            triangle(img, cd, ct, coosCercle(ct_sg(cd, ct), h, 90+o), clv, 0)
-            triangle(img, cd, ct, coosCercle(ct_sg(cd, ct), h, 90+o), noir, 2)
-            cercle(img, coosCercle(ct_sg(cd, ct), h, 90+o), 3*t, noir, 0, 180)
-            cercle(img, coosCercle(ct_sg(cg, ct), h, 90+o), 3*t, noir, 0, 180)
-            cercle(img, ctt, round(w/4*3), clt, 0)
-            cercle(img, ctt, round(w/4*3), noir, 2)
-            cercle(img, coosCercle(ctt, round(w/3), -30), t, noir, 0)
-            cercle(img, coosCercle(ctt, round(w/3), -150), t, noir, 0)
-            arc(img, coosCercle(pttb, t*3, 0), coosCercle(pttb, t*3, 180), t, noir, 1)
-            return(img)
         def polygone_regulier(img, ct=ct, n_cotes=5, rayon_vertex=rayon, couleur=noir, epaisseur=epaisseur, rotation=0):
             '''
             Dessin d'un polygone regulier avec autant de vertex que ``n_cotes``.\n
@@ -841,7 +837,7 @@ if oui: ## Tout ##
             if n_cotes > 100:
                 n_cotes = 100
             points = []
-            for i in range(n_cotes):
+            for i in list_nums_petits(n_cotes):
                 rot = (360 / n_cotes) * i + rotation
                 points.append(coosCercle(ct, rayon_vertex, rot))
             if epaisseur < 0:
@@ -958,6 +954,7 @@ if oui: ## Tout ##
             rotation = angleEntrePoints(p1, p2)
             if rayon < 0:
                 rayon = abs(rayon)
+                rotation += 180
             elif rayon == 0:
                 if epaisseur == 0:
                     epaisseur = -1
@@ -1091,17 +1088,18 @@ if oui: ## Tout ##
             rotation = angleEntrePoints(p1, p2)
             if sagitta < 0:
                 sagitta = abs(sagitta)
+                rotation += 180
             elif sagitta == 0:
                 abs(epaisseur)
                 cv2.line(img, p1, p2, couleur, epaisseur)
                 return(img)
             if epaisseur < 0:
                 try:
-                    cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 180, 360, couleur, abs(epaisseur))
+                    cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 0, 180, couleur, abs(epaisseur))
                 except:
                     pass
                 epaisseur = -1
-            cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 180, 360, couleur, epaisseur)
+            cv2.ellipse(img, ct_sg(p1, p2), (round(dist(p1, p2)/2), sagitta), rotation, 0, 180, couleur, epaisseur)
             return(img)
         def arc_dist(img, p1=ct, dist=25, sagitta=25, couleur=noir, epaisseur=epaisseur):
             '''
@@ -1329,10 +1327,6 @@ if oui: ## Tout ##
             Soit: ``img = rectangle(···)``\n
             Soit: ``rectangle(···)``
             '''
-            p1 = [round(i) for i in p1]
-            p2 = [round(i) for i in p2]
-            p3 = [round(i) for i in p3]
-
             epaisseur = int(epaisseur)
             if epaisseur <= 0:
                 if epaisseur == 0:
@@ -1397,7 +1391,7 @@ if oui: ## Tout ##
             '''
             rayon, epaisseur = int(rayon), int(epaisseur)
             a = 1
-            for i in range(tours):
+            for i in list_nums_petits(tours):
                 a /= 2
             step = 1 + a
             color = couleur
@@ -1415,7 +1409,7 @@ if oui: ## Tout ##
                 mult += 1
             return(img)
         def vortex(img, ct=ct, rayon=rayon, t_dist='lineere', couleur='random', epaisseur=epaisseur, c_ep=0, nºbras=4, rotation=0, angle=1, step=1):
-            for i in range(nºbras):
+            for i in list_nums_petits(nºbras):
                 spirale(img, ct, rayon, t_dist, couleur, epaisseur, c_ep, 360 / nºbras * i + rotation, angle, step)
             return(img)
         def vortex_vortex(img, cto=ct, dists=[0], angles=[0, 90, 180, 270], couleur='random', taille_spirale=25, rotation_spirales=0, rotation=0, c_ep=0, bras=4, tours=1, step=1):
@@ -1424,18 +1418,18 @@ if oui: ## Tout ##
                     ct = coosCercle(cto, i, j + rotation)
                     vortex(img, ct, taille_spirale, 'lineere', couleur, plein, c_ep, bras, rotation_spirales, tours, step)
             return(img)
-        def grille(img, epaisseur1=5, epaisseur2=2, pto=pt_img_cartee.pt, couleur=noir, d=[haut, long]):
+        def grille(img, epaisseur1=5, epaisseur2=2, pto=pt_img_cartee.pt, couleur=noir):
             x, y = pto
-            ligne(img, [x, 0], [x, d[0]], couleur, epaisseur1)
-            ligne(img, [0, y], [d[1], y], couleur, epaisseur1)
+            ligne(img, [x, 0], [x, haut], couleur, epaisseur1)
+            ligne(img, [0, y], [long, y], couleur, epaisseur1)
             for i in range(x, 0, -50):
-                ligne(img, [i, 0], [i, d[0]], couleur, epaisseur2)
-            for i in range(x, d[1], 50):
-                ligne(img, [i, 0], [i, d[0]], couleur, epaisseur2)
+                ligne(img, [i, 0], [i, haut], couleur, epaisseur2)
+            for i in range(x, long, 50):
+                ligne(img, [i, 0], [i, haut], couleur, epaisseur2)
             for i in range(y, 0, -50):
-                ligne(img, [0, i], [d[1], i], couleur, epaisseur2)
-            for i in range(y, d[0], 50):
-                ligne(img, [0, i], [d[1], i], couleur, epaisseur2)
+                ligne(img, [0, i], [long, i], couleur, epaisseur2)
+            for i in range(y, haut, 50):
+                ligne(img, [0, i], [long, i], couleur, epaisseur2)
             return(img)
         def parabole(img, a=1, b=0, c=0, puissance=2, couleur=bleu, epaisseur=10):
             p = puissance
@@ -1544,13 +1538,8 @@ if oui: ## Tout ##
                         pass
                     ctrl += 1
             return(img)
-        def cadre(img, pt1, pt2, cl=blanc, cl2=noir, ep_b=3, rot=0):
-            rectangle(img, pt1, pt2, cl, 0, rot)
-            rectangle(img, pt1, pt2, cl2, ep_b, rot)
-            return(img)
         def point(img, pt, cl=rouge):
             cercle(img, pt, 10, cl, 0)
-            return(img)
     if oui: ############################ Images ###
         def image(dimensions=(haut, long, 3), remplissage=blanc):
             '''
@@ -1564,6 +1553,7 @@ if oui: ## Tout ##
             --------
             ``img`` (``np.array``)
             '''
+            dimensions = [round(i) for i in dimensions]
             img = np.full(dimensions, remplissage, np.uint8)
             return(img)
         def image_cartesienne(dimensions=(haut, long, 3), remplissage=blanc, couleur_lignes=noir, point_debut=(0, 0)):
@@ -1580,7 +1570,7 @@ if oui: ## Tout ##
             ``img`` (``np.array``)
             '''
             img = image(dimensions, remplissage)
-            grille(img, pto=point_debut, couleur=couleur_lignes, d=dimensions[0:2])
+            grille(img, couleur_lignes, point_debut, dimensions[0:2], 25, 5)
             return(img)
         def image_cadre(dimensions=(haut, long, 3), remplissage=blanc, couleur_cadre=noir):
             '''
@@ -1643,20 +1633,10 @@ if oui: ## Tout ##
             '''
             img = cv2.imread(chemin)
             return(img)
-        def sauve_image(nom_fichier, img, path=''):
-            if path != '':
-                r = os.getcwd()
-                os.chdir(path)
+        def sauve_image(nom_fichier, img):
             cv2.imwrite(nom_fichier, img)
-            if path != '':
-                os.chdir(r)
     if oui: ########## Fonctions sur les images ###
-        def zoom_at(img, zoom=1, angle=0, coord=None):
-            cy, cx = [ i/2 for i in img.shape[:-1] ] if coord is None else coord[::-1]
-            rot_mat = cv2.getRotationMatrix2D((cx,cy), angle, zoom)
-            result = cv2.warpAffine(img, rot_mat, img.shape[1::-1], flags=cv2.INTER_LINEAR)
-            return(result)
-        def fusionImages(petite_img, grande_img):
+        def fusionImages(petite_img, grande_img, offsets=[0, 0]):
             '''
             Prend:
             ------
@@ -1668,8 +1648,7 @@ if oui: ## Tout ##
             '''
             s_img = petite_img
             img = grande_img
-            x_offset = 50
-            y_offset = 50
+            x_offset, y_offset = offsets
             img[y_offset:y_offset + s_img.shape[0], x_offset:x_offset + s_img.shape[1]] = s_img
             return(img)
         def montre(img, nomFenetre='img', attente=0, destroy=True, dists=relocate_img()):
@@ -1678,7 +1657,7 @@ if oui: ## Tout ##
             ------
             :nomFenetre: ``str``\n
             :img: ``np.array``\n
-            :attente: ``int``\n
+            :attente: ``int`` ## En milisecondes\n
             Renvoie:
             --------
             ``None``
@@ -1691,16 +1670,11 @@ if oui: ## Tout ##
             if destroy == True:
                 cv2.destroyWindow(nomFenetre)
             return(wk)
-        def montre_part(img, pto=[0, 0], t=[long-1, haut-1], nomFenetre='img', attente=0, destroy=True, dists=relocate_img()):
-            im = img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]
-            return(montre(im, nomFenetre, attente, destroy, dists))
-        def img_part(img, pto=[0, 0], t=[long-1, haut-1]):
-            return(np.array(img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]))
         def attend_touche(attente):
             if attente >= 0:
                 quoi = cv2.waitKeyEx(attente)
                 return(quoi)
-        def souris_sur_image(img, fonction, nomFenetre='img', attente=0, destroy=True, param=None):
+        def souris_sur_image(img, fonction, nomFenetre='img', attente=0, destroy=True):
             '''
             Prend:
             ------
@@ -1715,8 +1689,8 @@ if oui: ## Tout ##
             cv2.namedWindow(nomFenetre, cv2.WND_PROP_FULLSCREEN)
             cv2.setWindowProperty(nomFenetre, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
             cv2.imshow(nomFenetre, img)
-            cv2.setMouseCallback(nomFenetre, fonction, param)
-            wk = cv2.waitKeyEx(attente)
+            cv2.setMouseCallback(nomFenetre, fonction)
+            wk = cv2.waitKey(attente)
             if destroy == True:
                 cv2.destroyWindow(nomFenetre)
             return(wk)
@@ -3520,7 +3494,7 @@ if oui: ## Tout ##
                     break
             return(img)
     if oui: ######################## Animations ###
-        def defilement(img=image(), texte='Texte d\'essai.', wk=27, help=False):
+        def defilement(img=image(), texte='Texte d\'essai.', wk=27):
             sens = True
             a = '                          '
             if sens:
@@ -3529,31 +3503,16 @@ if oui: ## Tout ##
                 texte = a + texte
             wtk = 0
             while wtk != wk:
-                wtk = montre(scripte(copy.deepcopy(img), (0, 0), texte, combine=True, help=help), 'img', 300, False)
+                wtk = montre(scripte(image(), (0, 0), texte, combine=True), 'img', 300, False)
                 if sens:
                     texte = texte[1:len(texte)] + texte[0]
                 else:
                     texte = texte[-1] + texte[0:len(texte) - 1]
-        def horloge(img=image(), couleur=turquoise, sep1='h', sep2=':', wk=27, help=False):
+        def horloge(img=image(), couleur=turquoise, sep1='h', sep2=':', wk=27):
             wtk = 0
             format = f'%H{sep1}%M{sep2}%S'
             while wtk != wk:
-                wtk = montre(scripte(copy.deepcopy(img), ct, f'\r\f{heure(format)}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur, help=help), 'img', 300, False)
-        def syb_time(heure):
-            h, m, s, f = heure.split(':')
-            temps = [int(i) for i in (h, m, s)]
-            while len(f) < 6: f = f'0{f}'
-            t = float(f'0.{f}')
-            types = [3600, 60, 1]
-            for type_, valeur in enumerate(temps):
-                t += types[type_]*valeur
-            t = round(t/(60*60*24)*(10*100*100))
-            t = str('0'*6)[:6-len(str(t)):]+str(t)
-            t = f'{t[:2]}:{t[2:4]}:{t[4:6]}'
-            return(t)
-        def horloge_sybylline(img=image(), couleur=turquoise, wk=27, help=False):
-            wtk = 0; frmt = '%H:%M:%S:%f'
-            while wtk != wk: wtk = montre(scripte(copy.deepcopy(img), ct, f'\r\f{syb_time(datetime.now().strftime(frmt))}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur, help=help), 'img', 1, False)
+                wtk = montre(scripte(image(), ct, f'\r\f{heure(format)}\n\f\f   {aujourdhui()}', combine=True, couleur=couleur), 'img', 300, False)
         def coos_de_la_souris(event, x, y, flags, params):
             souris.x, souris.y = x, y
         def coos_souris(img=image(), couleur=turquoise, wk=27):
@@ -3568,25 +3527,6 @@ if oui: ## Tout ##
                 cv2.setMouseCallback(nomFenetre, coos_de_la_souris)
                 wtk = cv2.waitKey(1)
     if oui: ############################# Demos ###
-        def demo(help=True, polise='simplex'):
-            combine = False
-            ctrl = 0
-            wk = 0
-            for texte in samples1:
-                ctrl += 1
-                print(texte)
-                print(f'{ctrl}/{len(samples1)}')
-                wk = montre(scripte(image(), hg, texte, taille, espacement, couleur, epaisseur, polise, 0, help, souligne, surligne, combine), f'Sample nº{ctrl}')
-                if wk == 27:
-                    break
-            ctrl = 0
-            for texte in samples2:
-                ctrl += 1
-                print(texte)
-                print(f'{ctrl}/{len(samples2)}')
-                wk = montre(scripte(image(), hd, texte, taille, espacement, couleur, epaisseur, polise, 90, help, souligne, surligne, combine), f'Sample nº{ctrl}')
-                if wk == 27:
-                    break 
         def dessin():
             class clrsdessn:
                 r = 0
@@ -3624,8 +3564,8 @@ if oui: ## Tout ##
                     draw = not draw
                 elif wk == 8:
                     draw = not draw
-        def dessin_alea_infini(pl='p'):
-            img = image(remplissage=[rd.randint(0, 255), rd.randint(0, 255), rd.randint(0, 255)])
+        def dessin_alea_infini(pl='p', sz=[haut, long, 3]):
+            img = image(sz, remplissage=[rd.randint(0, 255), rd.randint(0, 255), rd.randint(0, 255)])
             wk = 0
             min_c = 0
             max_c = 255
@@ -3635,6 +3575,8 @@ if oui: ## Tout ##
             max_h = haut
             min_e = 0
             max_e = 30
+            diffs = []
+            mindiff = ''
             while wk != 27:
                 a, b = rd.randint(0, 1000000), rd.randint(0, 1000000)
                 if a == b:
@@ -3832,11 +3774,5 @@ if oui: ## Tout ##
             for i in pts:
                 cercle(img, i, ura, rubis, 0)
             return(img)
-    if oui: ############################## Main ###
-        def main(exec=False, help=True):
-            if exec:
-                demo(help)
 if oui: ## Main ##
-    #main(exec=non, help=False)
-    #horloge(help=oui)
     pass

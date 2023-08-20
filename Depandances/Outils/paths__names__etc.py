@@ -17,6 +17,8 @@ def create_dir_if_unexisting(name, path='./') -> None:
     except: os.mkdir(f"{path}\{name}")
 
 if True: ## Format.vars ##
+    new_line = '\n'
+    espace = ' '
     BLACK        = "\033[30m"
     RED          = "\033[31m"
     GREEN        = "\033[32m"
