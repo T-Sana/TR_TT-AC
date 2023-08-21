@@ -90,7 +90,7 @@ if True: ## persos ##
             return(self.nom)
         def __init__(self, nom: str, coos=ct, clrs=[blanc, blanc], t=1, o=0, keys=[key_arr_u, key_arr_d, key_arr_r, key_arr_l], ou_peut_etre=[hg, bd], ou_ne_peut_etre=[]) -> None:
             self.ou_peut_etre = [ou_peut_etre if type(ou_peut_etre[0][0]) == int or type(ou_peut_etre[0][0]) == float else i for i in ou_peut_etre]
-            self.ou_ne_peut_etre = ou_ne_peut_etre
+            self.ou_ne_peut_etre = copy.deepcopy(ou_ne_peut_etre)
             self.keys = keys
             self.k_h, self.k_b, self.k_d, self.k_g = self.keys
             print([self.k_h, self.k_b, self.k_d, self.k_g])

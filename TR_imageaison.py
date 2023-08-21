@@ -4,7 +4,7 @@ from Depandances.Outils.paths__names__etc import *
 from Depandances.Outils.quit import *
 
 if True: ## Pieces d'échecs ##
-    def dessine_roi(ep, img, pt1, pt2, pt3, pt4, col1, col2, echec=False): ############## Terminé ##
+    def dessine_roi(img, pt1, pt2, pt3, pt4, col1, col2, ep=5, echec=False): ############## Terminé ##
         ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
         c1 = pt_sg(pt1, ct)
         c2 = pt_sg(pt2, ct)
@@ -27,6 +27,95 @@ if True: ## Pieces d'échecs ##
         rectangle(img, ct_sg(pt2, c2), ct_sg(c2, cd), col2, ep)
         ligne(img, ct_sg(ch, ct), ct_sg(cb, ct), col2, ep)
         ligne(img, ct_sg(cg, ct), ct_sg(cd, ct), col2, ep)
+        return(img)
+    def dessine_pion(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ########################## Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c4 = pt_sg(pt4, ct)
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        return(img)
+    def dessine_pions(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ######################### Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        a, b = 2, 5
+        p1, p2, p3, p4 = pt_sg(ct, pt1, a, b), pt_sg(ct, pt2, a, b), pt_sg(ct, pt3, a, b), pt_sg(ct, pt4, a, b)
+        cg, cd, ch, cb = pt_sg(p1, p3), pt_sg(p2, p4), pt_sg(p1, p2), pt_sg(p3, p4)
+        cdb = ct_sg(cd, p4)
+        cgb = ct_sg(cg, p3)
+        cth = ct_cr(p1, p2, cg, cd)
+        ctb = ct_sg(cgb, cdb)
+        ctbg = ct_sg(ctb, cgb)
+        ctbd = ct_sg(ctb, cdb)
+        rectangle(img, cgb, p4, col1, 0)
+        rectangle(img, cgb, p4, col2, ep)
+        triangle(img, ctbd, ctbg, cth, col1, 0)
+        triangle(img, ctbd, ctbg, cth, col2, ep)
+        cercle(img, cth, round(dist(cth, ch)/1.5), col1, 0)
+        cercle(img, cth, round(dist(cth, ch)/1.5), col2, ep)
+        return(img)
+    def dessine_cavalier(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ###################### Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c4 = pt_sg(pt4, ct)
+        a, b = 1, 3
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        rectangle(img, ct_sg(pt1, c1), pt_sg(c1, ct, a, b), col1, 0)
+        rectangle(img, ct_sg(pt1, c1), pt_sg(c1, ct, a, b), col2, ep)
+        return(img)
+    def dessine_fou(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ########################### Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c2 = pt_sg(pt2, ct)
+        c3 = pt_sg(pt3, ct)
+        c4 = pt_sg(pt4, ct)
+        cg = pt_sg(c1, c3)
+        cd = pt_sg(c2, c4)
+        cb = pt_sg(c3, c4)
+        ch = pt_sg(c1, c2)
+        a, b = 7, 5
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col1, 0)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col2, ep)
+        ligne(img, ct_sg(ch, ct), ct_sg(cb, ct), col2, ep)
+        ligne(img, ct_sg(cg, ct), ct_sg(cd, ct), col2, ep)
+        return(img)
+    def dessine_tour(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ########################## Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c2 = pt_sg(pt2, ct)
+        c3 = pt_sg(pt3, ct)
+        c4 = pt_sg(pt4, ct)
+        cg = pt_sg(c1, c3)
+        cd = pt_sg(c2, c4)
+        cb = pt_sg(c3, c4)
+        ch = pt_sg(c1, c2)
+        a, b = 3, 1
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        rectangle(img, ct_sg(pt1, c1), pt_sg(c1, ct, a, b), col1, 0)
+        rectangle(img, ct_sg(pt1, c1), pt_sg(c1, ct, a, b), col2, ep)
+        rectangle(img, ct_sg(pt2, c2), pt_sg(c2, ct, a, b), col1, 0)
+        rectangle(img, ct_sg(pt2, c2), pt_sg(c2, ct, a, b), col2, ep)
+        return(img)
+    def dessine_dame(img, pt1, pt2, pt3, pt4, col1, col2, ep=5): ########################## Terminé ##
+        ct = ct_sg(ct_sg(pt1, pt2), ct_sg(pt3, pt4))
+        c1 = pt_sg(pt1, ct)
+        c2 = pt_sg(pt2, ct)
+        c3 = pt_sg(pt3, ct)
+        c4 = pt_sg(pt4, ct)
+        cg = pt_sg(c1, c3)
+        cd = pt_sg(c2, c4)
+        a, b = 7, 5
+        rectangle(img, c1, c4, col1, 0)
+        rectangle(img, c1, c4, col2, ep)
+        rectangle(img, ct_sg(pt1, c1), ct_sg(c1, cg), col1, 0)
+        rectangle(img, ct_sg(pt2, c2), ct_sg(c2, cd), col1, 0)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col1, 0)
+        rectangle(img, pt_sg(ct_sg(pt1, c1), ct_sg(pt2, c2), a, b), pt_sg(c1, c2, b, a), col2, ep)
+        rectangle(img, ct_sg(pt1, c1), ct_sg(c1, cg), col2, ep)
+        rectangle(img, ct_sg(pt2, c2), ct_sg(c2, cd), col2, ep)
         return(img)
 if True: ## Noms.vars ##
     n_img_chargement='img_chrg.jpg';n_img1='img1.jpg';n_img2='img2.jpg';n_img3='img3.jpg';n_img4='img4.jpg';n_img5='img5.jpg';imgs='Imgs'
@@ -86,7 +175,7 @@ if True: ## Img2 ## @@ Ville @@
                 porte = 4
                 d_porte = 35
             if True: ## Vars - others ##
-                d = [haut*2, long, 3]
+                d = [haut*2, round(long*1.5), 3]
                 hg2 = [0, 0]
                 bg2 = [0, haut]
                 hd2 = [long, 0]
@@ -239,8 +328,8 @@ if True: ## Img2 ## @@ Ville @@
             x, y = coos
             rectangle(img, [x, y], [x+dx*3, y+dy], nouvelle_couleur('72A4CA'), 0)
             rectangle(img, [x, y], [x+dx*3, y+dy], noir, 5)
-            dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('DFDFDF'), nouvelle_couleur('202020'))
-            dessine_roi(3, img, [x+dx*2, y], [x+dx*3, y], [x+dx*2, y+dy], [x+dx*3, y+dy], nouvelle_couleur('202020'), nouvelle_couleur('DFDFDF'))
+            dessine_roi(img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('DFDFDF'), nouvelle_couleur('202020'), 3)
+            dessine_roi(img, [x+dx*2, y], [x+dx*3, y], [x+dx*2, y+dy], [x+dx*3, y+dy], nouvelle_couleur('202020'), nouvelle_couleur('DFDFDF'), 3)
             rectangle(img, echq[0], echq[1], noir, 3)
         return(img)
 

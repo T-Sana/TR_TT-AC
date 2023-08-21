@@ -1,4 +1,4 @@
-from TR_setup import setup; #setup()
+from TR_setup import setup; setup()
 if True: ## Packages ##
     import TR_transitions as trs
     from TR_anim_debut import *
@@ -11,16 +11,16 @@ if True: ## Functs ##
             case i if i in list(jeux_dispos.keys()):
                 trs.shade(img)
                 jeu = jeux_dispos[ev]
-                jeu(j1=noms[0], j2=noms[1])
+                result = jeu(j1=noms[0], j2=noms[1])
+                print('Result:', result)
             case None: print('Error')
             case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')
 if True: ## Vars ##
     img = ouvre_image(f'./{imgs_path}/{n_img2}')
-if non: ## Main ##
-    '''trs.shade(img)
-    anim_debut(img)
-    trs.shade(img)
-    '''
+if True: ## Main ##
+    '''trs.shade(img_part(img))
+    anim_debut(img_part(img))
+    trs.shade(img_part(img))
     n_j1 = n_j2 = None
     while n_j1 == None or n_j1 == 0 or n_j1 == '' or len(str(n_j1)) > 9:
         n_j1 = visual_input(image(remplissage=turquoise), 'Nom j1: ', 'J1', '', nf)
@@ -35,11 +35,12 @@ if non: ## Main ##
         else:
             trs.shade(image(remplissage=turquoise))
             if len(str(n_j2)) > 9:
-                if montre(ecris(image(remplissage=turquoise), 'ERREUR !\nNom trop long,\n longeur max: 9chrs.', hg, bd, ), nf, 10000, non) == 27: quitter()
+                if montre(ecris(image(remplissage=turquoise), 'ERREUR !\nNom trop long,\n longeur max: 9chrs.', hg, bd, 3), nf, 10000, non) == 27: quitter()
             if n_j2 == n_j1:
                 if montre(ecris(image(remplissage=turquoise), f'ERREUR !\nVous ne pouvez vous appeller "{n_j1}",\ncar j1 ({n_j1}) s\'appelle deja ainsi.', hg, bd, 3), nf, 10000, non) == 27: quitter()
     noms = [n_j1, n_j2]
-    if montre(ecris(image(remplissage=turquoise), f'Bienvenu·e·s {n_j1} & {n_j2} !\n', hg, bd, 3), nf, 10000, non) == 27: quitter()
+    if montre(ecris(image(remplissage=turquoise), f'Bienvenu.e.s {n_j1} & {n_j2} !\n', hg, bd, 3), nf, 10000, non) == 27: quitter()'''
+    numb = 0; noms = ['j1', 'j2']
     while True:
-        event, img = carteVille(j1, j2)
+        event, img, c = carteVille(j1, j2, numb)
         runEvent(event, img, noms)
