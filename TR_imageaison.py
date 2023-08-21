@@ -230,16 +230,17 @@ if True: ## Img2 ## @@ Ville @@
                     if j == 2:
                         match i:
                             case 3:
-                                rectangle(img, [x, y], [x+dx*3, y+dy], nouvelle_couleur('72A4CA'), 0)
-                                rectangle(img, [x, y], [x+dx*3, y+dy], noir, 5)
-                                dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('DFDFDF'), nouvelle_couleur('202020'))
-                            case 4: pass
-                            case 5: dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('202020'), nouvelle_couleur('DFDFDF'))
+                                coos = [x, y]
                             case _:
                                 rectangle(img, [x, y], [x+dx, y+dy], nouvelle_couleur('202020') if i%2 == j%2 else nouvelle_couleur('DFDFDF'), 0)
                         
                     else:
                         rectangle(img, [x, y], [x+dx, y+dy], nouvelle_couleur('202020') if i%2 == j%2 else nouvelle_couleur('DFDFDF'), 0)
+            x, y = coos
+            rectangle(img, [x, y], [x+dx*3, y+dy], nouvelle_couleur('72A4CA'), 0)
+            rectangle(img, [x, y], [x+dx*3, y+dy], noir, 5)
+            dessine_roi(3, img, [x, y], [x+dx, y], [x, y+dy], [x+dx, y+dy], nouvelle_couleur('DFDFDF'), nouvelle_couleur('202020'))
+            dessine_roi(3, img, [x+dx*2, y], [x+dx*3, y], [x+dx*2, y+dy], [x+dx*3, y+dy], nouvelle_couleur('202020'), nouvelle_couleur('DFDFDF'))
             rectangle(img, echq[0], echq[1], noir, 3)
         return(img)
 
@@ -259,9 +260,12 @@ def demo_img2():
         if wk == 27: quitter()
     montre_part(im2)
 
-#img_cart2()
 def img_chrg() -> None: ## MAIN ##
     img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
+    try:
+        if type(img) == None: pass
+        img_cart1(); raise Exception
+    except: img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
     marron = nouvelle_couleur('122336')
     t=9
     t2 = 5

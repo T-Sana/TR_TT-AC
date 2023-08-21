@@ -144,8 +144,8 @@ if oui: ## Tout ##
                 'coeur_n':'a18', 'trefle_n':'b18', 'carreau_n':'c18', 'pique_n':'d18', 'pion_b':'e18', 'fou_b':'f18', 'cavalier_b':'g18', 'dame_b':'h18', 'roi_b':'i18', 'python_p':'j18', ################### Symboles 1/2 ###
                 'cœur_n':'a18', 'coeurs_n':'a18', 'cœurs_n':'a18', 'trefles_n':'b18', 'carreaux_n':'c18', 'piques_n':'d18', ################################################################################## Symboles 2/2 ###
                 ### Accents : #################################################################################################################################################################################################
-                'à':'a9\\c4', 'á':'b9\\c4', 'â':'a1\\c40', 'ä':'b1\\c40', 'è':'a9\\g4', 'é':'b9\\g4', 'ê':'a1\\g40', 'ë':'b1\\g40', 'ì':'a9\\k4', 'í':'b9\\k4', 'î':'a1\\k40', 'ï':'b1\\k40', 'ò':'a9\\q4', ### Accents 1/4 ###
-                'ó':'b9\\q4', 'ô':'a10\\q4', 'ö':'b10\\q4', 'ù':'a9\\h5', 'ú':'b9\\h5', 'û':'a10\\h5', 'ü':'b10\\h5', 'À':'a9\\c2', 'Á':'b9\\c2', ' ':'a10\\c2', 'Ä':'b10\\c2', 'È':'a9\\g2', 'É':'b9\\g2', ### Accents 2/4 ###
+                'à':'a9\\c4', 'á':'b9\\c4', 'â':'a10\\c4', 'ä':'b10\\c4', 'è':'a9\\g4', 'é':'b9\\g4', 'ê':'a1\\g40', 'ë':'b1\\g40', 'ì':'a9\\k4', 'í':'b9\\k4', 'î':'a1\\k40', 'ï':'b1\\k40', 'ò':'a9\\q4', ### Accents 1/4 ###
+                'ó':'b9\\q4', 'ô':'a10\\q4', 'ö':'b10\\q4', 'ù':'a9\\h5', 'ú':'b9\\h5', 'û':'a10\\h5', 'ü':'b10\\h5', 'À':'a9\\c2', 'Á':'b9\\c2', 'Â':'a10\\c2', 'Ä':'b10\\c2', 'È':'a9\\g2', 'É':'b9\\g2', ### Accents 2/4 ###
                 'Ê':'a10\\g2', 'Ë':'b10\\g2', 'Ì':'a9\\k2', 'Í':'b9\\k2', 'Î':'a10\\k2', 'Ï':'b10\\k2', 'Ò':'a9\\q2', 'Ó':'b9\\q2', 'Ô':'a10\\q2', 'Ö':'b10\\q2', 'Ù':'a9\\h3', 'Ú':'b9\\h3', 'Û':'a10\\h3', ## Accents 3/4 ###
                 'Ü':'b10\\h3', ################################################################################################################################################################################ Accents 4/4 ###
                 ###############################################################################################################################################################################################################
@@ -1212,10 +1212,8 @@ if oui: ## Tout ##
             Soit: ``rectangle(···)``
             '''
             save, save2, pt1, pt2 = pt1, pt2, [], []
-            for i in save:
-                pt1.append(int(i))
-            for i in save2:
-                pt2.append(int(i))
+            for i in save: pt1.append(int(i))
+            for i in save2: pt2.append(int(i))
             epaisseur = int(epaisseur)
             if rotation == 0:
                 if epaisseur < 0:
@@ -2317,8 +2315,7 @@ if oui: ## Tout ##
                     ligne(img, pt_sg(p3, p4, b, a), pt_sg(cg, cd, b, a), couleur, ep)
                     ligne(img, pt_sg(cg, cd, a, b), pt_sg(p3, p4, b, a), couleur, ep)
                 elif char == 'a6': ## Ecrit : [ ## ## Brackets 1 ###
-                    ligne(img, p1, p3, couleur, epaisseur
-)
+                    ligne(img, p1, p3, couleur, epaisseur)
                     ligne(img, p1, ch, couleur, epaisseur)
                     ligne(img, p3, cb, couleur, epaisseur)
                 elif char == 'b6': ## Ecrit : ] ## ## Brackets 2 ###
@@ -3046,8 +3043,9 @@ if oui: ## Tout ##
                     ligne(img, cd, ct, couleur, epaisseur)
                     ligne(img, p3, ct, couleur, epaisseur)
                     cercle(img, pt_sg(ct, ch), dist(pt_sg(ct, ch), ch), couleur, epaisseur, 0, 180, 90 + rotation)
-                elif char == 'q15': ## Rmplit tt ## ## Full square##
-                    rectangle(img, p1, p4, noir, epaisseur)
+                elif char == 'q15': ## Rmplit tt ## ## Square##
+                    for i, j in [(p1, p3), (p1, p2), (p2, p4), (p3, p4)]:
+                        ligne(img, i, j, noir, epaisseur)
                     pos -= 1
                 elif char == 'a16': ## Ecrit : а ## ## А min #######
                     p1, p2, p3, p4, ch, cb, cg, cd, ct, c1, c2, c3, c4, hg, hd, bd, bg, p1h, p2h, p3b, p4b = minCoos(p1, p2, p3, p4)
@@ -3363,7 +3361,7 @@ if oui: ## Tout ##
                     ligne(img, pt_sg(p1, ch, 1, 2), pt_sg(p3, cb, 2, 1), couleur, epaisseur)
                     ligne(img, pt_sg(p2, ch, 2, 1), pt_sg(p4, cb, 1, 2), couleur, epaisseur)
                 else: ######## Si char pas identifié correctement ##
-                    pos = char_inconnu(img, hg, hd, bg, bd, noir, rotation, taille, pos)
+                    pos = char_inconnu(img, hg, hd, bg, bd, noir, police, rotation, taille, pos)
             elif police == 'complex': ## À faire ##
                 if char == 'c1':
                     ellipse(img, ct, (abs(ct[1] - ch[1]), int(abs(ct[0] - cd[0]) / 5 * 4)), couleur, epaisseur)
@@ -3504,6 +3502,7 @@ if oui: ## Tout ##
                     scripte_format(img, p1, p2, p3, p4, souligne, surligne, epaisseur)
                     try:
                         img, pos = chars(img, char, p1, p2, p3, p4, couleur, epaisseur, police, rotation + rot_par_char * rote, taille, pos, combine)
+                        if type(pos) != int: pos = pos[-1]
                     except Exception as i:
                         print(i)
                         img, pos = char_inconnu(img, p1, p2, p3, p4, noir, police, rotation + rot_par_char * rote, taille, pos)
@@ -3569,24 +3568,46 @@ if oui: ## Tout ##
                 wtk = cv2.waitKey(1)
     if oui: ############################# Demos ###
         def demo(help=True, polise='simplex'):
-            combine = False
-            ctrl = 0
-            wk = 0
-            for texte in samples1:
-                ctrl += 1
+            txt = []
+            st = '\b\\b1\\b1\\b1\\b1\\b1\\b1'
+            n = 0; l = 0
+            t = st
+            ind = 0
+            lts = 'abcdefghijklmnopqrstuvwxyz'
+            lst_lts = []
+            w = 0
+            for lpp in [17, 17, 17, 16, 16, 16, 16]:
+                lst_lts.append('')
+                for i in range(lpp):
+                    if ind < len(lts): lst_lts[w] += lts[ind]+':'
+                    else: lst_lts[w] += lts[ind//len(lts)-1]+lts[ind%len(lts)]+':'
+                    ind += 1
+                lst_lts[w] = lst_lts[w][:len(lst_lts[w])-1:]
+                w+=1
+            print(lst_lts)
+            for lets in lst_lts:
+                for i in range(18):
+                    for j in lets.split(':'):
+                        t += f'\\{j}{i+1}'
+                        n += 1
+                        if n%17 == 0:
+                            if not (l+1)%9 == 0: t += f'\\n\\{st[2::]}'; l+= 1
+                            else: l+=1
+                            if l%9 == 0: txt.append(t); t = st
+            if t != st: txt.append(t)
+            i = 0; r=0
+            while True:
+                texte = txt[i]
                 print(texte)
-                print(f'{ctrl}/{len(samples1)}')
-                wk = montre(scripte(image(), hg, texte, taille, espacement, couleur, epaisseur, polise, 0, help, souligne, surligne, combine), f'Sample nº{ctrl}')
-                if wk == 27:
-                    break
-            ctrl = 0
-            for texte in samples2:
-                ctrl += 1
-                print(texte)
-                print(f'{ctrl}/{len(samples2)}')
-                wk = montre(scripte(image(), hd, texte, taille, espacement, couleur, epaisseur, polise, 90, help, souligne, surligne, combine), f'Sample nº{ctrl}')
-                if wk == 27:
-                    break 
+                #img = scripte(scripte(image(remplissage=turquoise), hg, texte+'\\', 1, combine=non), hg, f'{i+1:2d}/{len(txt):2d}', surligne=vert, souligne=rouge, couleur=bleu)
+                r+=1
+                img = scripte(scripte(image(remplissage=turquoise), ct, texte+'\\', 1, combine=non, rotation=r), hg, f'{i+1:2d}/{len(txt):2d}', surligne=vert, souligne=rouge, couleur=bleu)
+                wk = montre(img, 'demo', 1, non)
+                match wk:
+                    case 27: break
+                    case 32: i += 1; i=i%len(txt)
+                    case  8: i -= 1; i=(i+len(txt))%len(txt)
+            ferme_all()
         def dessin():
             class clrsdessn:
                 r = 0

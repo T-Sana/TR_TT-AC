@@ -64,7 +64,7 @@ def carteVille(j1=j1, j2=j2): ## Carte de Img2 ##
         wk = montre(imag, nf, 100, non)
         if wk == 27: quitter()
         elif wk == 32:
-            return('echecs', imag)
+            return('echecs' if rd.randint(0, 1)==0 else 'morpion', imag)
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
             print(j1.ou_peut_etre)

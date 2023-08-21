@@ -18,8 +18,18 @@ class nom:
     nom = 'Morpion'
 if True: ## Imports ##
     import cv2
-    from cvt import *
-    from outils.souris import souris
+    try: from cvt import *
+    except:
+        try: from Jeux.cvt import *
+        except:
+            try: from Outils.Jeux.cvt import *
+            except: from Depandances.Outils.Jeux.cvt import *
+    try: from cvt import *
+    except:
+        try: from Jeux.outils.souris import souris
+        except:
+            try: from Outils.Jeux.outils.souris import souris
+            except: from Depandances.Outils.Jeux.outils.souris import souris
 if oui: ## Functions ##
     def clicked_in(pos, boutton): ## Is pos between boutton[0] (haut gauche) and boutton[1] (bas droite) ##
         a_l_interieur = pos[0] >= boutton[0][0] and pos[0] <= boutton[1][0] and pos[1] >= boutton[0][1] and pos[1] <= boutton[1][1]
@@ -28,7 +38,9 @@ if oui: ## Classes ##
     class morpion:
         def __str__(self):
             return(self.nom)
-        def __init__(self, nom='partie 1'):
+        def __init__(self, nom='partie 1', J1='J1', J2='J2'):
+            self.J1 = J1
+            self.J2 = J2
             self.points_j1 = self.points_j2 = 0 ## 
             self.nom = nom
             table = [
@@ -70,8 +82,8 @@ if oui: ## Classes ##
                 rectangle(img, pt_sg(p2, p3, 2), p3, bois, 10)
                 rectangle(img, p2, pt_sg(p2, p3, 1, 2), bois, 10)
                 t = '/' if self.trait else '0'
-                ecris(img, f'J1\n{self.points_j1}\n\n{t}', [0, 0], p3, 5, turquoise, 15)
-                ecris(img, f'J2\n{self.points_j2}\n\n{t}', p2, [long, haut], 5, turquoise, 15)
+                ecris(img, f'{self.J1}\n{self.points_j1}\n\n{t}', [0, 0], p3, 5, turquoise, 15)
+                ecris(img, f'{self.J2}\n{self.points_j2}\n\n{t}', p2, [long, haut], 5, turquoise, 15)
                 for j in range(len(self.table)):
                     for i in range(len(self.table[j])):
                         c = self.table[j, i]
@@ -143,9 +155,7 @@ if oui: ## Classes ##
                 r = self.jouable()
                 if r == 'x' or r == 'o' or r == '_':
                     self.rejouer(r)
-def start():
-    jeu = morpion()
+def start(j1='J1', j2='J2'):
+    jeu = morpion(J1=j1, J2=j2)
     jeu.jouer()
     ferme(str(jeu))
-
-#start()

@@ -72,6 +72,16 @@ def setup():
     class imag:
         def __init__(self, t_steps=100, steps=5, action='Installing pip', image_path=f'./Depandances/Imgs/img_chrg.jpg'):
             bgr_img_chrg = ouvre_image(image_path)
+            print(type(bgr_img_chrg), type(bgr_img_chrg) == None, bgr_img_chrg)
+            try:
+                if bgr_img_chrg == None: pass
+                print('Here')
+                raise Exception
+                print('There')
+                bgr_img_chrg = ouvre_image(image_path)
+            except:
+                img_chrg()
+                bgr_img_chrg = ouvre_image(image_path)
             a, b = 3, 7; dst = 75
             b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b), pt_sg(cd, ct_sg(bg, bd), a, b)]
             b1, b2 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[1][0], b_c_c[1][1]+25]]

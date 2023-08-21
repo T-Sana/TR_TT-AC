@@ -6,5 +6,7 @@ Depandances/Imgs
 Depandances/Trash
 Depandances/Config
 Depandances/__pycache__
-Depandances/outils/__pycache__
-Depandances/outils/Dependances/__pycache__
+Depandances/Outils/__pycache__
+Depandances/Outils/Jeux/__pycache__
+Depandances/Outils/Jeux/outils/__pycache__
+Depandances/Outils/Dependances/__pycache__
