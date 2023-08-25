@@ -24,6 +24,7 @@ if True: ## Imports ##
 ##################################################################################
 ## BUG : qd une pièce bouge là où elle pourra capturer une pièce au mouve suiv ###
 ## elle peut se faire souffler ###################################################
+##################################################################################
 class dames:
     def __init__(self, j1='j1', j2='j2', nom='dames') -> None:
         self.j1 = j1
@@ -40,8 +41,10 @@ class dames:
                 if (y+1)%2==x%2:
                     self.tableau.tableau[9-y, x] = 1
         self.killed = False
-    def image(self, pos=(-1, -1)) -> np.array:
+        self.tableaux = []
+    def image(self, pos=(-1, -1), sec=False) -> np.array:
         img = self.tableau.img(else_=False)
+        cercle(img, ctd, 33, bleu if self.trait else rouge, 0)
         coos = (self.tableau.colonnes[0, 0], self.tableau.colonnes[-1, -1])
         for j, x in enumerate(range2(coos[0][0], coos[1][0], diff(coos[0][0], coos[1][0])/10)):
             for i, y in enumerate(range2(coos[0][0], coos[1][0], diff(coos[0][1], coos[1][1])/10)):
@@ -59,7 +62,7 @@ class dames:
             pbg = []
             for y in range(10):
                 for x in range(10):
-                    if self.legal(pos, (y, x), self.trait, False):
+                    if self.legal(pos, (y, x), self.trait, False, sec):
                         pbg.append((y, x))
             for move in pbg:
                 for j, x in enumerate(range2(coos[0][0], coos[1][0], diff(coos[0][0], coos[1][0])/10)):
@@ -69,72 +72,137 @@ class dames:
         return(img)
     def montre(self) -> None:
         montre(self.image())
-    def legal(self, c1, c2, t, mod=True) -> bool:
+    def legal(self, c1, c2, t, mod=True, sec=False) -> bool:
         x1, y1 = c1
         x2, y2 = c2
+        p = self.tableau.tableau[y1, x1]
         if self.tableau.tableau[y2, x2] == 0:
             if t:
-                if self.tableau.tableau[y1, x1] == 1:
+                if p == 1:
                     if y1-y2 == 1 and abs(x1-x2) == 1:
+                        if sec: return(False)
                         if mod and y2 == 0:
-                            self.tableau.tableau[y1, x1] = 11
+                            self.tableau.tableau[y2, x2] = 11
+                            self.tableau.tableau[y1, x1] = 0
+                            self.trait = not self.trait
+                            return(False)
                         return(True)
                     elif y1-y2 == 2 and abs(x1-x2) == 2:
-                        if self.tableau.tableau[(y1+y2)//2, (x1+x2)//2] == 2:
+                        p2 = self.tableau.tableau[(y1+y2)//2, (x1+x2)//2]
+                        if p2 == 2 or p2 == 22:
+                            self.killed = True
                             if mod:
                                 self.tableau.tableau[(y1+y2)//2, (x1+x2)//2] = 0
-                                self.killed = True
                                 if y2 == 0:
-                                    self.tableau.tableau[y1, x1] = 11
+                                    self.tableau.tableau[y2, x2] = 11
+                                    self.tableau.tableau[y1, x1] = 0
+                                    self.trait = not self.trait
+                                    return(False)
                             return(True)
-                elif self.tableau.tableau[y1, x1] == 11:
-                    if abs(y1-y2) == abs(x1-x2):
-                        for y in range(min(y1, y2), max(y1, y2)):
-                            for x in range(min(x1, x2), max(x1, x2)):
-                                pass
+                elif p == 11:
+                    if diff(y1, y2) == diff(x1, x2):
+                        a, b = [], []
+                        for y in range(y1+(1 if y2>y1 else -1), y2, 1 if y2>y1 else -1):
+                            a.append(y)
+                        for x in range(x1+(1 if x2>x1 else -1), x2, 1 if x2>x1 else -1): 
+                            b.append(x)
+                        pts = [[a[n], b[n]] for n in range(len(a))]
+                        for n, pt in enumerate(pts):
+                            y, x = pt
+                            p = self.tableau.tableau[y, x]
+                            if p != 0 and n < len(pts)-1:
+                                return(False)
+                            elif p != 0:
+                                if p == (1 if self.trait else 2) or p == (11 if self.trait else 22):
+                                    return(False)
+                                elif mod:
+                                    self.tableau.tableau[y, x] = 0
+                                self.killed = True
+                            elif p == 0 and n == len(pts)-1:
+                                if not sec: return(True)
+                                else: return(False)
+                        return(True)
             else:
-                if self.tableau.tableau[y1, x1] == 2:
+                if p == 2:
                     if y2-y1 == 1 and abs(x1-x2) == 1:
+                        if sec: return(False)
                         if mod and y2 == 9:
-                            self.tableau.tableau[y1, x1] = 22
+                            self.tableau.tableau[y2, x2] = 22
+                            self.tableau.tableau[y1, x1] = 0
+                            self.trait = not self.trait
+                            return(False)
                         return(True)
                     elif y2-y1 == 2 and abs(x1-x2) == 2:
-                        if self.tableau.tableau[(y1+y2)//2, (x1+x2)//2] == 1:
+                        p2 = self.tableau.tableau[(y1+y2)//2, (x1+x2)//2]
+                        if p2 == 1 or p2 == 11:
+                            self.killed = True
                             if mod:
                                 self.tableau.tableau[(y1+y2)//2, (x1+x2)//2] = 0
-                                self.killed = True
                                 if y2 == 9:
-                                    self.tableau.tableau[y1, x1] = 22
+                                    self.tableau.tableau[y2, x2] = 22
+                                    self.tableau.tableau[y1, x1] = 0
+                                    self.trait = not self.trait
+                                    return(False)
                             return(True)
-                elif self.tableau.tableau[y1, x1] == 2: pass
+                elif p == 22:
+                    if diff(y1, y2) == diff(x1, x2):
+                        a, b = [], []
+                        for y in range(y1+(1 if y2>y1 else -1), y2, 1 if y2>y1 else -1):
+                            a.append(y)
+                        for x in range(x1+(1 if x2>x1 else -1), x2, 1 if x2>x1 else -1): 
+                            b.append(x)
+                        pts = [[a[n], b[n]] for n in range(len(a))]
+                        for n, pt in enumerate(pts):
+                            y, x = pt
+                            p = self.tableau.tableau[y, x]
+                            if p != 0 and n < len(pts)-1:
+                                return(False)
+                            elif p != 0:
+                                if p == (1 if not self.trait else 2) or p == (11 if not self.trait else 22):
+                                    return(False)
+                                elif mod:
+                                    self.tableau.tableau[y, x] = 0
+                                self.killed = True
+                            elif p == 0:
+                                if not sec: return(True)
+                                else: return(False)
+                        return(True)
         return(False)
-    def peut_kill(self, coos, t) -> bool:
+    def peut_kill(self, coos, t, tableau=None) -> bool:
+        if tableau == None: tableau = self.tableau.tableau
+        self.save_killed, self.killed = self.killed, False
         for y in range(10):
             for x in range(10):
                 if self.legal(coos, (y, x), t, False):
-                    if abs(x-coos[1]) == 2 == abs(y-coos[0]):
+                    if self.killed:
+                        self.killed = self.save_killed
                         return(True)
+        self.killed = self.save_killed
         return(False)
     def move(self, killed=False, coos=None) -> None:
         self.tableau.imprime()
-        print(self.trait)
         if coos == None:
+            sec = False
             while True:
                 coos = self.tableau.getcase(self.nom, self.image())
+                p = self.tableau.tableau[coos[1], coos[0]]
                 if self.trait:
-                    if self.tableau.tableau[coos[1], coos[0]] == 2 and not killed:
+                    if (p == 2 or p == 22) and not killed:
                         if self.peut_kill(coos, not self.trait):
                             killed = True
                             self.tableau.tableau[coos[1], coos[0]] = 0
-                    elif self.tableau.tableau[coos[1], coos[0]] == 1: break
+                    elif p == 1 or p == 11: break
                 else:
-                    if self.tableau.tableau[coos[1], coos[0]] == 1 and not killed:
+                    if (p == 1 or p == 11) and not killed:
                         if self.peut_kill(coos, not self.trait):
                             killed = True
                             self.tableau.tableau[coos[1], coos[0]] = 0
-                    elif self.tableau.tableau[coos[1], coos[0]] == 2: break
-        coos2 = self.tableau.getcase(self.nom, self.image(coos))
-        leg = self.legal(coos, coos2, self.trait)
+                    elif p == 2 or p == 22: break
+        else:
+            if not self.peut_kill(coos, self.trait): return(None)
+            sec = True
+        coos2 = self.tableau.getcase(self.nom, self.image(coos, sec))
+        leg = self.legal(coos, coos2, self.trait, True, sec)
         if leg:
             self.tableau.tableau[coos2[1], coos2[0]] = self.tableau.tableau[coos[1], coos[0]]
             self.tableau.tableau[coos[1], coos[0]] = 0
@@ -142,6 +210,7 @@ class dames:
                 self.trait = not self.trait
             else:
                 return(coos2)
+        elif sec: self.trait = not self.trait
         return(None)
     def jouable(self):
         for j in range(10):
@@ -156,6 +225,7 @@ class dames:
     def jouer(self):
         coos = None
         while self.jouable():
+            self.tableaux.append(self.tableau.tableau)
             self.killed, killed = False, self.killed
             coos = self.move(killed, coos)
         if self.trait: ## Noirs ont gagné
