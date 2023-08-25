@@ -98,7 +98,7 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
         elif wk == 32:
             echq = [list(c-50 for c in echiquier[0]), list(c+50 for c in echiquier[1])]
             if clicked_in(j1.pos, echq) and clicked_in(j2.pos, echq): return('echecs', imag, numb)
-            return('echecs' if rd.randint(0, 1)==0 else 'morpion', imag)
+            return('morpion', imag, numb)
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
             print('J1 non:', j1.ou_ne_peut_etre)

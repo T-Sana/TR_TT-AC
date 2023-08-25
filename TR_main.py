@@ -11,7 +11,7 @@ if True: ## Functs ##
             case i if i in list(jeux_dispos.keys()):
                 trs.shade(img)
                 jeu = jeux_dispos[ev]
-                result = jeu(j1=noms[0], j2=noms[1])
+                result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non)
                 print('Result:', result)
             case None: print('Error')
             case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')

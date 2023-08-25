@@ -99,9 +99,6 @@ class tableau:
             c.append([[c1[0]+round(i), c1[1]], [c1[0]+round(i+d), c1[1]+haut]])
         self.colonnes = np.array(c)
     def img_(self, c1=noir, c2=blanc, cf=bois, cg=nouvelle_couleur('804000', 'rgb'), ep_g=2):
-        '''
-        
-        '''
         img = image()
         rectangle(img, self.p1, self.p4, cf, 0)
         rectangle(img, self.p1, self.p4, cg)
@@ -113,7 +110,7 @@ class tableau:
         for hg, bd in self.colonnes: rectangle(img, hg, bd, cg, ep_g)
         for hg, bd in self.files: rectangle(img, hg, bd, cg, ep_g)
         return(img)
-    def img(self, c1=noir, c2=blanc, cf=bois, cg=nouvelle_couleur('804000', 'rgb'), ep_g=2):
+    def img(self, c1=noir, c2=blanc, cf=bois, cg=nouvelle_couleur('804000', 'rgb'), ep_g=2, else_=True):
         img = image()
         rectangle(img, self.p1, self.p4, cf, 0)
         rectangle(img, self.p1, self.p4, cg)
@@ -132,7 +129,8 @@ class tableau:
                     elif t == 0:
                         pass
                     else:
-                        ecris(img, self.tableau[j, i], hg, bd, 2, turquoise)
+                        if else_:
+                            ecris(img, self.tableau[j, i], hg, bd, 2, turquoise)
                 except: pass
         for hg, bd in self.colonnes: rectangle(img, hg, bd, cg, ep_g)
         for hg, bd in self.files: rectangle(img, hg, bd, cg, ep_g)
