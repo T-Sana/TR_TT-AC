@@ -16,9 +16,9 @@ if True: ## Functs ##
                 print('Result:', result)
             case None: print('Error')
             case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')
-if True: ## Vars ##
-    img = ouvre_image(f'./{imgs_path}/{n_img2}')
-if True: ## Main ##
+if __name__ == '__main__': ## Main ##
+    if True: ## Vars ##
+        img = ouvre_image(f'./{imgs_path}/{n_img2}')
     '''trs.shade(img_part(img))
     anim_debut(img_part(img))
     trs.shade(img_part(img))

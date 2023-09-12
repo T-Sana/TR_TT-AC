@@ -6,8 +6,6 @@
 ## TODO Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
 
-## ***TODO*** Faire l'horloge sybyllienne ##
-
 ######################################
 ### À régler : ###########################################
 ### Il faut remonter les majuscules pour que le bas ######
@@ -16,17 +14,13 @@
 ### TODO :####################################################################
 ### - class image (comme ça, touts les dessins suporteront le canal alpha) ###
 ### - ♮ ######################################################################
-### - ℗ ##################################################
-### - Il faut rajouter tous les idéogrammes (du Tim) ##### ## Il faut d'abord les mettre dans la table du cahier (ou plus d'ailleurs) ##
-##########################################################
+### - ℗ #######################################
+### - Il faut rajouter tous les idéogrammes ### ## Il faut d'abord les mettre dans la table du cahier (ou plus d'ailleurs) ##
+###############################################
 
-## To get pip installed packages : `pip freeze`
-
-oui = True
-non = False
-pas = False
-aucun = aucune = 0
-wk = 0
+if True: ## Vars ##
+    oui = True; non = pas = False
+    aucun = aucune = 0; wk = 0
 if oui: ## Tout ##
     if oui: ## En developpement ##
         pass
@@ -3857,7 +3851,5 @@ if oui: ## Tout ##
         def main(exec=False, help=True):
             if exec:
                 demo(help)
-if oui: ## Main ##
-    #main(exec=non, help=False)
-    #horloge(help=oui)
-    pass
+if __name__ == '__main__': ## Main ##
+    main()
