@@ -31,6 +31,9 @@ def deplace_js(wk, j1, j2, cam=[0, 0]):
         case j2.k_g:
             j2.deplace([-cb, 0])
     return(cam)
+def f(event, x, y, flags, param) -> None:
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print('Souris:', [x, y])
 def carte1(j1=j1, j2=j2):
     while True:
         wk = montre(img(ouvre_image(f'{dir}/{imgs_path}/{n_img1}'), j1, j2), nf, 100, non)
