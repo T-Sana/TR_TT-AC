@@ -232,5 +232,6 @@ class dames:
             return([0, 1])
         else: ##
             return([1, 0])
-a = dames()
-print(a.jouer())
+if __name__ == '__main__':
+    a = dames()
+    print(a.jouer())
