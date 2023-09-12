@@ -134,7 +134,7 @@ class othello:
                         leg = True
                         break
                     else: break
-            except Exception as e: print(e)
+            except Exception as ERREUR: print(ERREUR)
         return(leg)
     def jouable(self):
         moves = False

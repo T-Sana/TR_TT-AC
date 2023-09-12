@@ -2,9 +2,35 @@ from cvt import *
 from outils.souris import souris as s
 
 class moulin9:
-    def __str__(self):
-        return(self.nom)
-    def __init__(self, nom='moulin9', j1='j1', j2='j2'):
+    def __str__(self) -> str:
+        t = self.tableau
+        a = 'a'
+        b = 'b'
+        c = 'c'
+        h = 'h'
+        d = 'd'
+        g = 'g'
+        _1 = '1'
+        _2 = '2'
+        _3 = '3'
+        _4 = '4'
+        table = f'''
+{t[a][_1]}------------{t[a][h]}------------{t[a][_2]}
+|            |            |
+|   {t[b][_1]}--------{t[b][h]}--------{t[b][_2]}   |
+|   |        |        |   |
+|   |   {t[c][_1]}----{t[c][h]}----{t[c][_2]}   |   |
+|   |   |         |   |   |
+{t[a][g]}---{t[b][g]}---{t[c][g]}         {t[c][d]}---{t[b][d]}---{t[a][d]}
+|   |   |         |   |   |
+|   |   {t[c][_3]}----{t[c][b]}----{t[c][_4]}   |   |
+|   |        |        |   |
+|   {t[b][_3]}--------{t[b][b]}--------{t[b][_4]}   |
+|            |            |
+{t[a][_3]}------------{t[a][b]}------------{t[a][_4]}
+'''
+        return(table)
+    def __init__(self, nom='moulin9', j1='j1', j2='j2') -> None:
         self.nom = nom
         self.j1 = j1
         self.j2 = j2
@@ -33,11 +59,11 @@ class moulin9:
             self.imprimme()
             
             self.move()
-    def legal0(self, p):
+    def legal0(self, p) -> bool:
         if self.tableau[p[0]][p[1]] == 0:
             return(True)
         else: return(False)
-    def legal1(self, p1, p2):
+    def legal1(self, p1, p2) -> bool:
         if self.tableau[p2[0]][p2[1]] != 0: return(False)
         c1, c2 = p1[0], p2[0]
         w1, w2 = p1[1], p2[1]
@@ -79,34 +105,8 @@ class moulin9:
             elif c1 == 'c' and c2 == 'b':
                 leg = True
         return(leg)
-    def imprimme(self):
-        t = self.tableau
-        a = 'a'
-        b = 'b'
-        c = 'c'
-        h = 'h'
-        d = 'd'
-        g = 'g'
-        _1 = '1'
-        _2 = '2'
-        _3 = '3'
-        _4 = '4'
-        s = f'''
-{t[a][_1]}------------{t[a][h]}------------{t[a][_2]}
-|            |            |
-|   {t[b][_1]}--------{t[b][h]}--------{t[b][_2]}   |
-|   |        |        |   |
-|   |   {t[c][_1]}----{t[c][h]}----{t[c][_2]}   |   |
-|   |   |         |   |   |
-{t[a][g]}---{t[b][g]}---{t[c][g]}         {t[c][d]}---{t[b][d]}---{t[a][d]}
-|   |   |         |   |   |
-|   |   {t[c][_3]}----{t[c][b]}----{t[c][_4]}   |   |
-|   |        |        |   |
-|   {t[b][_3]}--------{t[b][b]}--------{t[b][_4]}   |
-|            |            |
-{t[a][_3]}------------{t[a][b]}------------{t[a][_4]}
-'''
-        print(s)
+    def imprimme(self) -> None:
+        print(self.__str__())
     def move(self):
         if self.fase == 0:
             while True:

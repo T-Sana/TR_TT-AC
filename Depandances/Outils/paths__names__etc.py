@@ -93,7 +93,6 @@ if True: ## persos ##
             self.ou_ne_peut_etre = copy.deepcopy(ou_ne_peut_etre)
             self.keys = keys
             self.k_h, self.k_b, self.k_d, self.k_g = self.keys
-            print([self.k_h, self.k_b, self.k_d, self.k_g])
             self.nom = nom
             self.pos = coos # [x, y]
             self.clrs = clrs
@@ -116,7 +115,6 @@ if True: ## persos ##
 if True: ## Keys.vars ##
     with open(f'./{config_path}/keys.txt', 'r') as file:
         keys = file.read()
-        print(keys)
     configKeys = eval(keys)
 j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])
 j2 = joueur('j2', clrs=[blanc, blanc], t=1.5, keys=configKeys['keysj2'])

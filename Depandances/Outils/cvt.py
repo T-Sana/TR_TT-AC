@@ -1751,17 +1751,12 @@ if oui: ## Tout ##
                     chars.index(char)
                     out += char
                 except:
-                    if wk == 8:
-                        try:
-                            out = out[0:len(out)-1]
-                        except:
-                            continue
-                    elif wk == 13:
-                        break
-                    elif wk == 27:
-                        return(0)
-                    else:
-                        print(wk)
+                    match wk:
+                        case 8:
+                            try: out = out[0:len(out)-1]
+                            except: continue
+                        case 13: break
+                        case 27: return(0)
             return(out)
     if oui: ############ Miscellanous functions ###
         def execute(path):
@@ -1799,17 +1794,12 @@ if oui: ## Tout ##
                     chars.index(char)
                     out += char
                 except:
-                    if wk == 8:
-                        try:
-                            out = out[0:len(out)-1]
-                        except:
-                            continue
-                    elif wk == 13:
-                        break
-                    elif wk == 27:
-                        return(0)
-                    else:
-                        print(wk)
+                    match wk:
+                        case 8:
+                            try: out = out[0:len(out)-1]
+                            except: continue
+                        case 13: break
+                        case 27: return(0)
             return(out)
     if oui: ######## scripte et ses dépandances ###
         def scripte_format(img, p1, p2, p3, p4, souligne, surligne, epaisseur):
@@ -3497,8 +3487,8 @@ if oui: ## Tout ##
                     try:
                         img, pos = chars(img, char, p1, p2, p3, p4, couleur, epaisseur, police, rotation + rot_par_char * rote, taille, pos, combine)
                         if type(pos) != int: pos = pos[-1]
-                    except Exception as i:
-                        print(i)
+                    except Exception as ERREUR:
+                        print(ERREUR)
                         img, pos = char_inconnu(img, p1, p2, p3, p4, noir, police, rotation + rot_par_char * rote, taille, pos)
                     pos += 1
                     rotation += rot_par_char
@@ -3561,47 +3551,6 @@ if oui: ## Tout ##
                 cv2.setMouseCallback(nomFenetre, coos_de_la_souris)
                 wtk = cv2.waitKey(1)
     if oui: ############################# Demos ###
-        def demo(help=True, polise='simplex'):
-            txt = []
-            st = '\b\\b1\\b1\\b1\\b1\\b1\\b1'
-            n = 0; l = 0
-            t = st
-            ind = 0
-            lts = 'abcdefghijklmnopqrstuvwxyz'
-            lst_lts = []
-            w = 0
-            for lpp in [17, 17, 17, 16, 16, 16, 16]:
-                lst_lts.append('')
-                for i in range(lpp):
-                    if ind < len(lts): lst_lts[w] += lts[ind]+':'
-                    else: lst_lts[w] += lts[ind//len(lts)-1]+lts[ind%len(lts)]+':'
-                    ind += 1
-                lst_lts[w] = lst_lts[w][:len(lst_lts[w])-1:]
-                w+=1
-            print(lst_lts)
-            for lets in lst_lts:
-                for i in range(18):
-                    for j in lets.split(':'):
-                        t += f'\\{j}{i+1}'
-                        n += 1
-                        if n%17 == 0:
-                            if not (l+1)%9 == 0: t += f'\\n\\{st[2::]}'; l+= 1
-                            else: l+=1
-                            if l%9 == 0: txt.append(t); t = st
-            if t != st: txt.append(t)
-            i = 0; r=0
-            while True:
-                texte = txt[i]
-                print(texte)
-                #img = scripte(scripte(image(remplissage=turquoise), hg, texte+'\\', 1, combine=non), hg, f'{i+1:2d}/{len(txt):2d}', surligne=vert, souligne=rouge, couleur=bleu)
-                r+=1
-                img = scripte(scripte(image(remplissage=turquoise), ct, texte+'\\', 1, combine=non, rotation=r), hg, f'{i+1:2d}/{len(txt):2d}', surligne=vert, souligne=rouge, couleur=bleu)
-                wk = montre(img, 'demo', 1, non)
-                match wk:
-                    case 27: break
-                    case 32: i += 1; i=i%len(txt)
-                    case  8: i -= 1; i=(i+len(txt))%len(txt)
-            ferme_all()
         def dessin():
             class clrsdessn:
                 r = 0
@@ -3849,7 +3798,6 @@ if oui: ## Tout ##
             return(img)
     if oui: ############################## Main ###
         def main(exec=False, help=True):
-            if exec:
-                demo(help)
+            dessin_alea_infini()
 if __name__ == '__main__': ## Main ##
     main()

@@ -695,32 +695,6 @@ if oui: ## Tout ##
             ## Autres couleurs ##
             turquoise = (255//2, 255//2, 0)
             bois = [80, 150, 190]
-        if oui: ## Noms des touches ##
-            tabulationKey, newLineKey, returnLineKey, spaceBarKey, exclamationMarkKey, doubleQuotesKey = '\t', '\n', '\r', ' ', '!', '"'
-            hashTagKey, dollarSignKey, perCentKey, esperluetteKey, singleQuoteKey, openingParentesisKey = '#', '$', '%', '&', "'", '('
-            ClosingParentesisKey, asteriskKey, plusSignKey, comaKey, minusSignKey, dotKey, slashKey, zeroKey = ')', '*', '+', ',', '-', '.', '/', '0'
-            oneKey, twoKey, threeKey, fourKey, fiveKey, sixKey, sevenKey, eightKey, nineKey, colonKey = '1', '2', '3', '4', '5', '6', '7', '8', '9', ':'
-            semiColonKey, lessThanSignKey, equalSignKey, GreaterSignKey, interrogationMarkKey, atSignKey = ';', '<', '=', '>', '?', '@'
-            openingBracketsKey, backSlashKey, closingBracketsKey, circumflexKey, underScoreKey, graveAccentKey = '[', '\\', ']', '^', '_', '`'
-            aKey, bKey, cKey, dKey, eKey, fKey, gKey, hKey, iKey, jKey, kKey, lKey, mKey, nKey = 'a', 'b', 'c', 'd', 'e','f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
-            oKey, pKey, qKey, rKey, sKey, tKey, uKey, vKey, wKey, xKey, yKey, zKey, openingBracesKey = 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{'
-            verticalBarKey, closingBracesKey, medianTildeKey, acceptKey, addKey, altKey, lefAltKey, rightAltCase = '|', '}', '~', 'accept', 'add', 'alt', 'altleft', 'altright'
-            appsKey, backSpaceKey, broserBackKey, browserFavoritesKey, browserForwardKey = 'apps', 'backspace', 'browserback', 'browserfavorites', 'browserforward'
-            browserHomeKey, browserRefreshKey, browserSearchKey, brouserStopKey, capsLockKey = 'browserhome', 'browserrefresh', 'browsersearch', 'browserstop', 'capslock'
-            clearKey, convertKey, ctrlKey, leftCtrlKey, rightCtrlKey, decimalKey, delKey = 'clear', 'convert', 'ctrl', 'ctrlleft', 'ctrlright', 'decimal', 'del'
-            deleteKey, divideKey, downKey, endKey, enterKey, escKey, escapeKey, executeKey, f1Key = 'delete', 'divide', 'down', 'end', 'enter', 'esc', 'escape', 'execute', 'f1'
-            f10Key, f11Key, f12Key, f13Key, f14Key, f15Key, f16Key, f17Key, f18Key, f19Key, f2Key = 'f10', 'f11', 'f12', 'f13', 'f14', 'f15', 'f16', 'f17', 'f18', 'f19', 'f2'
-            f20Key, f21Key, f22Key, f23Key, f24Key, f3Key, f4Key, f5Key, f6Key, f7Key, f8Key, f9Key = 'f20', 'f21', 'f22', 'f23', 'f24', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9'
-            finalKey, fnKey, hanguelKey, hangulKey, hanjaKey, helpKey, homeKey, insertKey = 'final', 'fn', 'hanguel', 'hangul', 'hanja', 'help', 'home', 'insert'
-            junjaKey, kanaKey, kanjiKey, launchApp1Key, launchApp2Key, launchMailKey = 'junja', 'kana', 'kanji', 'launchapp1', 'launchapp2', 'launchmail'
-            launchMediadiaSelectKey, leftKey, changeModeKey, multiplyKey, nextTrackKey = 'launchmediaselect', 'left', 'modechange', 'multiply', 'nexttrack', 
-            nonConvertKey, num0Key, num1Key, num2Key, num3Key, num4Key, num5Key, num6Key, num7Key = 'nonconvert', 'num0', 'num1', 'num2', 'num3', 'num4', 'num5', 'num6', 'num7'
-            num8Key, num9Key, numLockKey, pageDownKey, pageUpKey, pauseKey, pgdnKey, pgupKey = 'num8', 'num9', 'numlock', 'pagedown', 'pageup', 'pause', 'pgdn', 'pgup'
-            playPauseKey, previousTrackKey, printKey, printScreenKey, prntscrnKey, prtscKey = 'playpause', 'prevtrack', 'print', 'printscreen', 'prntscrn', 'prtsc'
-            prtscrKey, returnKey, rightKey, lockScrollKey, selectKey, separatorKey, shiftKey = 'prtscr', 'return', 'right', 'scrolllock', 'select', 'separator', 'shift'
-            leftShiftKey, rightShiftKey, sleepKey, spaceKey, stopKey, subtractKey, tabKey, upKey = 'shiftleft', 'shiftright', 'sleep', 'space', 'stop', 'subtract', 'tab', 'up'
-            volumeDownKey, molumeMuteKey, volumeUpKey, winKey, leftWinKey, rightWinKey, yenKey = 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen'
-            commandKey, optionKey, leftOptionKey, rightOptionKey = 'command', 'option', 'optionleft', 'optionright'
         if oui: ## Coos et valeurs par défaut ##
             longChar, hautChar = chars(1)
             haut, long, dd, deb, fin, ff, x, y, ct, p1, p2, p3, p4, ch, cb, cg, cd, c1, c2, c3, c4, cth, ctb, ctg, ctd, ct1, ct2, ct3, ct4 = coos()
@@ -1733,21 +1707,15 @@ if oui: ## Tout ##
                     chars.index(char)
                     out += char
                 except:
-                    if wk == 8:
-                        try:
-                            out = out[0:len(out)-1]
-                        except:
-                            continue
-                    elif wk == 13:
-                        break
-                    elif wk == 27:
-                        return(0)
-                    else:
-                        print(wk)
+                    match wk:
+                        case 8:
+                            try: out = out[0:len(out)-1]
+                            except: continue
+                        case 13: break
+                        case 27: return(0)
             return(out)
     if oui: ############ Miscellanous functions ###
-        def execute(path):
-            os.startfile(path)
+        def execute(path) -> None: os.startfile(path)
     if oui: ### CV2.puttext()
         def ecris(img, texte, pt1, pt2, taille=1, couleur=noir, epaisseur=epaisseur, police=cv2.FONT_HERSHEY_SCRIPT_COMPLEX, help=False):
             if help:
@@ -1781,17 +1749,12 @@ if oui: ## Tout ##
                     chars.index(char)
                     out += char
                 except:
-                    if wk == 8:
-                        try:
-                            out = out[0:len(out)-1]
-                        except:
-                            continue
-                    elif wk == 13:
-                        break
-                    elif wk == 27:
-                        return(0)
-                    else:
-                        print(wk)
+                    match wk:
+                        case 8:
+                            try: out = out[0:len(out)-1]
+                            except: continue
+                        case 13: break
+                        case 27: return(0)
             return(out)
     if oui: ######## scripte et ses dépandances ###
         def scripte_format(img, p1, p2, p3, p4, souligne, surligne, epaisseur):
@@ -3478,8 +3441,8 @@ if oui: ## Tout ##
                     scripte_format(img, p1, p2, p3, p4, souligne, surligne, epaisseur)
                     try:
                         img, pos = chars(img, char, p1, p2, p3, p4, couleur, epaisseur, police, rotation + rot_par_char * rote, taille, pos, combine)
-                    except Exception as i:
-                        print(i)
+                    except Exception as ERREUR:
+                        print(ERREUR)
                         img, pos = char_inconnu(img, p1, p2, p3, p4, noir, police, rotation + rot_par_char * rote, taille, pos)
                     pos += 1
                     rotation += rot_par_char

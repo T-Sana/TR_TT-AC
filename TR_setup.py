@@ -11,7 +11,6 @@ import shutil
 
 nf = os.getenv('nomJeu') # nf = NomFenêtre
 if True: ## Format + def montre_img_charg() ##
-    print('\n', end='')
     def montre_img_charg(action='', steps=0, taille=1.2) -> None:
         t_steps = 20
         if steps > t_steps: steps = t_steps
@@ -72,12 +71,8 @@ def setup():
     class imag:
         def __init__(self, t_steps=100, steps=5, action='Installing pip', image_path=f'./Depandances/Imgs/img_chrg.jpg'):
             bgr_img_chrg = ouvre_image(image_path)
-            print(type(bgr_img_chrg), type(bgr_img_chrg) == None, bgr_img_chrg)
             try:
                 if bgr_img_chrg == None: pass
-                print('Here')
-                raise Exception
-                print('There')
                 bgr_img_chrg = ouvre_image(image_path)
             except:
                 img_chrg()

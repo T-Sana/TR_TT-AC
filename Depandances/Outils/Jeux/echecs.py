@@ -363,7 +363,7 @@ class echecs: ########################### Terminé ##
                     if tableau[i][j][0] == piece:
                         return(i, j)
             return(False)
-        def imprime_tableau(self): ############################################# Terminé ##
+        def __str__(self) -> str:
             tableau = self.echiquier
             out = '    A  B  C  D  E  F  G  H\n'
             for i in tableau:
@@ -374,22 +374,9 @@ class echecs: ########################### Terminé ##
                 outy = outy[0:len(outy)-2]
                 out += f'{i} : {outy}\n'
             out = out[0:len(out)-1]
-            print(out)
-        def imprimme_tableau(self): ############################################ Terminé ##
-            tableau = self.echiquier
-            out = '    A   B   C   D   E   F   G   H\n'
-            for i in tableau:
-                outy = ''
-                for j in tableau[i]:
-                    c = tableau[i][j]
-                    if len(c) == 3:
-                        outy = outy[0:len(outy)-1]
-                    char = c + ' ' if len(c) == 1 else c if len(c) == 1 else c
-                    outy += f'{char}, '
-                outy = outy[0:len(outy)-2]
-                out += f'{i} : {outy}\n'
-            out = out[0:len(out)-1]
-            print(out)
+            return(out)
+        def imprime_tableau(self) -> None: ############################################# Terminé ##
+            print(self.__str__())
         def getcase(self): ##################################################### Terminé ##
             coos = self.mouse.pos
             if coos != None:
@@ -1117,8 +1104,8 @@ class echecs: ########################### Terminé ##
                         break
             except InterruptedError:
                 pass
-            except Exception as e:
-                print(e)
+            except Exception as ERREUR:
+                print(ERREUR)
     if oui: ## Imagaison ## ############# Terminé ##
         def disquette(self, img, c1, c2, c3, c4): ############################## Terminé ##
             rectangle(img, c1, c4, bleu, 0)
@@ -1448,8 +1435,6 @@ class echecs: ########################### Terminé ##
     if oui: ## Jeu ## ################### Terminé ##
         def jouer(self): ####################################################### Terminé ##
             while self.jouable: ## If not end of game ##
-                if self.dev == True:
-                    pass#self.imprimme_tableau() ## Details of the current position ##
                 self.tableau = copy.deepcopy(self.echiquier) ## Creation d'une sauvegarde de la position ##
                 if self.legalite[-1]:
                     self.mat_au_pas() ## Vérifications sur le mat au pas ##
@@ -1706,4 +1691,5 @@ def start(j1=None, j2=None, nm=None, lg=None, trn=None):
     tourne = oui if trn == 'True' else non
     if truc: ferme(sl)
     return(starty(j1=j1, j2=j2, nom=nm, langue=lg, tourne=tourne, help=non, dev=non))
-#print(start('a', 'b', 'C', 'fr', 'False'))
+if __name__ == '__main__':
+    print(start('a', 'b', 'C', 'fr', 'False'))

@@ -31,16 +31,12 @@ def deplace_js(wk, j1, j2, cam=[0, 0]):
         case j2.k_g:
             j2.deplace([-cb, 0])
     return(cam)
-def f(event, x, y, flags, param) -> None:
-    if event == cv2.EVENT_LBUTTONDOWN:
-        print('Souris:', [x, y])
 def carte1(j1=j1, j2=j2):
     while True:
         wk = montre(img(ouvre_image(f'{dir}/{imgs_path}/{n_img1}'), j1, j2), nf, 100, non)
         if wk == 27: quitter()
         elif wk != -1:
             deplace_js(wk, j1, j2)
-            print(wk)
 def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
     for i in [[[0, 0], [1905, 315]], [[0, 2003], [2000, 2160]]]:
         j1.ou_ne_peut_etre.append(i)
@@ -104,12 +100,5 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
             return('morpion', imag, numb)
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
-            print('J1 non:', j1.ou_ne_peut_etre)
-            print('J2 non:', j2.ou_ne_peut_etre)
-            print('J1 oui:', j1.ou_peut_etre)
-            print('J2 oui:', j2.ou_peut_etre)
-            print(cam, wk)
-            print(cam[1] + haut/3, cam[1] + haut/3*2)
-            print(j1.pos, j2.pos)
         numb += 1
 if __name__ == '__main__': carteVille()

@@ -63,8 +63,7 @@ class tableau:
         out = out[:len(out)-1]
         out += f'| {esp*(lg-1)}*'
         return(out)
-    def imprime(self):
-        print(self.__str__())
+    def imprime(self) -> None: print(self.__str__())
     def files(self, n):
         ct = ct_cr(self.p1, self.p2, self.p3, self.p4)
         c1, c2 = pt_sg(self.p1, ct, self.a, self.b), pt_sg(self.p2, ct, self.a, self.b)

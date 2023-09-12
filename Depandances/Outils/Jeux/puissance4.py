@@ -8,7 +8,13 @@ class nom:
     nom = 'Puissance4'
 class puissance4:
     def __str__(self):
-        return(self.nom)
+        r = ''
+        for i in self.tableau:
+            out = ''
+            for j in i:
+                out += str(j)
+            r += out + '\n'
+        return(r[:len(r)-1:])
     def __init__(self, nom='1', j1='j1', j2='j2'):
         tableau = [
             [0, 0, 0, 0, 0, 0, 0],
@@ -51,12 +57,7 @@ class puissance4:
         self.tableau = np.array(tableau)
         self.traite = not self.traite
         self.trait = self.traite
-    def imprime(self):
-        for i in self.tableau:
-            out = ''
-            for j in i:
-                out += str(j)
-            print(out)
+    def imprime(self) -> None: print(self.__str__())
     def image(self):
         img = image(remplissage=nouvelle_couleur('303030'))
         t = self.tableau
