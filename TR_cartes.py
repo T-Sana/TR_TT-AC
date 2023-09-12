@@ -72,12 +72,15 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
         j1.ou_peut_etre[-1] = hg_bd_img2
         j2.ou_peut_etre[-1] = hg_bd_img2
         im = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
+        img_xy_len = [len(im[0]), len(im)]
+        for j in joueurs:
+            try: j.ou_peut_etre.index([[0, 0], img_xy_len])
+            except: j.ou_peut_etre.append([[0, 0], img_xy_len])
         cl1, cl2 = blanc, noir
         for ou in ous:
             dessine_pion(im, (echiquier[0][0]+x_*ou[0], echiquier[0][1]+y_*ou[1]), (echiquier[0][0]+x_*(ou[0]+1), echiquier[0][1]+y_*ou[1]), (echiquier[0][0]+x_*(ou[0]), echiquier[0][1]+y_*(ou[1]+1)), (echiquier[0][0]+x_*(ou[0]+1), echiquier[0][1]+y_*(ou[1]+1)), cl1, cl2, 3)
             cl1, cl2 = cl2, cl1
-        for a in range(0, 360, 100):
-            ecris(im, 'vs', (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), 2, rouge, 5)
+        ecris(im, 'vs', (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), 2, rouge, 5)
         imag = img_part(img(im, j1, j2), cam)
         if numb%3 == 0:
             for n in range(len(ous)):
@@ -109,4 +112,4 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
             print(cam[1] + haut/3, cam[1] + haut/3*2)
             print(j1.pos, j2.pos)
         numb += 1
-#carteVille()
+if __name__ == '__main__': carteVille()

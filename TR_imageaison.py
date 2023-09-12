@@ -159,6 +159,14 @@ if True: ## Img1 ## @@ Campagne @@
 if True: ## Img2 ## @@ Ville @@
     def img2():
         if True: ## VARS ##
+            if True: ## Vars - others ##
+                d = [haut*2, round(long*1.5), 3]
+                hg2 = [0, 0]
+                bg2 = [0, haut]
+                hd2 = [d[1], 0]
+                bd2 = [d[1], haut]
+                c_porte = []
+                img = image(remplissage=nouvelle_couleur('e08030'), dimensions=d)
             if True: ## Ciel.vars ##
                 dist_nuages = 2000
                 vitesses= (0.50, 1.00, 0.75, 1.25, 0.50, 1.00)
@@ -168,20 +176,13 @@ if True: ## Img2 ## @@ Ville @@
                 tla, tlb, tlc, tld, tle, tlf = tailles
                 dtt = 100
             if True: ## Mur.vars ##
-                mur = [pt_sg(hg, bg, 9, 3), pt_sg(hd, bd, 9, 5), 5]
-                crenaux = [pt_sg(hg, bg, 9, 2), pt_sg(hd, bd, 9, 3), 19] ## Merlets [CATALÀ] ##
+                mur = [pt_sg(hg, bg, 9, 3), pt_sg([d[1], hd[1]], [d[1], bd[1]], 9, 5), 5]
+                crenaux = [pt_sg(hg, bg, 9, 2), pt_sg([d[1], hd[1]], [d[1], bd[1]], 9, 3), 30] ## Merlets [CATALÀ] ##
                 distance = diff(crenaux[0][0], crenaux[1][0])/crenaux[2]/2
             if True: ## Porte.vars ##
                 porte = 4
-                d_porte = 35
-            if True: ## Vars - others ##
-                d = [haut*2, round(long*1.5), 3]
-                hg2 = [0, 0]
-                bg2 = [0, haut]
-                hd2 = [long, 0]
-                bd2 = [long, haut]
-                c_porte = []
-                img = image(remplissage=nouvelle_couleur('e08030'), dimensions=d)
+                d_porte = 40
+            
         soleil(img, [hd2[0]-dtt, hd2[1]+dtt])
         if True: ## Nuages ##
             nuage(img, [cth[0]+200, cth[1]+75], tld, [220, 220, 220])
@@ -373,3 +374,7 @@ def img_chrg() -> None: ## MAIN ##
     ecris(img, f'{aut2}', pg2, bd, t-t2, noir, 15)
     ecris(img, f'{aut2}', pg2, bd, t-t2, turquoise, 5)
     sauve_image(n_img_chargement, img, f'{dir}/{imgs_path}')
+
+if __name__ == '__main__':
+    for i in [img_cart1, img_cart2, img_chrg]:
+        i()

@@ -120,3 +120,4 @@ if True: ## Keys.vars ##
     configKeys = eval(keys)
 j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])
 j2 = joueur('j2', clrs=[blanc, blanc], t=1.5, keys=configKeys['keysj2'])
+joueurs = [j1, j2]

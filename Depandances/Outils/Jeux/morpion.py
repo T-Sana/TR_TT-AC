@@ -155,7 +155,7 @@ if oui: ## Classes ##
                 r = self.jouable()
                 if r == 'x' or r == 'o' or r == '_':
                     self.rejouer(r)
-def start(j1='J1', j2='J2'):
-    jeu = morpion(J1=j1, J2=j2)
+def start(j1='J1', j2='J2', nm='morpion'):
+    jeu = morpion(J1=j1, J2=j2, nom=nm)
     jeu.jouer()
     ferme(str(jeu))
