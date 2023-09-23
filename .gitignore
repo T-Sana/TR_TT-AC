@@ -1,10 +1,10 @@
-.env
-test.py
-essais.py
+#.env
+#test.py
+#essais.py
 __pycache__
 Depandances/Imgs
-Depandances/Trash
-Depandances/Config
+#Depandances/Trash
+#Depandances/Config
 Depandances/__pycache__
 Depandances/Outils/__pycache__
 Depandances/Outils/Jeux/__pycache__
