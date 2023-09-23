@@ -1633,7 +1633,10 @@ if oui: ## Tout ##
             --------
             ``img`` (``np.array``)
             '''
-            img = cv2.imread(chemin)
+            stream = open(f'{chemin}', "rb")
+            bytes = bytearray(stream.read())
+            numpyarray = np.asarray(bytes, dtype=np.uint8)
+            img = cv2.imdecode(numpyarray, cv2.IMREAD_UNCHANGED)
             return(img)
         def sauve_image(nom_fichier, img, path=''):
             if path != '':
