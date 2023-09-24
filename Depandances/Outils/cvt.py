@@ -1689,8 +1689,8 @@ if oui: ## Tout ##
         def montre_part(img, pto=[0, 0], t=[long-1, haut-1], nomFenetre='img', attente=0, destroy=True, dists=relocate_img()):
             im = img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]
             return(montre(im, nomFenetre, attente, destroy, dists))
-        def img_part(img, pto=[0, 0], t=[long-1, haut-1]):
-            return(np.array(img[pto[1]:pto[1]+t[1], pto[0]:pto[0]+t[0]]))
+        def img_part(img, pto=[0, 0], t=[long, haut]):
+            return(np.array(img[pto[1]:pto[1]+t[1]-1, pto[0]:pto[0]+t[0]-1]))
         def attend_touche(attente):
             if attente >= 0:
                 quoi = cv2.waitKeyEx(attente)
@@ -1765,7 +1765,7 @@ if oui: ## Tout ##
         def execute(path):
             os.startfile(path)
     if oui: ### CV2.puttext()
-        def ecris(img, texte, pt1, pt2, taille=1, couleur=noir, epaisseur=epaisseur, police=cv2.FONT_HERSHEY_SCRIPT_COMPLEX, help=False):
+        def ecris(img, texte, pt1=hg, pt2=bd, taille=1, couleur=noir, epaisseur=epaisseur, police=cv2.FONT_HERSHEY_SCRIPT_COMPLEX, help=False):
             if help:
                 for i in [pt1, pt2]:
                     point(img, i)

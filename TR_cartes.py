@@ -41,7 +41,8 @@ def carte1(j1=j1, j2=j2):
         elif wk != -1:
             deplace_js(wk, j1, j2)
 def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
-    for i in [[[0, 0], [1905, 315]], [[0, 2003], [2000, 2160]]]:
+    im = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
+    for i in [[[0, 0], [len(im[0]), 315]], [[0, 2003], [len(im[0]), 2160]]]:
         j1.ou_ne_peut_etre.append(i)
         j2.ou_ne_peut_etre.append(i)
     dst = 400; dst2 = 400; cam = [0, 0]
@@ -64,10 +65,10 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
             else: cam[0] -= dst2
         ### Blocage caméra ###
         if cam[1] < 0: cam[1] = 0
-        elif cam[1] > haut: cam[1] = haut
+        elif cam[1] > len(im)-haut: cam[1] = len(im)-haut
         if cam[0] < 0: cam[0] = 0
-        elif cam[0] > long: cam[0] = long
-        hg_bd_img2 = [cam, [long, cam[1]+haut]]
+        elif cam[0] > len(im[0])-long: cam[0] = len(im[0])-long
+        hg_bd_img2 = [cam, [cam[0], cam[1]+haut]]
         j1.ou_peut_etre[-1] = hg_bd_img2
         j2.ou_peut_etre[-1] = hg_bd_img2
         im = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
@@ -80,7 +81,8 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
             dessine_pion(im, (echiquier[0][0]+x_*ou[0], echiquier[0][1]+y_*ou[1]), (echiquier[0][0]+x_*(ou[0]+1), echiquier[0][1]+y_*ou[1]), (echiquier[0][0]+x_*(ou[0]), echiquier[0][1]+y_*(ou[1]+1)), (echiquier[0][0]+x_*(ou[0]+1), echiquier[0][1]+y_*(ou[1]+1)), cl1, cl2, 3)
             cl1, cl2 = cl2, cl1
         ecris(im, 'vs', (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), 2, rouge, 5)
-        imag = img_part(img(im, j1, j2), cam)
+        imag = img_part(img(im, j1, j2), cam, [long, haut])
+        if __name__ == '__main__': ecris(imag, f'cam: {cam}\nimg: [{len(im[0])}, {len(im)}]\ndiff: [{diff(len(im[0]), cam[0])}, {diff(len(im), cam[1])}]', taille=1, epaisseur=3)
         if numb%3 == 0:
             for n in range(len(ous)):
                 if ous[n][1] == 0:

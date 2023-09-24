@@ -70,9 +70,7 @@ def setup():
     root = Tk()
     class imag:
         def __init__(self, t_steps=100, steps=5, action='Installing pip', image_path=f'./Depandances/Imgs/img_chrg.jpg'):
-            bgr_img_chrg = ouvre_image(image_path)
             try:
-                if bgr_img_chrg == None: pass
                 bgr_img_chrg = ouvre_image(image_path)
             except:
                 img_chrg()
