@@ -1692,4 +1692,4 @@ def start(j1=None, j2=None, nm=None, lg=None, trn=None):
     if truc: ferme(sl)
     return(starty(j1=j1, j2=j2, nom=nm, langue=lg, tourne=tourne, help=non, dev=non))
 if __name__ == '__main__':
-    print(start('a', 'b', 'C', 'fr', 'False'))
+    print(start(input('J1: '), input('J2: '), 'C', 'fr', 'False'))

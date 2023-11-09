@@ -220,3 +220,6 @@ def start(nom=nom.nom, j1='j1', j2='j2'):
     jeu = othello(nom, j1, j2)
     jeu.jouer()
     ferme(jeu.nom)
+
+if __name__ == '__main__':
+    start()

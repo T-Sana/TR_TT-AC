@@ -65,7 +65,9 @@ class bombardement:
                         [-1,  1], [ 0,  1], [ 1,  1]
                     ]
                     for i in l:
-                        try: self.tableau.tableau[y1 + i[1], x1 + i[0]] = 0
+                        try:
+                            if y1 + i[1] >= 0 and x1 + i[0] >= 0:
+                                self.tableau.tableau[y1 + i[1], x1 + i[0]] = 0
                         except: continue
                     self.trait = not self.trait
                 elif mov:
@@ -98,3 +100,6 @@ class bombardement:
 def start(nom=nom.nom, j1='j1', j2='j2'):
     a = bombardement(nom, j1, j2)
     a.jouer()
+
+if __name__ == '__main__':
+    start()

@@ -8,8 +8,10 @@ def uninstall(package) -> None:
 def update(package) -> None:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
 def install_updated(package) -> None:
-    install(package)
-    update(package)
+    try:
+        install(package)
+        update(package)
+    except: pass
 def get_installed_packages():
     r = str(subprocess.check_output([sys.executable, "-m", "pip", "freeze"]))
     pckgs = []; pckg = ''; t = False
