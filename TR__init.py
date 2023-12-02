@@ -1,20 +1,21 @@
-from Depandances.Outils.paths__names__etc import *
 from Depandances.Outils.pip import *
 import copy
 
 try:
     if True: ## Packages.vars ##
-            packages_to_install = ['opencv-python', 'numpy', 'python-dotenv']
-            packages_installed = get_installed_packages()
+        with open('./Depandances/Requirements.txt', 'r', encoding='utf8') as file:
+            packages_to_install = [package[:package.find('='):] for package in file.readlines()]
+        if __name__ == '__main__' and False:
+            for pckg in packages_to_install:
+                uninstall(pckg)
+        packages_installed = get_installed_packages()
     if True: ## Discard installed packages ##
-        for i in copy.deepcopy(packages_to_install): ## If must be a copy. If not it exits sooner because of removing an index
-            for j in packages_installed:
-                if j == i:
-                    packages_to_install.remove(i)
-    try: update('pip')
-    except: pass
+        for pckg in copy.deepcopy(packages_to_install): ## If must be a copy. If not it exits sooner because of removing an index
+            if pckg in packages_installed:
+                packages_to_install.remove(pckg)
+                print(f'{f"\033[34m\033[1m{pckg}\033[00m \033[35m":{"-"}<35}\033[00m \033[21;33mIs\033[00m \033[36malready\033[00m \033[32minstalled\033[00m \033[31m!\033[00m')
     if True: ## Install required packages
         for pckg in packages_to_install:
-            try: install(pckg)
+            try:print(f'Installing \033[34m\033[1m{pckg}\033[00m');install(pckg);print(f'Installed \033[34m\033[1m{pckg}\033[00m!')
             except: print(f'Couldn\'t install {pckg} package.')
-except: print(f'ERROR IN {BOLD_BLUE}TR__init.py{NORMAL} !')
+except Exception as e: print(f'ERROR IN \033[34m\033[1mTR__init.py\033[00m !', e, sep='\n')

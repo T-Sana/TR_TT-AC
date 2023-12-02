@@ -4,14 +4,10 @@ import sys
 def install(package) -> None:
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 def uninstall(package) -> None:
-    subprocess.check_call([sys.executable, "-m", "pip", "uninstall", package])
+    if package != 'pip': subprocess.check_call([sys.executable, "-m", "pip", "uninstall", package, '-y'])
+    else: print('YOU CAN\'T UNINSTALL PIP!!!\nARE YOU CRAZY???')
 def update(package) -> None:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
-def install_updated(package) -> None:
-    try:
-        install(package)
-        update(package)
-    except: pass
 def get_installed_packages():
     r = str(subprocess.check_output([sys.executable, "-m", "pip", "freeze"]))
     pckgs = []; pckg = ''; t = False

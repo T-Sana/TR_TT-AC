@@ -14,30 +14,27 @@ def create_dir_if_unexisting(name, path='./') -> None:
     '''
     v_dir = os.listdir(path)
     try: v_dir.index(name)
-    except: os.mkdir(f"{path}\{name}")
+    except: os.mkdir(f"{path}\\{name}")
 
 if True: ## Format.vars ##
     new_line = '\n'
     espace = ' '
-    BLACK        = "\033[30m"
-    RED          = "\033[31m"
-    GREEN        = "\033[32m"
-    BROWN        = "\033[33m"
-    BLUE         = "\033[34m"
-    PURPLE       = "\033[35m"
-    CYAN         = "\033[36m"
-    LIGHT_GRAY   = "\033[37m"
-    DARK_GRAY    = "\033[30m"
-    LIGHT_RED    = "\033[31m"
-    LIGHT_GREEN  = "\033[32m"
-    YELLOW       = "\033[33m"
-    LIGHT_BLUE   = "\033[34m"
-    LIGHT_PURPLE = "\033[35m"
-    LIGHT_CYAN   = "\033[36m"
-    LIGHT_WHITE  = "\033[37m"
+    BLACK        = "\033[0;30m"
+    RED          = "\033[0;31m"
+    GREEN        = "\033[0;32m"
+    BROWN        = "\033[0;33m"
+    BLUE         = "\033[0;34m"
+    PURPLE       = "\033[0;35m"
+    CYAN         = "\033[0;36m"
+    LIGHT_GRAY   = "\033[0;37m"
     BOLD         = '\033[1m'
+    FAINT        = "\033[2m"
+    ITALIC       = "\033[3m"
     UNDERLINED   = '\033[4m'
-    NORMAL       = '\033[00m' # @@ Always append to the end, else: terminal = BUG @@
+    BLINK        = "\033[5m"
+    NEGATIVE     = "\033[7m"
+    CROSSED      = "\033[9m"
+    NORMAL       = '\033[00m' # @@ Always append to the end, else: terminal = BUG @@ #
     BOLD_RED     = f'{RED}{BOLD}'
     BOLD_GREEN   = f'{GREEN}{BOLD}'
     BOLD_BLUE    = f'{BLUE}{BOLD}'
@@ -46,7 +43,6 @@ if True: ## keys ##
     key_d = 100
     key_w = 119
     key_s = 115
-
     key_arr_l = 2424832
     key_arr_r = 2555904
     key_arr_u = 2490368
@@ -63,19 +59,19 @@ if True: ## Paths ##
     imgs = 'Imgs'
     config = 'Config'
     depts_path = 'Depandances' ## Do NOT change ! (unless you know what you are doing) ##
-    imgs_path = f'{depts_path}\{imgs}'
-    trash_path = f'{depts_path}\{trash}'
-    config_path = f'{depts_path}\{config}'
+    imgs_path = f'{depts_path}\\{imgs}'
+    trash_path = f'{depts_path}\\{trash}'
+    config_path = f'{depts_path}\\{config}'
 if True: ## Exceptions ##
     class invalidPlace(Exception):
         def __init__(self, file, line):
-            path = f'{BOLD_BLUE}{os.getcwd()}\{imgs_path}{NORMAL}'
-            path_here = f'{BOLD_BLUE}{os.getcwd()}\TR_setup.py, line {line}{NORMAL}'
+            path = f'{BOLD_BLUE}{os.getcwd()}\\{imgs_path}{NORMAL}'
+            path_here = f'{BOLD_BLUE}{os.getcwd()}\\TR_setup.py, line {line}{NORMAL}'
             filename = f'{UNDERLINED+BOLD_GREEN}{file}{NORMAL}'
             file = f'{BOLD_RED}FILE{NORMAL}'
             error = f'{BOLD_RED}ERROR WHILE SCANING DIRECTORY{NORMAL}'
             expla = f'{BOLD_RED}SHOULD {UNDERLINED}NOT{NORMAL+BOLD_RED} BE HERE{NORMAL} ({path})'
-            issue1 = f'{PURPLE}If{NORMAL} {filename} {BOLD_RED}SHOULD{NORMAL} be in {path}:\n   {NORMAL+LIGHT_CYAN}Add{NORMAL} {filename} into "imgs_to_create" -> {path_here}'
+            issue1 = f'{PURPLE}If{NORMAL} {filename} {BOLD_RED}SHOULD{NORMAL} be in {path}:\n   {NORMAL+BOLD+CYAN}Add{NORMAL} {filename} into "imgs_to_create" -> {path_here}'
             issue2 = f'File {filename} has been moved from {UNDERLINED+BOLD_GREEN}{imgs_path}{NORMAL} to {UNDERLINED+BOLD_GREEN}{trash_path}{NORMAL}'
             print(f"{error}: {path}\n{file} {filename} {expla}\n{issue1}\n{issue2}\n")
 if True: ## Noms ##

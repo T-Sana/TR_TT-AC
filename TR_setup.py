@@ -1,7 +1,8 @@
+import os;print(f'\033[1;32mRunning \033[1;35mfrom \033[1;4;36m{os.path.dirname(__file__)}\033[00m')
+from TR__init import *
 from tkinter import *
 from tkinter.ttk import *
 from PIL import ImageTk, Image
-from TR__init import *
 from Depandances.Outils.pip import *
 from inspect import currentframe
 from Depandances.Outils.paths__names__etc import *
@@ -85,10 +86,10 @@ def setup():
             b1, b2 = [[b1[0], b1[1]+dst], [b2[0], b2[1]+dst]]; dst = 50
             ecris(bgr_img_chrg, action, [b1[0], b1[1]+dst], [b2[0], b2[1]+dst], taille, noir, 10/5*taille)
             rgb_img_chrg = bgr_img_chrg[::, ::, ::-1]
-            self.img = ImageTk.PhotoImage(Image.fromarray(rgb_img_chrg))       
+            self.img = ImageTk.PhotoImage(Image.fromarray(rgb_img_chrg))
     root.title('JEU_TR')
     p1 = PhotoImage(file = './Infos/Favicon.ico')
-    root.iconphoto(False, p1)
+    root.iconphoto(True, p1)
     root.attributes('-fullscreen',True)
     image = imag()
     panel = Label(root, image = image.img)
