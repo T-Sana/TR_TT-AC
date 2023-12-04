@@ -1,4 +1,5 @@
 import cv2
+
 class souris:
     dehors = [-1, -1]
     pos = dehors

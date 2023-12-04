@@ -1,2 +1,3 @@
 # TR_TT-AC
-The readme is in _Infos/_.
+
+Visite le [README.MD](./Infos/README.md) (il est dans le répertoire infos)

@@ -5,7 +5,7 @@
 ## To do:
 
 - [ ] Create the imgs
-  - [ ] ImgCity
+  - [X] ImgCity
 
 ### In Progress:
 

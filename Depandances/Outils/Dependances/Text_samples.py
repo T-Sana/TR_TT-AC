@@ -8,8 +8,6 @@ def samples():
     max_chrs_h = 17
     max_chrs_v = 18
 
-    feuilles = 5
-
     samples = []
 
     out = []

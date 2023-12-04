@@ -13,6 +13,7 @@ except:
 
 pieces_d_chaque_cote = True ## TODO TODO le faire un paramètre par défaut ##
 ## TODO un menu in-game ##
+
 class nom:
     nom = 'Echecs'
 if oui: ## Commentaires et TODO ##

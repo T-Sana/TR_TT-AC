@@ -4,8 +4,10 @@ from outils.souris import souris
 def clicked_in(pos, boutton): ## Is pos between boutton[0] (haut gauche) and boutton[1] (bas droite) ##
     a_l_interieur = pos[0] >= boutton[0][0] and pos[0] <= boutton[1][0] and pos[1] >= boutton[0][1] and pos[1] <= boutton[1][1]
     return(a_l_interieur)
+
 class nom:
     nom = 'Puissance4'
+
 class puissance4:
     def __str__(self):
         r = ''

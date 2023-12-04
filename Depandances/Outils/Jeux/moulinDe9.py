@@ -57,7 +57,6 @@ class moulin9:
         self.trait = True
         while True:
             self.imprimme()
-            
             self.move()
     def legal0(self, p) -> bool:
         if self.tableau[p[0]][p[1]] == 0:

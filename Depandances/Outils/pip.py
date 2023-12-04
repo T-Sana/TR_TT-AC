@@ -18,7 +18,8 @@ def get_installed_packages():
             elif pckg != '':
                 try: pckgs.append(pckg[:pckg.index('=')])
                 except ValueError: pckgs.append(pckg)
-                pckg = ''; t = False
+                pckg = ''
+                t = False
         elif t and i == 'r': pass
         elif t and i == 'n': t = False
         else: pckg += i

@@ -3,27 +3,26 @@
 ## <b><r style="color: #A040A0; text-decoration: underline">FR</r></b>
 > Pour lancer le jeu, executez simplement le fichier <b><u style="color: #22B278">TR_main.py</u></b>.<br>
 > 
-> <r style="color: red">⚠</r> Il ne faut executer aucun des fichiers du directoire <b><u style="color: #22B278">&lt;Jeu_TR&gt;</u></b><b style='color: #ff2020'>*</b>. <b style="color: #ff2020">Le nom de fichier est entre guillemets pcq le dossier ne s'appelle pas ainsi et qu'il s'appellera comme le nom du jeu. D'autre part, le présent texte en #ff2020 doit être supprimé.</b><br>
 > <r style="color: red">⚠</r> Les dossiers <b><u style="color: #22B278">Imgs/</u></b> et <b><u style="color: #22B278">Config/</u></b> peuvent être supprimés. Ils seront recrées par <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
-> <r style="color: red">⚠</r> Les dossiers <b><u style="color: #22B278">Imgs/</u></b> et <b><u style="color: #22B278">Config/</u></b> ne peuvent recevoir les fichiers <b>que</b> par les scripts python.
+> <r style="color: red">⚠</r> Les dossiers <b><u style="color: #22B278">Imgs/</u></b> et <b><u style="color: #22B278">Config/</u></b> ne doivent recevoir les fichiers <b>que</b> par les scripts python.<br><tb> &emsp;&ensp; &mdash; ~~(Sauf si vous savez ce que vous faites)~~.
 
 ## <b><r style="color: #A040A0; text-decoration: underline">CA</r></b>
 > Per començar a jugar, executeu simplement el fitxer <b><u style="color: #22B278">TR_main.py</u></b>.<br>
 > 
-> <r style="color: red">⚠</r> No s'ha d'executar cap dels fitxers presents dins de la carpeta <b><u style="color: #22B278">&lt;Jeu_TR&gt;</u></b><b style='color: #ff2020'>*</b>. <b style="color: #ff2020">Le nom de fichier est entre guillemets pcq le dossier ne s'appelle pas ainsi et qu'il s'appellera comme le nom du jeu. D'autre part, le présent texte en #ff2020 doit être supprimé.</b><br>
-> <r style="color: red">⚠</r> Les carpetes <b><u style="color: #22B278">Imgs/</u></b> i <b><u style="color: #22B278">Config/</u></b> es poden suprimir. Es recrearan quan s'executi el <b><u style="color: #22B278">TR_setup.py</u></b>.
+> <r style="color: red">⚠</r> Les carpetes <b><u style="color: #22B278">Imgs/</u></b> i <b><u style="color: #22B278">Config/</u></b> es poden suprimir. Es recrearan quan s'executi el <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
+> <r style="color: red">⚠</r> Les carpetes <b><u style="color: #22B278">Imgs/</u></b> i <b><u style="color: #22B278">Config/</u></b> <b>només</b> han de rebre fitxers des dels scripts python.<br><tb> &emsp;&ensp; &mdash; ~~(Excepte si sabeu què feu)~~.
 
 
 ## <b><r style="color: #A040A0; text-decoration: underline">EN</r></b>
 > To launch the game, simply execute <b><u style="color: #22B278">TR_main.py</u></b> file.<br>
 > 
-> <r style="color: red">⚠</r> No file in <b><u style="color: #22B278">&lt;Jeu_TR&gt;</u></b><b style='color: #ff2020'>*</b>  <b style="color: #ff2020">Le nom de fichier est entre guillemets pcq le dossier ne s'appelle pas ainsi et qu'il s'appellera comme le nom du jeu. D'autre part, le présent texte en #ff2020 doit être supprimé.</b><br>folder has to be executed.<br>
-> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> and <b><u style="color: #22B278">Config/</u></b> can be suppressed. They will be recreated by <b><u style="color: #22B278">TR_setup.py</u></b>.
+> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> & <b><u style="color: #22B278">Config/</u></b> can be suppressed. They will be recreated by <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
+> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> & <b><u style="color: #22B278">Config/</u></b> <b> only </b> can receive files from the python scripts.<br><tb> &emsp;&ensp; &mdash; ~~(Unless you know what you're doing)~~.
 
 ## <b><r style="color: #A040A0; text-decoration: underline">ES</r></b>
 > Para empezar a jugar, simplemente ejecute el fichero <b><u style="color: #22B278">TR_main.py</u></b>.<br>
 > 
-> <r style="color: red">⚠</r> Ningún fichero en la carpeta <b><u style="color: #22B278">&lt;Jeu_TR&gt;</u></b><b style='color: #ff2020'>*</b>  <b style="color: #ff2020">Le nom de fichier est entre guillemets pcq le dossier ne s'appelle pas ainsi et qu'il s'appellera comme le nom du jeu. D'autre part, le présent texte en #ff2020 doit être supprimé.</b><br>debe ser ejecutado.<br>
-> <r style="color: red">⚠</r> Las carpetas <b><u style="color: #22B278">Imgs/</u></b> y <b><u style="color: #22B278">Config/</u></b> pueden ser suprimidas. Serán recreadas por <b><u style="color: #22B278">TR_setup.py</u></b>.
+> <r style="color: red">⚠</r> Las carpetas <b><u style="color: #22B278">Imgs/</u></b> y <b><u style="color: #22B278">Config/</u></b> pueden ser suprimidas. Serán recreadas por <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
+> <r style="color: red">⚠</r> Les carpetas <b><u style="color: #22B278">Imgs/</u></b> y <b><u style="color: #22B278">Config/</u></b> <b>solo</b> deben recibir ficheros desde los scripts python.<br><tb> &emsp;&ensp; &mdash; ~~(Excepto si sabe lo qué hace)~~.
 
 </p>

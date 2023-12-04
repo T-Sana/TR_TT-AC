@@ -376,5 +376,5 @@ def img_chrg() -> None: ## MAIN ##
     sauve_image(n_img_chargement, img, f'{dir}/{imgs_path}')
 
 if __name__ == '__main__':
-    for i in [img_cart1, img_cart2, img_chrg]:
-        i()
+    for carte in [img_cart1, img_cart2, img_chrg]:
+        carte()

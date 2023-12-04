@@ -5,9 +5,6 @@ try:
     if True: ## Packages.vars ##
         with open('./Depandances/Requirements.txt', 'r', encoding='utf8') as file:
             packages_to_install = [package[:package.find('='):] for package in file.readlines()]
-        if __name__ == '__main__' and False:
-            for pckg in packages_to_install:
-                uninstall(pckg)
         packages_installed = get_installed_packages()
     if True: ## Discard installed packages ##
         for pckg in copy.deepcopy(packages_to_install): ## If must be a copy. If not it exits sooner because of removing an index

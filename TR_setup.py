@@ -10,12 +10,12 @@ from TR_imageaison import img_cart1, img_cart2, img_chrg
 from Depandances.Outils.cvt import *
 import shutil
 
-nf = os.getenv('nomJeu') # nf = NomFenêtre
 if True: ## Format + def montre_img_charg() ##
     def montre_img_charg(action='', steps=0, taille=1.2) -> None:
         t_steps = 20
         if steps > t_steps: steps = t_steps
-        img_chrg = ouvre_image(f'{dir}/{imgs_path}/{n_img_chargement}')
+        img_chrg = ouvre_image(f'{dir}\\{imgs_path}\\{n_img_chargement}')
+        print(f'Opening {BOLD_GREEN}{n_img_chargement}{NORMAL} from {CYAN+BOLD+UNDERLINED}{dir}\\{imgs_path}\\{NORMAL}')
         a, b = 3, 7; dst = 75
         b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b), pt_sg(cd, ct_sg(bg, bd), a, b)]
         b1, b2 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[1][0], b_c_c[1][1]+25]]

@@ -1,6 +1,6 @@
-from Depandances.Outils.cvt import *
-from Depandances.Outils.quit import quitter
 from Depandances.Outils.paths__names__etc import *
+from Depandances.Outils.quit import quitter
+from Depandances.Outils.cvt import *
 
 if True: ## Vars ##
     if True: ## Anim.vars ##

@@ -1,10 +1,19 @@
 import numpy as np
 from multimethod import multimethod
-from cvt import *
-try:
-    import outils.souris as s
+try: from cvt import *
 except:
-    import souris as s
+    try: from Jeux.cvt import *
+    except:
+        try: from Outils.Jeux.cvt import *
+        except: from Depandances.Outils.Jeux.cvt import *
+try:import souris as s
+except:
+    try: import outils.souris as s
+    except:
+        try: from Jeux.outils import souris as s
+        except:
+            try: from Outils.Jeux.outils import souris as s
+            except: from Depandances.Outils.Jeux.outils import souris as s
 
 marron_clair = [77, 113, 181]
 marron_clair2 = [30, 60, 120]

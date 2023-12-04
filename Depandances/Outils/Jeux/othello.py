@@ -13,7 +13,7 @@ class nom:
 ##################################
 
 ##################################
-## TODO ##########################
+## TODO OR NOT TODO ##############
 ## Afficher comptage des points ##
 ## Caisses des joueurs ###########
 ## Indicateur de trait amélioré ##

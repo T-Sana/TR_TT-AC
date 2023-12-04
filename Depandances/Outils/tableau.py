@@ -1,11 +1,20 @@
-try: from functs import *
-except: from outils.functs import *
 import numpy as np
-from outils.cvt import *
-try:
-    import outils.souris as s
+try: from functs import *
 except:
-    import souris as s
+    try: from Outils.functs import *
+    except: from Depandances.Outils.functs import *
+try: from cvt import *
+except:
+    try: from Outils.cvt import *
+    except: from Depandances.Outils.cvt import *
+try: from quit import *
+except:
+    try: from Outils.quit import *
+    except: from Depandances.Outils.quit import *
+try: import souris as s
+except:
+    try: from Outils import souris as s
+    except: from Depandances.Outils import souris as s
 
 marron_clair = [77, 113, 181]
 marron_clair2 = [30, 60, 120]

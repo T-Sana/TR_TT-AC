@@ -3,7 +3,7 @@
 ### Nom pr : cvt.py ##################
 
 ## *_* TODO *_* ##
-## TODO Passer tout le programme en POO dans cvt2.py ##
+## TODO (en cours) Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
 
 ######################################

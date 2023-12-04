@@ -2,7 +2,7 @@
 ### Auteur : Tim Tamet -- Martínez ###
 ### Nom pr : cvt.py ##################
 
-## TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO ##
+## TODO ##
 ## TODO Passer tout le programme en POO dans cvt2.py ##
 ## TODO Quand ce sera fait, supprimer ce programme et renommer cvt2.py en cvt.py ##
 

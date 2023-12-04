@@ -4,6 +4,7 @@ except:
     except:
         try: from Outils.Jeux.cvt import *
         except: from Depandances.Outils.Jeux.cvt import *
+        
 if oui: ## Fonctions ##
     def liste_pts_sg(p1, p2, n_pts): ## Returne une liste ayant n_pts équidistants sur le ségment donné ##
             pts = []

@@ -106,4 +106,5 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
         numb += 1
-if __name__ == '__main__': carteVille()
+if __name__ == '__main__':
+    carteVille()

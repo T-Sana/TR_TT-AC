@@ -1,6 +1,5 @@
 from cvt import *
 from tableau import *
-from souris import souris as s
 
 class puissance4:
     def __str__(self) -> str:

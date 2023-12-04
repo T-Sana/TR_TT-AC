@@ -1,4 +1,5 @@
 import cv2
+
 class move_on_map(Exception):
     def __init__(self, msg='Moved on map due of a click on it!'):
         self.msg = msg

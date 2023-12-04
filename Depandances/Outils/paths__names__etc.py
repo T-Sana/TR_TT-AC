@@ -19,14 +19,14 @@ def create_dir_if_unexisting(name, path='./') -> None:
 if True: ## Format.vars ##
     new_line = '\n'
     espace = ' '
-    BLACK        = "\033[0;30m"
-    RED          = "\033[0;31m"
-    GREEN        = "\033[0;32m"
-    BROWN        = "\033[0;33m"
-    BLUE         = "\033[0;34m"
-    PURPLE       = "\033[0;35m"
-    CYAN         = "\033[0;36m"
-    LIGHT_GRAY   = "\033[0;37m"
+    BLACK        = "\033[30m"
+    RED          = "\033[31m"
+    GREEN        = "\033[32m"
+    BROWN        = "\033[33m"
+    BLUE         = "\033[34m"
+    PURPLE       = "\033[35m"
+    CYAN         = "\033[36m"
+    LIGHT_GRAY   = "\033[37m"
     BOLD         = '\033[1m'
     FAINT        = "\033[2m"
     ITALIC       = "\033[3m"
@@ -78,6 +78,7 @@ if True: ## Noms ##
     nf = os.getenv('nomJeu') # nf = NomFenêtre
     aut1 = os.getenv('aut1')
     aut2 = os.getenv('aut2')
+    if nf in [None, '']: nf = 'Jeu'
     if aut1 == None: aut1 = 'Author1'
     if aut2 == None: aut2 = 'Author2'
 if True: ## persos ##

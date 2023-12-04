@@ -1,6 +1,8 @@
 from outils.tableau import *
+
 class nom:
     nom = 'Bombardement'
+    
 if True: ## result "errors" ##
     class J1_gagne(Exception):
         def __init__(self, msg) -> None:

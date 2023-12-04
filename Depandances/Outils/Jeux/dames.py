@@ -232,6 +232,9 @@ class dames:
             return([0, 1])
         else: ##
             return([1, 0])
+def start(*args, **kwargs):
+    jeu = dames()
+    jeu.jouer()
 if __name__ == '__main__':
     a = dames()
     print(a.jouer())
