@@ -62,6 +62,7 @@ if True: ## Paths ##
     imgs_path = f'{depts_path}\\{imgs}'
     trash_path = f'{depts_path}\\{trash}'
     config_path = f'{depts_path}\\{config}'
+    create_dir_if_unexisting(imgs, f'{dir}\\{depts_path}')
 if True: ## Exceptions ##
     class invalidPlace(Exception):
         def __init__(self, file, line):
@@ -78,9 +79,9 @@ if True: ## Noms ##
     nf = os.getenv('nomJeu') # nf = NomFenêtre
     aut1 = os.getenv('aut1')
     aut2 = os.getenv('aut2')
-    if nf in [None, '']: nf = 'Jeu'
-    if aut1 == None: aut1 = 'Author1'
-    if aut2 == None: aut2 = 'Author2'
+    if aut1 == None: aut1 = 'TTM'
+    if aut2 == None: aut2 = 'ACG'
+    if nf in [None, '']: nf = 'TR_TT_AC'
 if True: ## persos ##
     class joueur:
         def __str__(self):
@@ -111,11 +112,12 @@ if True: ## persos ##
                 self.pos = list(pos)
 if True: ## Keys.vars ##
     keys_set = "{'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97]}"
+    keys = ''
     try:
         with open(f'./{config_path}/keys.txt', 'r') as file: keys = file.read()
     except:
         create_dir_if_unexisting(f'./{config_path}/')
-        with open(f'./{config_path}/keys.txt', 'w') as file: file.write(keys_set)
+        with open(f'./{config_path}/keys.txt', 'x') as file: file.write(keys_set)
     if keys == '': keys = keys_set
     configKeys = eval(keys)
 j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])

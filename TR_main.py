@@ -1,12 +1,12 @@
-class points:
-    def __init__(self) -> None:
-        self.j1 = 0
-        self.j2 = 0
-    def update(self, points):
-        self.j1 += points[0]
-        self.j2 += points[1]
-compteur = points()
 try:
+    class points:
+        def __init__(self) -> None:
+            self.j1 = 0
+            self.j2 = 0
+        def update(self, points):
+            self.j1 += points[0]
+            self.j2 += points[1]
+    compteur = points()
     from TR_setup import setup; setup()
     if True: ## Packages ##
         import TR_transitions as trs
@@ -61,4 +61,5 @@ except Exception as e:
     err = '\n'.join(er for er in tb.format_exception(e))
     with open(f'{os.path.dirname(__file__)}\\Infos\\Logs.log', 'a', encoding='utf8') as file:file.write('\n'+'-'*50+'\n'+err)
     print(f'AN EXCEPTION OCCURRED\n\tRefer to \033[1;4;36m{os.path.dirname(__file__)}\\Infos\\Logs.log\033[00m')
-except KeyboardInterrupt: print(f'\033[1;34mGAME \033[1;32mENDED \033[1;31m!\033[00m')
+except KeyboardInterrupt: pass
+finally: print(f'\033[1;34mGAME \033[1;32mENDED \033[1;31m!\033[00m')
