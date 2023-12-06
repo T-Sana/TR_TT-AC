@@ -1,6 +1,6 @@
 .env
-test.py
-essais.py
+.vscode
+testing.py
 __pycache__
 Depandances/Imgs
 Depandances/Trash
