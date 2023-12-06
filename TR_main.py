@@ -22,7 +22,6 @@ try:
                     jeu = jeux_dispos[ev]
                     try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non, help=True)
                     except: result = jeu(j1=noms[0], j2=noms[1], nm=nf)
-                    print(result)
                     compteur.update(result)
                 case None: print('Error')
                 case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')
