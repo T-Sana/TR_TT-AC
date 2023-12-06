@@ -15,8 +15,8 @@
 ## <b><r style="color: #A040A0; text-decoration: underline">EN</r></b>
 > To launch the game, simply execute <b><u style="color: #22B278">TR_main.py</u></b> file.<br>
 > 
-> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> & <b><u style="color: #22B278">Config/</u></b> can be suppressed. They will be recreated by <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
-> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> & <b><u style="color: #22B278">Config/</u></b> <b> only </b> can receive files from the python scripts.
+> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> and <b><u style="color: #22B278">Config/</u></b> can be suppressed. They will be recreated by <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
+> <r style="color: red">⚠</r> The directories <b><u style="color: #22B278">Imgs/</u></b> and <b><u style="color: #22B278">Config/</u></b> <b> only </b> can receive files from the python scripts.
 
 ## <b><r style="color: #A040A0; text-decoration: underline">ES</r></b>
 > Para empezar a jugar, simplemente ejecute el fichero <b><u style="color: #22B278">TR_main.py</u></b>.<br>
