@@ -4,9 +4,9 @@ from TR_imageaison import img_cart1, img_cart2, img_chrg
 from Depandances.Outils.paths__names__etc import *
 from inspect import currentframe
 from Depandances.Outils.pip import *
-from PIL import ImageTk, Image
 from tkinter.ttk import *
 from tkinter import *
+from PIL import ImageTk, Image ## Même si pas esthétique l'importer après @tkinter@ au risque de faire péter le programme ##
 from TR__init import *
 import os
 print(f'\033[1;32mRunning \033[1;35mfrom \033[1;4;36m{
@@ -69,8 +69,8 @@ def setup_(root=rt()):
         for i in imgs_to_create:
             imgs_to_create[i]()
     if True:  # KeyConfig ##
-        keyConfig = {'keysj1': [2490368, 2621440, 2555904,
-                                2424832], 'keysj2': [119, 115, 100, 97]}
+        keyConfig = {'keysj1': [2490368, 2621440, 2555904, 2424832],
+                     'keysj2': [119, 115, 100, 97]}
     if True:  # Checking Config ##
         create_dir_if_unexisting(config, f'.\\{depts_path}')
         if True:  # Creating Config/keys.txt ##
