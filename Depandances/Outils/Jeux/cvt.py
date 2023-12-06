@@ -1668,14 +1668,15 @@ if oui: ## Tout ##
             if destroy == True:
                 cv2.destroyWindow(nomFenetre)
             return(wk)
-        def ferme(nomFenetre):
+        def ferme(nomFenetre, help=False):
             '''
             Ferme la fenêtre (python) qui correspond avec le nom introduit.
             '''
             try:
                 cv2.destroyWindow(nomFenetre)
             except:
-                print(f'None window named {nomFenetre}.')
+                if help:
+                    print(f'None window named {nomFenetre}.')
         def ferme_all():
             '''
             Ferme toutes les fenêtres ouvertes (par python).
