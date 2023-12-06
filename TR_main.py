@@ -1,4 +1,7 @@
 try:
+    class ENDGAME(Exception):
+        def __init__(self, *args: object) -> None:
+            super().__init__(*args)
     class points:
         def __init__(self) -> None:
             self.j1 = 0
@@ -20,9 +23,11 @@ try:
                 case i if i in list(jeux_dispos.keys()):
                     trs.shade(img)
                     jeu = jeux_dispos[ev]
-                    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non, help=True)
+                    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non)
                     except: result = jeu(j1=noms[0], j2=noms[1], nm=nf)
                     compteur.update(result)
+                    if 10 in [compteur.j1, compteur.j2]:
+                        raise ENDGAME
                 case None: print('Error')
                 case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')
     if __name__ == '__main__': ## Main ##
@@ -55,10 +60,11 @@ try:
         while True:
             event, img, c = carteVille(j1, j2, numb, [compteur.j1, compteur.j2])
             runEvent(event, img, noms)
+except KeyboardInterrupt: pass
+except ENDGAME: print(f'\033[1;34m{str(j1.nom if compteur.j1==10 else j2).upper()} \033[1;32mWON \033[1;31m!\033[00m')
 except Exception as e:
     import traceback as tb, os
     err = '\n'.join(er for er in tb.format_exception(e))
     with open(f'{os.path.dirname(__file__)}\\Infos\\Logs.log', 'a', encoding='utf8') as file:file.write('\n'+'-'*50+'\n'+err)
     print(f'AN EXCEPTION OCCURRED\n\tRefer to \033[1;4;36m{os.path.dirname(__file__)}\\Infos\\Logs.log\033[00m')
-except KeyboardInterrupt: pass
 finally: print(f'\033[1;34mGAME \033[1;32mENDED \033[1;31m!\033[00m')

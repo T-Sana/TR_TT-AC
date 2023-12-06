@@ -1114,10 +1114,9 @@ class echecs: ########################### Terminé ##
                     self.menu()
                     if self.exit: ## End of program ##
                         break
-            except InterruptedError:
-                pass
+            except InterruptedError: pass
             except Exception as ERREUR:
-                print(ERREUR)
+                if self.help: print(ERREUR)
     if oui: ## Imagaison ## ############# Terminé ##
         def disquette(self, img, c1, c2, c3, c4): ############################## Terminé ##
             rectangle(img, c1, c4, bleu, 0)
@@ -1665,7 +1664,7 @@ class echecs: ########################### Terminé ##
                         move = f'{p}{p1} -> {p2}'
                     else:
                         move = f'{p}{p1} x {t}{p2}'
-                    print(move)
+                    if self.help: print(move)
                     if t == 'r':
                         jb = False
                     else:
@@ -1681,7 +1680,7 @@ class echecs: ########################### Terminé ##
                 else: ## If move is not legal => illegal move ##
                     if self.help:
                         nemovepas = f'{self.piece} {p1} -> {p2}:\n    {self.illegal_move}'
-                        print(nemovepas)
+                        if self.help: print(nemovepas)
                     self.image()
                 break
             return(False)
@@ -1690,8 +1689,7 @@ def starty(j1=echecs.j1, j2=echecs.j2, nm=nom.nom, lg='fr', trn=non, help=non, d
     jeu.begin_playing = bgn_playing
     try: jeu.start()
     except NotImplementedError: pass
-    if help:
-        print(jeu.cause_fin)
+    if help: print(jeu.cause_fin)
     ferme(nom)
     if jeu.j1.nom+jeu.j2.nom==j1+j2:
         return(jeu.result)
