@@ -1,3 +1,11 @@
+class points:
+    def __init__(self) -> None:
+        self.j1 = 0
+        self.j2 = 0
+    def update(self, points):
+        self.j1 += points[0]
+        self.j2 += points[1]
+compteur = points()
 try:
     from TR_setup import setup; setup()
     if True: ## Packages ##
@@ -12,9 +20,10 @@ try:
                 case i if i in list(jeux_dispos.keys()):
                     trs.shade(img)
                     jeu = jeux_dispos[ev]
-                    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non)
+                    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non, help=True)
                     except: result = jeu(j1=noms[0], j2=noms[1], nm=nf)
-                    print('Result:', result)
+                    print(result)
+                    compteur.update(result)
                 case None: print('Error')
                 case _: raise ValueError(f'Var <ev> of type {type(ev)} with value "{ev}" has a wrong value!\n<ev> should had one of the following values:\n{str(new_line+espace).join(i for i in list(jeux_dispos.keys()))}')
     if __name__ == '__main__': ## Main ##
@@ -43,9 +52,9 @@ try:
                     if montre(ecris(image(remplissage=turquoise), f'ERREUR !\nVous ne pouvez vous appeller "{n_j1}",\ncar j1 ({n_j1}) s\'appelle deja ainsi.', hg, bd, 3), nf, 10000, non) == 27: quitter()
         noms = [n_j1, n_j2]
         if montre(ecris(image(remplissage=turquoise), f'Bienvenu.e.s {n_j1} & {n_j2} !\n', hg, bd, 3), nf, 10000, non) == 27: quitter()
-        numb = 0; #noms = ['j1', 'j2']
+        j1.nom = n_j1; j2.nom = n_j2; numb = 0
         while True:
-            event, img, c = carteVille(j1, j2, numb)
+            event, img, c = carteVille(j1, j2, numb, [compteur.j1, compteur.j2])
             runEvent(event, img, noms)
 except Exception as e:
     import traceback as tb, os

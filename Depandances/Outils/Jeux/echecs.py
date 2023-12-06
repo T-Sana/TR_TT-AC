@@ -1083,20 +1083,31 @@ class echecs: ########################### Terminé ##
                         break
             return(player)
         def menu(self): ######################################################## Terminé ##
-            j = self.menuy()
-            if j: ## Play ##
+            if self.begin_playing:
                 rj = self.jouer()
-            else: ## Menuy ##
-                rj = False
-            while True:
-                if self.exit: ## End of program ##
-                    break
-                if rj: ## Restart a game ##
-                    self.rejouer()
-                    rj = ex = self.jouer()
-                else: ## Go to menu ##
-                    self.rejouer()
-                    rj = self.menuy()
+                while True:
+                    if self.exit: ## End of program ##
+                        break
+                    if rj: ## Restart a game ##
+                        self.rejouer()
+                        rj = self.jouer()
+                    else: ## End game ##
+                        break
+            else:
+                j = self.menuy()
+                if j: ## Play ##
+                    rj = self.jouer()
+                else: ## Menuy ##
+                    rj = False
+                while True:
+                    if self.exit: ## End of program ##
+                        break
+                    if rj: ## Restart a game ##
+                        self.rejouer()
+                        rj = self.jouer()
+                    else: ## Go to menu ##
+                        self.rejouer()
+                        rj = self.menuy()
         def start(self): ####################################################### Terminé ##
             try:
                 while True:
@@ -1454,7 +1465,7 @@ class echecs: ########################### Terminé ##
             img = self.img
             texte1 = self.fin_partie
             texte2 = str(self.causes_fin_partie[self.cause_fin]) if self.cause_fin != 'nulle' else str(self.causes_fin_partie[self.cause_fin][self.nulle])
-            self.result = [1, 0] if self.cause_fin == 'blancs_m' or 'blancs_a' else [0.5, 0.5] if self.cause_fin == 'nulle' else [0, 1]
+            self.result = [1, 0] if self.cause_fin in ['blancs_m', 'blancs_a'] else [0, 1] if self.cause_fin in ['noirs_m', 'noirs_a'] else [0.5, 0.5]
             raise NotImplementedError()
             p1, p2, p3, p4, ct = echecs.ct1, echecs.ct2, echecs.ct3, echecs.ct4, echecs.ct
             cg, cd, ch, cb = ct_sg(p1, p3), ct_sg(p2, p4), ct_sg(p3, p4), ct_sg(p3, p4)
@@ -1674,12 +1685,18 @@ class echecs: ########################### Terminé ##
                     self.image()
                 break
             return(False)
-def starty(j1=echecs.j1, j2=echecs.j2, nom=nom.nom, langue='fr', tourne=non, help=non, dev=non):
-    jeu = echecs(nom=nom, j1=j1, j2=j2, langue=langue, tourne=tourne, help=help, dev=dev)
+def starty(j1=echecs.j1, j2=echecs.j2, nm=nom.nom, lg='fr', trn=non, help=non, dev=non, bgn_playing:bool=True):
+    jeu = echecs(nom=nm, j1=j1, j2=j2, langue=lg, tourne=trn, help=help, dev=dev)
+    jeu.begin_playing = bgn_playing
     try: jeu.start()
     except NotImplementedError: pass
+    if help:
+        print(jeu.cause_fin)
     ferme(nom)
-    return(jeu.result)
+    if jeu.j1.nom+jeu.j2.nom==j1+j2:
+        return(jeu.result)
+    else:
+        return(jeu.result[::-1])
 def start(j1=None, j2=None, nm=None, lg=None, trn=None):
     sl='selection'; truc = False
     for i in [j1, j2, nm, lg, trn]:
@@ -1691,6 +1708,6 @@ def start(j1=None, j2=None, nm=None, lg=None, trn=None):
     while trn == None or trn == 0 or trn == '': trn = visual_input(image(remplissage=turquoise), '\nTourne: ', 'False', '\n[True/False]', sl)
     tourne = oui if trn == 'True' else non
     if truc: ferme(sl)
-    return(starty(j1=j1, j2=j2, nom=nm, langue=lg, tourne=tourne, help=non, dev=non))
+    return(starty(j1=j1, j2=j2, nm=nm, lg=lg, trn=tourne, help=non, dev=non, bgn_playing=False))
 if __name__ == '__main__':
     print(start(input('J1: '), input('J2: '), 'C', 'fr', 'False'))

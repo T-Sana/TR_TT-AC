@@ -14,6 +14,7 @@ def anim_debut(img=None, anim=True, v=5) -> None:
             montre_img(zoom_at(img, 2, coord=i), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
+            elif wk == 32: return
         if True: ## Vars ##
             pts = points_segment(p_arr, ct)
             zp = 1/len(pts)
@@ -23,4 +24,5 @@ def anim_debut(img=None, anim=True, v=5) -> None:
             montre_img(zoom_at(img, 2-zp*cnt, coord=j), nf)
             wk = attend_touche(1)
             if wk == 27: quitter()
+            elif wk == 32: return
             cnt += v2

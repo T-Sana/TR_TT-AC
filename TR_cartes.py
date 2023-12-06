@@ -40,7 +40,7 @@ def carte1(j1=j1, j2=j2):
         if wk == 27: quitter()
         elif wk != -1:
             deplace_js(wk, j1, j2)
-def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
+def carteVille(j1=j1, j2=j2, numb=0, points=[0,0]): ## Carte de Img2 ##
     im = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
     for i in [[[0, 0], [len(im[0]), 315]], [[0, 2003], [len(im[0]), 2160]]]:
         j1.ou_ne_peut_etre.append(i)
@@ -82,6 +82,12 @@ def carteVille(j1=j1, j2=j2, numb=0): ## Carte de Img2 ##
             cl1, cl2 = cl2, cl1
         ecris(im, 'vs', (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), (echiquier[0][0]+x_*4.5, echiquier[0][1]+y_*2.5), 2, rouge, 5)
         imag = img_part(img(im, j1, j2), cam, [long, haut])
+        ecris(imag, f'{j1.nom}: {points[0]}', [-1620, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'{j1.nom}: {points[0]}', [-1620, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'{j1.nom}: {points[0]}', [-1620, -980], couleur=blanc, taille=1, epaisseur=1, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=blanc, taille=1, epaisseur=1, police=cv2.FONT_HERSHEY_COMPLEX)
         if __name__ == '__main__': ecris(imag, f'cam: {cam}\nimg: [{len(im[0])}, {len(im)}]\ndiff: [{diff(len(im[0]), cam[0])}, {diff(len(im), cam[1])}]', taille=1, epaisseur=3)
         if numb%3 == 0:
             for n in range(len(ous)):

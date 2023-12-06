@@ -1,1 +1,67 @@
 All good
+--------------------------------------------------
+Traceback (most recent call last):
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 15, in runEvent
+    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TypeError: starty() got an unexpected keyword argument 'nm'
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 49, in <module>
+    runEvent(event, img, noms)
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 16, in runEvent
+    except: result = jeu(j1=noms[0], j2=noms[1], nm=nf)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TypeError: starty() got an unexpected keyword argument 'nm'
+
+--------------------------------------------------
+Traceback (most recent call last):
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 55, in <module>
+    runEvent(event, img, noms)
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 23, in runEvent
+    points.update(result)
+
+TypeError: points.update() missing 1 required positional argument: 'points'
+
+--------------------------------------------------
+Traceback (most recent call last):
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 23, in runEvent
+    try: result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non, help=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\Depandances\Outils\Jeux\echecs.py", line 1696, in starty
+    if jeu.j1+jeu.j2==j1+j2:
+       ~~~~~~^~~~~~~
+
+TypeError: unsupported operand type(s) for +: 'joueur' and 'joueur'
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 58, in <module>
+    runEvent(event, img, noms)
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\TR_main.py", line 24, in runEvent
+    except: result = jeu(j1=noms[0], j2=noms[1], nm=nf)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "c:\Users\Tim\Documents\GitHub\TR_TT-AC\Depandances\Outils\Jeux\echecs.py", line 1696, in starty
+    if jeu.j1+jeu.j2==j1+j2:
+       ~~~~~~^~~~~~~
+
+TypeError: unsupported operand type(s) for +: 'joueur' and 'joueur'
