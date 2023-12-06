@@ -24,4 +24,8 @@
 > <r style="color: red">⚠</r> Las carpetas <b><u style="color: #22B278">Imgs/</u></b> y <b><u style="color: #22B278">Config/</u></b> pueden ser suprimidas. Serán recreadas por <b><u style="color: #22B278">TR_setup.py</u></b>.<br>
 > <r style="color: red">⚠</r> Les carpetas <b><u style="color: #22B278">Imgs/</u></b> y <b><u style="color: #22B278">Config/</u></b> <b>solo</b> deben recibir ficheros desde los scripts python.
 
+## <b><r style="color: #A040A0; text-decoration: underline">Auteurs</r></b>
+**<r style="color: #2278B2">TT</r> <r style="color: #78B222">_&_</r> <r style="color: #22B278">AC</r><r style="color: #d05080">.</r>**
+## <b><r style="color: #A040A0; text-decoration: underline">Dates</r></b>
+**<r style="color: #2278B2">2/2023</r> <r style="color: #78B222">_-_</r> <r style="color: #22B278">12/2023</r><r style="color: #d05080">.</r>**
 </p>

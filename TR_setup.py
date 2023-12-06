@@ -1,16 +1,15 @@
 import shutil
 from Depandances.Outils.cvt import *
 from TR_imageaison import img_cart1, img_cart2, img_chrg
-from Depandances.Outils.paths__names__etc import *
 from inspect import currentframe
 from Depandances.Outils.pip import *
 from tkinter.ttk import *
 from tkinter import *
 from PIL import ImageTk, Image ## Même si pas esthétique l'importer après @tkinter@ au risque de faire péter le programme ##
+from Depandances.Outils.paths__names__etc import * ## L'importer après @tkinter@ au risque de faire péter le programme ##
 from TR__init import *
 import os
-print(f'\033[1;32mRunning \033[1;35mfrom \033[1;4;36m{
-      os.path.dirname(__file__)}\033[00m')
+print(f'\033[1;32mRunning \033[1;35mfrom \033[1;4;36m{os.path.dirname(__file__)}\033[00m')
 
 if True:  # Format + def montre_img_charg() ##
     def montre_img_charg(action='', steps=0, taille=1.2) -> None:
@@ -18,8 +17,7 @@ if True:  # Format + def montre_img_charg() ##
         if steps > t_steps:
             steps = t_steps
         img_chrg = ouvre_image(f'{dir}\\{imgs_path}\\{n_img_chargement}')
-        print(f'Opening {BOLD_GREEN}{n_img_chargement}{NORMAL} from {
-              CYAN+BOLD+UNDERLINED}{dir}\\{imgs_path}\\{NORMAL}')
+        print(f'Opening {BOLD_GREEN}{n_img_chargement}{NORMAL} from {CYAN+BOLD+UNDERLINED}{dir}\\{imgs_path}\\{NORMAL}')
         a, b = 3, 7
         dst = 75
         b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b),
