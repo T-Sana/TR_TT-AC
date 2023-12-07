@@ -1,3 +1,4 @@
+from TR__init import * ## Doit être le premier import à faire ##
 import shutil
 from Depandances.Outils.cvt import *
 from TR_imageaison import img_cart1, img_cart2, img_chrg
@@ -7,7 +8,6 @@ from tkinter.ttk import *
 from tkinter import *
 from PIL import ImageTk, Image ## Même si pas esthétique l'importer après @tkinter@ au risque de faire péter le programme ##
 from Depandances.Outils.paths__names__etc import * ## L'importer après @tkinter@ au risque de faire péter le programme ##
-from TR__init import *
 import os
 print(f'\033[1;32mRunning \033[1;35mfrom \033[1;4;36m{os.path.dirname(__file__)}\033[00m')
 
