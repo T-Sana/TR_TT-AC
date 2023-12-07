@@ -12,9 +12,8 @@ def create_dir_if_unexisting(name, path='./') -> None:
     :name: name of the file/folder to check existance of\n
     :path: where the file is supposed to be and would be created the file
     '''
-    v_dir = os.listdir(path)
-    try: v_dir.index(name)
-    except: os.mkdir(f"{path}\\{name}")
+    try: os.mkdir(f"{path}\\{name}")
+    except: return
 
 if True: ## Format.vars ##
     new_line = '\n'
@@ -111,15 +110,16 @@ if True: ## persos ##
             if pos != None:
                 self.pos = list(pos)
 if True: ## Keys.vars ##
-    keys_set = "{'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97]}"
+    keys_set = "{'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97], 'pause':[112]}"
     keys = ''
     try:
-        with open(f'./{config_path}/keys.txt', 'r') as file: keys = file.read()
+        with open(f'.\\{config_path}\\keys.txt', 'r') as file: keys = file.read()
     except:
-        create_dir_if_unexisting(f'./{config_path}/')
-        with open(f'./{config_path}/keys.txt', 'x') as file: file.write(keys_set)
+        create_dir_if_unexisting(config, depts_path)
+        with open(f'.\\{config_path}\\keys.txt', 'x') as file: file.write(keys_set)
     if keys == '': keys = keys_set
     configKeys = eval(keys)
 j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])
 j2 = joueur('j2', clrs=[blanc, blanc], t=1.5, keys=configKeys['keysj2'])
+pauseKeys = configKeys['pause']
 joueurs = [j1, j2]

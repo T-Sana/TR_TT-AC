@@ -1,6 +1,7 @@
 from TR_imageaison import *
 from TR_transitions import *
 from Depandances.Outils.cvt import *
+from Depandances.Outils.pause import *
 from Depandances.Outils.paths__names__etc import *
 
 def img(im, j1, j2):
@@ -109,6 +110,7 @@ def carteVille(j1=j1, j2=j2, numb=0, points=[0,0]): ## Carte de Img2 ##
             echq = [list(c-50 for c in echiquier[0]), list(c+50 for c in echiquier[1])]
             if clicked_in(j1.pos, echq) and clicked_in(j2.pos, echq): return('echecs', imag, numb)
             return('morpion', imag, numb)
+        elif wk in pauseKeys: pause()
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
         numb += 1

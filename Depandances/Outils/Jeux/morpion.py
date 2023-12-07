@@ -155,7 +155,9 @@ if oui: ## Classes ##
                 r = self.jouable()
                 if r == 'x' or r == 'o' or r == '_':
                     self.rejouer(r)
+            return [self.points_j1, self.points_j2]
 def start(j1='J1', j2='J2', nm='morpion'):
     jeu = morpion(J1=j1, J2=j2, nom=nm)
-    jeu.jouer()
+    pts = jeu.jouer()
     ferme(str(jeu))
+    return pts
