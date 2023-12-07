@@ -477,4 +477,5 @@ def img_chrg() -> None:  # MAIN ##
 
 if __name__ == '__main__':
     img_chrg()
-    montre(ouvre_image(f'{imgs_path}\\{n_img_chargement}'))
+    img = ouvre_image(f'{imgs_path}\\{n_img_chargement}')
+    montre(img)
