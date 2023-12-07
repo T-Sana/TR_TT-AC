@@ -80,7 +80,7 @@ if True: ## Noms ##
     aut2 = os.getenv('aut2')
     if aut1 == None: aut1 = 'TTM'
     if aut2 == None: aut2 = 'ACG'
-    if nf in [None, '']: nf = 'TR_TT_AC'
+    if nf in [None, 'TR_TT_AC', '']: nf = 'Καησσομαχε´ια'
 if True: ## persos ##
     class joueur:
         def __str__(self):

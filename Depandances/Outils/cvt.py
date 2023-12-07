@@ -2528,7 +2528,8 @@ if oui: ## Tout ##
                     ptg = coosCercle(ctb, dist(ctb, ct), 180)
                     ellipse(img, ptg, (dist(ct, ctb)*2, dist(ct, cb)*0.9), couleur, ep, 30, 80, angle=rotation)
                 elif char == 'g9': ## Ecrit : τ ## ## Tau  min #####
-                    pass
+                    ligne(img, cg, cd, couleur, epaisseur)
+                    ligne(img, ct, cb, couleur, epaisseur)
                 elif char == 'h9': ## Ecrit : υ ## ## Upsilon min ##
                     a, b = 15, 4
                     g = ct_sg(p3, cg)
@@ -2538,9 +2539,11 @@ if oui: ## Tout ##
                     ligne(img, pt_sg(g, d, a, b), pt_sg(cg, cd, a, b), couleur, ep)
                     ligne(img, pt_sg(d, g, a, b), pt_sg(cd, cg, a, b), couleur, ep)
                 elif char == 'i9': ## Ecrit : φ ## ## phi min ######
-                    pass
+                    ellipse(img, ctb, (dist(ct, ctb), dist(ct, cb)/2), couleur, ep, angle=rotation)
+                    ligne(img, ch, cb, couleur, epaisseur)
                 elif char == 'j9': ## Ecrit : χ ## ## Khi min ######
-                    pass
+                    ligne(img, cg, bd, couleur, epaisseur)
+                    ligne(img, cd, bg, couleur, epaisseur)
                 elif char == 'k9': ## Ecrit : ψ ## ## Psi min ######
                     pass
                 elif char == 'l9': ## Ecrit : ω ## ## Omega min ####
