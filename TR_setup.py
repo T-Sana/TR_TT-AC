@@ -23,8 +23,7 @@ if True:  # Format + def montre_img_charg() ##
         b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b),
                  pt_sg(cd, ct_sg(bg, bd), a, b)]
         b1, b2 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[1][0], b_c_c[1][1]+25]]
-        b3, b4 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[0][0] +
-                                                  (b_c_c[1][0]-b_c_c[0][0])/t_steps*steps, b_c_c[1][1]+25]]
+        b3, b4 = [[b_c_c[0][0], b_c_c[0][1]-25], [b_c_c[0][0] + (b_c_c[1][0]-b_c_c[0][0])/t_steps*steps, b_c_c[1][1]+25]]
         rectangle(img_chrg, b3, b4, rouge, 0)
         rectangle(img_chrg, b1, b2, noir)
         ecris(img_chrg, f'{round(steps/t_steps*100)}%',
@@ -50,8 +49,7 @@ def setup_(root=rt()):
         create_dir_if_unexisting(trash, f'.\\{depts_path}')
     if True:  # Imgs.vars ##
         line = currentframe().f_lineno+1
-        imgs_to_create = {n_img1: img_cart1,
-                          n_img_chargement: img_chrg, n_img2: img_cart2}
+        imgs_to_create = {n_img1: img_cart1, n_img_chargement: img_chrg, n_img2: img_cart2}
     if True:  # Checking Imgs/ ##
         create_dir_if_unexisting(imgs, f'.\\{depts_path}')
     if True:  # Checking imgs to create in Imgs/ ##
