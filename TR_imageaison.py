@@ -3,7 +3,7 @@ from Depandances.Outils.functs import *
 from Depandances.Outils.paths__names__etc import *
 from Depandances.Outils.quit import *
 
-SUPPORTED_CHARS = '1234567890qwertyuiopasdfghjklzxcvbnm,.;:-_!"$%&/()=?*[]{}\\'
+SUPPORTED_CHARS = '1234567890qwertyuiopasdfghjklzxcvbnm,.;:-_!"$%&/()=?*[]{}\\ '
 
 if True:  # Pieces d'échecs ##
     def dessine_roi(img, pt1, pt2, pt3, pt4, col1, col2, ep=5, echec=False):  # Terminé ##
