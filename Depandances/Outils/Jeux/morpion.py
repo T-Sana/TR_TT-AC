@@ -41,7 +41,7 @@ if oui: ## Classes ##
         def __init__(self, nom='partie 1', J1='J1', J2='J2'):
             self.J1 = J1
             self.J2 = J2
-            self.points_j1 = self.points_j2 = 0 ## 
+            self.points_j1 = self.points_j2 = 0
             self.nom = nom
             table = [
                 ['_', '_', '_'],
@@ -81,9 +81,9 @@ if oui: ## Classes ##
                 rectangle(img, p1, pt_sg(p1, p4, 1, 2), bois, 10)
                 rectangle(img, pt_sg(p2, p3, 2), p3, bois, 10)
                 rectangle(img, p2, pt_sg(p2, p3, 1, 2), bois, 10)
-                t = '/' if self.trait else '0'
-                ecris(img, f'{self.J1}\n{self.points_j1}\n\n{t}', [0, 0], p3, 5, turquoise, 15)
-                ecris(img, f'{self.J2}\n{self.points_j2}\n\n{t}', p2, [long, haut], 5, turquoise, 15)
+                t = 'X' if self.trait else 'O'
+                ecris(img, f'{self.J1}\n{self.points_j1}\nX\n{t}', [0, 0], p3, 5, turquoise, 15, police=cv2.FONT_HERSHEY_SIMPLEX)
+                ecris(img, f'{self.J2}\n{self.points_j2}\nO\n{t}', p2, [long, haut], 5, turquoise, 15, police=cv2.FONT_HERSHEY_SIMPLEX)
                 for j in range(len(self.table)):
                     for i in range(len(self.table[j])):
                         c = self.table[j, i]
@@ -157,8 +157,14 @@ if oui: ## Classes ##
                     self.rejouer(r) # Clears table and set points
                     break
             return [self.points_j1, self.points_j2]
-def start(j1='J1', j2='J2', nm='morpion'):
-    jeu = morpion(J1=j1, J2=j2, nom=nm)
+try: import TR_transitions as trs; trs_ = True
+except: trs_ = False
+def start(j1='J1', j2='J2', nm='morpion', frm=False):
+    jrs = [j1, j2]
+    num = rd.randint(0,1)
+    jeu = morpion(J1=jrs[num], J2=jrs[num-1], nom=nm)
     pts = jeu.jouer()
-    ferme(str(jeu))
+    if num == 1: pts = pts[::-1]
+    if frm: ferme(str(jeu))
+    elif trs_: trs.shade(jeu.img)
     return pts

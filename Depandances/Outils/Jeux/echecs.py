@@ -1684,13 +1684,16 @@ class echecs: ########################### Terminé ##
                     self.image()
                 break
             return(False)
-def starty(j1=echecs.j1, j2=echecs.j2, nm=nom.nom, lg='fr', trn=non, help=non, dev=non, bgn_playing:bool=True):
+try: import TR_transitions as trs; trs_ = True
+except: trs_ = False
+def starty(j1=echecs.j1, j2=echecs.j2, nm=nom.nom, lg='fr', trn=non, help=non, dev=non, bgn_playing:bool=True, frm=False):
     jeu = echecs(nom=nm, j1=j1, j2=j2, langue=lg, tourne=trn, help=help, dev=dev)
     jeu.begin_playing = bgn_playing
     try: jeu.start()
     except NotImplementedError: pass
     if help: print(jeu.cause_fin)
-    ferme(nom)
+    if frm: ferme(nom)
+    elif trs_: trs.shade(jeu.img)
     if jeu.j1.nom+jeu.j2.nom==j1+j2:
         return(jeu.result)
     else:
