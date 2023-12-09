@@ -29,8 +29,7 @@ try:
                     trs.shade(img)
                     jeu = jeux_dispos[ev]
                     try:
-                        result = jeu(j1=noms[0], j2=noms[1],
-                                     nm=nf, lg='fr', trn=non)
+                        result = jeu(j1=noms[0], j2=noms[1], nm=nf, lg='fr', trn=non)
                     except:
                         result = jeu(j1=noms[0], j2=noms[1], nm=nf)
                     compteur.update(result)
@@ -45,8 +44,7 @@ try:
         trs.shade(img_part(img), v=vel)
         n_j1 = n_j2 = None
         while n_j1 == None or n_j1 == 0 or n_j1 == '' or len(str(n_j1)) > 9:
-            n_j1 = visual_input(image(remplissage=turquoise),
-                                'Nom j1: ', 'J1', '', nf)
+            n_j1 = visual_input(image(remplissage=turquoise), 'Nom j1: ', 'J1', '', nf)
             if n_j1 == 0 or n_j1 == '':
                 quitter()
             else:
@@ -82,12 +80,10 @@ try:
         text = f'Le.a gagnant.e est\n{j1.nom if compteur.j1 > compteur.j2 else j2.nom} !!!\nFelicitations'
         montre(ecris(ouvre_image(f'{imgs_path}\\{n_img1}'), text, taille=3))
         raise ENDGAME
-except KeyboardInterrupt:
-    pass
+except KeyboardInterrupt: pass
 except ENDGAME:
     if points_p_g in [compteur.j1, compteur.j2]:
-        print(f'\033[1;34m{str(j1.nom if compteur.j1 > compteur.j2 else j2.nom).upper(
-        )} \033[1;32mWON \033[1;31m!\033[00m')
+        print(f'\033[1;34m{str(j1.nom if compteur.j1 > compteur.j2 else j2.nom).upper()} \033[1;32mWON \033[1;31m!\033[00m')
 except Exception as e:
     import traceback as tb
     import os
