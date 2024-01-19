@@ -1,3 +1,4 @@
+## Désinstalle toutes les dépendances pip du programme ##
 from Depandances.Outils.pip import *
 
 with open('./Depandances/Requirements.txt', 'r', encoding='utf8') as file:
