@@ -169,4 +169,4 @@ def start():
     jeu = puissance4('jeu')
     jeu.jouer()
     ferme(str(jeu))
-#start()
+if __name__ == '__main__': start()

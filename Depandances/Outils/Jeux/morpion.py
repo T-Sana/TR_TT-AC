@@ -24,7 +24,7 @@ if True: ## Imports ##
         except:
             try: from Outils.Jeux.cvt import *
             except: from Depandances.Outils.Jeux.cvt import *
-    try: from cvt import *
+    try: from outils.souris import souris
     except:
         try: from Jeux.outils.souris import souris
         except:
@@ -168,3 +168,4 @@ def start(j1='J1', j2='J2', nm='morpion', frm=False):
     if frm: ferme(str(jeu))
     elif trs_: trs.shade(jeu.img)
     return pts
+if __name__ == '__main__': start()
