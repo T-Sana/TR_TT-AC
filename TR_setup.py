@@ -17,7 +17,7 @@ if True:  # Format + def montre_img_charg() ##
         if steps > t_steps:
             steps = t_steps
         img_chrg = ouvre_image(f'{dir}\\{imgs_path}\\{n_img_chargement}')
-        print(f'Opening {BOLD_GREEN}{n_img_chargement}{NORMAL} from {CYAN+BOLD+UNDERLINED}{dir}\\{imgs_path}\\{NORMAL}')
+        print(f'\033[1;32mOpening \033[1;36m{n_img_chargement}{NORMAL} \033[1;35mfrom {CYAN+BOLD+UNDERLINED}{dir}\\{imgs_path}\\{NORMAL}')
         a, b = 3, 7
         dst = 75
         b_c_c = [pt_sg(cg, ct_sg(bg, bd), a, b),
@@ -63,6 +63,7 @@ def setup_(root=rt()):
                 except:
                     shutil.move(f'./{imgs_path}/{i}', f'./{trash_path}')
         for i in imgs_to_create:
+            print(f'\033[1;32mCreated \033[1;35mimage \033[1;4;36m{i}\033[00m')
             imgs_to_create[i]()
     if True:  # KeyConfig ##
         keyConfig = {'keysj1': [2490368, 2621440, 2555904, 2424832],

@@ -440,9 +440,8 @@ def img_chrg() -> None:  # MAIN ##
         img = ouvre_image(f'{dir}\\{imgs_path}\\{n_img1}')
     try:
         if type(img) == None:
-            pass
-        img_cart1()
-        raise Exception
+            img_cart1()
+            raise Exception
     except:
         img = ouvre_image(f'{dir}\\{imgs_path}\\{n_img1}')
     marron = nouvelle_couleur('122336')

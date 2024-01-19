@@ -2,6 +2,7 @@
 .vscode
 testing.py
 __pycache__
+.env.example
 Depandances/Imgs
 Depandances/Trash
 Depandances/Config
