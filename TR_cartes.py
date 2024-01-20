@@ -36,10 +36,15 @@ def deplace_js(wk, j1, j2, cam=[0, 0]):
             j2.deplace([-cb, 0])
     return (cam)
 
+class click_souris:
+    clicked = False
+    pos = np.array([-1,-1])
 
 def f(event, x, y, flags, param) -> None:
     if event == cv2.EVENT_LBUTTONDOWN:
-        print('Souris:', [x, y])
+        click_souris.clicked = True
+        click_souris.pos[0] = x
+        click_souris.pos[1] = y
 
 
 def carte1(j1=j1, j2=j2):
@@ -124,6 +129,9 @@ def carteVille(j1=j1, j2=j2, numb=0, points=[0, 0]):  # Carte de Img2 ##
                     if ous[n][1] > 0: ous[n] = ous[n][0], ous[n][1]-1
                     else: ous[n] = ous[n][0]+1, ous[n][1]
         wk = souris_sur_image(imag, f, nf, 100, non) ### C'est pour avoir des coos ###
+        if click_souris.clicked:
+            click_souris.clicked = False
+            print(f'Col: {imag[click_souris.pos[1],click_souris.pos[0]]}\nPos: {click_souris.pos}')
         if wk == 27: quitter()
         elif wk == 32:
             echq = [list(c-50 for c in echiquier[0]), list(c+50 for c in echiquier[1])]
