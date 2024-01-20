@@ -4,6 +4,7 @@ from Depandances.Outils.cvt import *
 from Depandances.Outils.pause import *
 from Depandances.Outils.paths__names__etc import *
 
+
 def img(im, j1, j2):
     if j1.pos[1] <= j2.pos[1]:
         j1.dessine(im)
@@ -11,7 +12,9 @@ def img(im, j1, j2):
     else:
         j2.dessine(im)
         j1.dessine(im)
-    return(im)
+    return (im)
+
+
 def deplace_js(wk, j1, j2, cam=[0, 0]):
     cb = 45
     match wk:
@@ -31,26 +34,37 @@ def deplace_js(wk, j1, j2, cam=[0, 0]):
             j2.deplace([cb, 0])
         case j2.k_g:
             j2.deplace([-cb, 0])
-    return(cam)
+    return (cam)
+
+
 def f(event, x, y, flags, param) -> None:
     if event == cv2.EVENT_LBUTTONDOWN:
         print('Souris:', [x, y])
+
+
 def carte1(j1=j1, j2=j2):
     while True:
-        wk = montre(img(ouvre_image(f'{dir}/{imgs_path}/{n_img1}'), j1, j2), nf, 100, non)
-        if wk == 27: quitter()
+        wk = montre(
+            img(ouvre_image(f'{dir}/{imgs_path}/{n_img1}'), j1, j2), nf, 100, non)
+        if wk == 27:
+            quitter()
         elif wk != -1:
             deplace_js(wk, j1, j2)
-def carteVille(j1=j1, j2=j2, numb=0, points=[0,0]): ## Carte de Img2 ##
+
+
+def carteVille(j1=j1, j2=j2, numb=0, points=[0, 0]):  # Carte de Img2 ##
     im = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
     for i in [[[0, 0], [len(im[0]), 315]], [[0, 2003], [len(im[0]), 2160]]]:
         j1.ou_ne_peut_etre.append(i)
         j2.ou_ne_peut_etre.append(i)
-    dst = 400; dst2 = 400; cam = [0, 0]
+    dst = 400
+    dst2 = 400
+    cam = [0, 0]
     echiquier = [[120, 540], [690, 865]]
-    ech = [echiquier[0][0]-echiquier[1][0], echiquier[0][1]-echiquier[1][1]] #####
+    ech = [echiquier[0][0]-echiquier[1][0], echiquier[0][1]-echiquier[1][1]]
     x_, y_ = abs(ech[0])/9, abs(ech[1])/5
     ous = [[0, 0], [4, 0], [8, 0], [8, 4], [4, 4], [0, 4]]
+    last_time = time.time()
     while True:
         if j1.pos[1] > cam[1] + haut/3*2 or j2.pos[1] > cam[1] + haut/3*2:
             if j1.pos[1] < cam[1] + haut/3+dst or j2.pos[1] < cam[1] + haut/3+dst: pass
@@ -89,8 +103,13 @@ def carteVille(j1=j1, j2=j2, numb=0, points=[0,0]): ## Carte de Img2 ##
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=blanc, taille=1, epaisseur=1, police=cv2.FONT_HERSHEY_COMPLEX)
+        FPS = f'{60/diff(last_time, time.time())}'[:5:]
+        last_time = time.time()
+        ecris(imag, f'FPS: {FPS}', [0, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'FPS: {FPS}', [0, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
+        ecris(imag, f'FPS: {FPS}', [0, -980], couleur=blanc, taille=1, epaisseur=1, police=cv2.FONT_HERSHEY_COMPLEX)
         if __name__ == '__main__': ecris(imag, f'cam: {cam}\nimg: [{len(im[0])}, {len(im)}]\ndiff: [{diff(len(im[0]), cam[0])}, {diff(len(im), cam[1])}]', taille=1, epaisseur=3)
-        if numb%3 == 0:
+        if numb % 3 == 0:
             for n in range(len(ous)):
                 if ous[n][1] == 0:
                     if ous[n][0] < 8: ous[n] = ous[n][0]+1, ous[n][1]
@@ -114,5 +133,7 @@ def carteVille(j1=j1, j2=j2, numb=0, points=[0,0]): ## Carte de Img2 ##
         elif wk != -1:
             cam = deplace_js(wk, j1, j2, cam)
         numb += 1
+
+
 if __name__ == '__main__':
     carteVille()
