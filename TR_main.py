@@ -53,8 +53,7 @@ try:
                         quitter()
                 trs.shade(image(remplissage=turquoise))
         while n_j2 == None or n_j2 == 0 or n_j1 == '' or len(str(n_j2)) > 9 or n_j2 == n_j1:
-            n_j2 = visual_input(image(remplissage=turquoise),
-                                'Nom j2: ', 'J2', '', nf)
+            n_j2 = visual_input(image(remplissage=turquoise), 'Nom j2: ', 'J2', '', nf)
             if n_j2 == 0 or n_j2 == '':
                 quitter()
             else:
