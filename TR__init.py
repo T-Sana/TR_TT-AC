@@ -7,6 +7,7 @@ try:
             packages_to_install = [package[:package.find('='):] for package in file.readlines()]
         packages_installed = get_installed_packages()
     if True: ## Discard installed packages ##
+        if 'pillow' in packages_installed: packages_to_install.remove('Pillow')
         for pckg in copy.deepcopy(packages_to_install): ## It must be a copy. If not it exits sooner because of removing indexes ##
             if pckg in packages_installed:
                 packages_to_install.remove(pckg)
