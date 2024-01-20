@@ -103,7 +103,7 @@ def carteVille(j1=j1, j2=j2, numb=0, points=[0, 0]):  # Carte de Img2 ##
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
         ecris(imag, f'{j2.nom}: {points[1]}', [+1620, -980], couleur=blanc, taille=1, epaisseur=1, police=cv2.FONT_HERSHEY_COMPLEX)
-        FPS = f'{60/diff(last_time, time.time())}'[:5:]
+        FPS = f'{1/diff(last_time, time.time())}'[:5:]
         last_time = time.time()
         ecris(imag, f'FPS: {FPS}', [0, -980], couleur=noir, taille=1, epaisseur=5, police=cv2.FONT_HERSHEY_COMPLEX)
         ecris(imag, f'FPS: {FPS}', [0, -980], couleur=nouvelle_couleur('808080'), taille=1, epaisseur=3, police=cv2.FONT_HERSHEY_COMPLEX)
