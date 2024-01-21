@@ -13,7 +13,6 @@ except:
 
 pieces_d_chaque_cote = True ## TODO TODO le faire un paramètre par défaut ##
 ## TODO un menu in-game ##
-
 class nom:
     nom = 'Echecs'
 if oui: ## Commentaires et TODO ##
@@ -37,6 +36,8 @@ if oui: ## Commentaires et TODO ##
     #### Pat ################## o ## ## Finish fait ###
     ###################################################
     pass
+class glob:
+    path_sauv = 'Depandances\\Outils\\Jeux\\parties_sauvees.txt'
 class echecs: ########################### Terminé ##
     if oui: ## Dessin des pièces ######## Terminé ##
         if oui: ### Anciens ###
@@ -214,7 +215,7 @@ class echecs: ########################### Terminé ##
         def rename(self, nom): ################################################# Terminé ##
             self.nom = nom
         def parties_sauvees(self): ############################################# Terminé ##
-            fs = open('parties_sauvees.txt', 'r')
+            fs = open(glob.path_sauv, 'r')
             parties_sauvees = fs.read()
             fs.close()
             parties = {}
@@ -266,7 +267,7 @@ class echecs: ########################### Terminé ##
             a_ecrire = ''
             for i in parties:
                 a_ecrire += f'{i} {parties[i]}\n'
-            fs = open('parties_sauvees.txt', 'w')
+            fs = open(glob.path_sauv, 'w')
             fs.write(a_ecrire)
             fs.close()
         def charge_partie(self, nom_sauvegarde): ############################### Terminé ##
@@ -835,6 +836,7 @@ class echecs: ########################### Terminé ##
     if oui: ## Trucs sur la classe ## ### Terminé ##
         def __init__(self, nom=nom.nom, j1=j1, j2=j2, langue='eo', tourne=non, help=non, dev=non): ## Terminé ##
             if oui: ## Vars ##
+                self.begin_playing = False
                 self.result = [0, 0]
                 if j1 != self.j1.lower() and j2 != self.j2.lower():
                     tirage = [j1, j2]
@@ -1083,40 +1085,33 @@ class echecs: ########################### Terminé ##
                         break
             return(player)
         def menu(self): ######################################################## Terminé ##
-            if self.begin_playing:
-                rj = self.jouer()
-                while True:
-                    if self.exit: ## End of program ##
-                        break
-                    if rj: ## Restart a game ##
-                        self.rejouer()
-                        rj = self.jouer()
-                    else: ## End game ##
-                        break
-            else:
+            if not self.begin_playing:
                 j = self.menuy()
                 if j: ## Play ##
                     rj = self.jouer()
                 else: ## Menuy ##
                     rj = False
-                while True:
-                    if self.exit: ## End of program ##
-                        break
-                    if rj: ## Restart a game ##
-                        self.rejouer()
-                        rj = self.jouer()
-                    else: ## Go to menu ##
-                        self.rejouer()
-                        rj = self.menuy()
+            else:
+                rj = self.jouer()
+            while True:
+                if self.exit: ## End of program ##
+                    break
+                if rj: ## Restart a game ##
+                    self.rejouer()
+                    rj = ex = self.jouer()
+                else: ## Go to menu ##
+                    self.rejouer()
+                    rj = self.menuy()
         def start(self): ####################################################### Terminé ##
             try:
                 while True:
                     self.menu()
                     if self.exit: ## End of program ##
                         break
-            except InterruptedError: pass
+            except InterruptedError:
+                pass
             except Exception as ERREUR:
-                if self.help: print(ERREUR)
+                print(ERREUR)
     if oui: ## Imagaison ## ############# Terminé ##
         def disquette(self, img, c1, c2, c3, c4): ############################## Terminé ##
             rectangle(img, c1, c4, bleu, 0)
@@ -1464,7 +1459,7 @@ class echecs: ########################### Terminé ##
             img = self.img
             texte1 = self.fin_partie
             texte2 = str(self.causes_fin_partie[self.cause_fin]) if self.cause_fin != 'nulle' else str(self.causes_fin_partie[self.cause_fin][self.nulle])
-            self.result = [1, 0] if self.cause_fin in ['blancs_m', 'blancs_a'] else [0, 1] if self.cause_fin in ['noirs_m', 'noirs_a'] else [0.5, 0.5]
+            self.result = [1, 0] if self.cause_fin == 'blancs_m' or 'blancs_a' else [0.5, 0.5] if self.cause_fin == 'nulle' else [0, 1]
             raise NotImplementedError()
             p1, p2, p3, p4, ct = echecs.ct1, echecs.ct2, echecs.ct3, echecs.ct4, echecs.ct
             cg, cd, ch, cb = ct_sg(p1, p3), ct_sg(p2, p4), ct_sg(p3, p4), ct_sg(p3, p4)
@@ -1664,7 +1659,7 @@ class echecs: ########################### Terminé ##
                         move = f'{p}{p1} -> {p2}'
                     else:
                         move = f'{p}{p1} x {t}{p2}'
-                    if self.help: print(move)
+                    print(move)
                     if t == 'r':
                         jb = False
                     else:
@@ -1680,35 +1675,17 @@ class echecs: ########################### Terminé ##
                 else: ## If move is not legal => illegal move ##
                     if self.help:
                         nemovepas = f'{self.piece} {p1} -> {p2}:\n    {self.illegal_move}'
-                        if self.help: print(nemovepas)
+                        print(nemovepas)
                     self.image()
                 break
             return(False)
-try: import TR_transitions as trs; trs_ = True
-except: trs_ = False
-def starty(j1=echecs.j1, j2=echecs.j2, nm=nom.nom, lg='fr', trn=non, help=non, dev=non, bgn_playing:bool=True, frm=False):
-    jeu = echecs(nom=nm, j1=j1, j2=j2, langue=lg, tourne=trn, help=help, dev=dev)
-    jeu.begin_playing = bgn_playing
+def starty(j1=echecs.j1, j2=echecs.j2, nom=nom.nom, langue='fr', tourne=non, help=non, dev=non):
+    jeu = echecs(nom=nom, j1=j1, j2=j2, langue=langue, tourne=tourne, help=help, dev=dev)
+    jeu.begin_playing = True
     try: jeu.start()
     except NotImplementedError: pass
-    if help: print(jeu.cause_fin)
-    if frm: ferme(nom)
-    elif trs_: trs.shade(jeu.img)
-    if jeu.j1.nom+jeu.j2.nom==j1+j2:
-        return(jeu.result)
-    else:
-        return(jeu.result[::-1])
-def start(j1=None, j2=None, nm=None, lg=None, trn=None):
-    sl='selection'; truc = False
-    for i in [j1, j2, nm, lg, trn]:
-        if i == None or i == 0 or i == '': truc = True
-    while j1 == None or j1 == 0 or j1 == '': j1 = visual_input(image(remplissage=turquoise), 'J1: ', echecs.j1, '', sl)
-    while j2 == None or j2 == 0 or j2 == '': j2 = visual_input(image(remplissage=turquoise), 'J2: ', echecs.j2, '', sl)
-    while nm == None or nm == 0 or nm == '': nm = visual_input(image(remplissage=turquoise), 'Nom partie: ', nom.nom, '', sl)
-    while lg == None or lg == 0 or lg == '': lg = visual_input(image(remplissage=turquoise), 'Langue: ', 'fr', '', sl)
-    while trn == None or trn == 0 or trn == '': trn = visual_input(image(remplissage=turquoise), '\nTourne: ', 'False', '\n[True/False]', sl)
-    tourne = oui if trn == 'True' else non
-    if truc: ferme(sl)
-    return(starty(j1=j1, j2=j2, nm=nm, lg=lg, trn=tourne, help=non, dev=non, bgn_playing=False))
+    return(jeu.result)
+def start(j1=None, j2=None, nm=None, lg=None, trn=False):
+    return(starty(j1=j1, j2=j2, nom=nm, langue=lg, tourne=trn, help=non, dev=non))
 if __name__ == '__main__':
-    print(start(input('J1: '), input('J2: '), 'C', 'fr', 'False'))
+    print(start('a', 'b', 'C', 'fr', 'False'))
