@@ -1459,7 +1459,7 @@ class echecs: ########################### Terminé ##
             img = self.img
             texte1 = self.fin_partie
             texte2 = str(self.causes_fin_partie[self.cause_fin]) if self.cause_fin != 'nulle' else str(self.causes_fin_partie[self.cause_fin][self.nulle])
-            self.result = [1, 0] if self.cause_fin == 'blancs_m' or 'blancs_a' else [0.5, 0.5] if self.cause_fin == 'nulle' else [0, 1]
+            self.result = [1, 0] if self.cause_fin in ['blancs_m', 'blancs_a'] else [0.5, 0.5] if self.cause_fin == 'nulle' else [0, 1]
             raise NotImplementedError()
             p1, p2, p3, p4, ct = echecs.ct1, echecs.ct2, echecs.ct3, echecs.ct4, echecs.ct
             cg, cd, ch, cb = ct_sg(p1, p3), ct_sg(p2, p4), ct_sg(p3, p4), ct_sg(p3, p4)
