@@ -306,20 +306,12 @@ class echecs: ########################### Terminé ##
             self.jouer()
     if oui: ## Infos ## ################# Terminé ##
         def points(self, p): ################################################### Terminé ##
-            if p == 'r':
-                return(0)
-            elif p == 'p':
-                return(1)
-            elif p == 'c':
-                return(3)
-            elif p == 'f':
-                return(3)
-            elif p == 't':
-                return(5)
-            elif p == 'd':
-                return(9)
-            else:
-                return(0)
+            match p:
+                case 'p': return 1
+                case 'c' | 'f': return 3
+                case 't': return 5
+                case 'd': return 9
+                case _: return 0
         def avantage(self, jr): ################################################ Terminé ##
             if jr == '1':
                 jr = True
