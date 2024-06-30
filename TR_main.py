@@ -77,7 +77,7 @@ try:
             if points_p_g in [compteur.j1, compteur.j2]:
                 break
         text = f'Le.a gagnant.e est\n{j1.nom if compteur.j1 > compteur.j2 else j2.nom} !!!\nFelicitations'
-        montre(ecris(ouvre_image(f'{imgs_path}\\{n_img1}'), text, taille=3))
+        montre(ecris(ouvre_image(f'{imgs_path}/{n_img1}'), text, taille=3))
         raise ENDGAME
 except KeyboardInterrupt: pass
 except ENDGAME:
@@ -87,8 +87,8 @@ except Exception as e:
     import traceback as tb
     import os
     err = '\n'.join(er for er in tb.format_exception(e))
-    with open(f'{os.path.dirname(__file__)}\\Infos\\Logs.log', 'a', encoding='utf8') as file:
+    with open(f'{os.path.dirname(__file__)}/Infos/Logs.log', 'a', encoding='utf8') as file:
         file.write('\n'+'-'*50+'\n'+err)
-    print(f'AN EXCEPTION OCCURRED\n\tRefer to \033[1;4;36m{os.path.dirname(__file__)}\\Infos\\Logs.log\033[00m')
+    print(f'AN EXCEPTION OCCURRED\n\tRefer to \033[1;4;36m{os.path.dirname(__file__)}/Infos/Logs.log\033[00m')
 finally:
     print(f'\033[1;34mGAME \033[1;32mENDED \033[1;31m!\033[00m')

@@ -37,7 +37,7 @@ if oui: ## Commentaires et TODO ##
     ###################################################
     pass
 class glob:
-    path_sauv = 'Depandances\\Outils\\Jeux\\parties_sauvees.txt'
+    path_sauv = 'Depandances/Outils/Jeux/parties_sauvees.txt'
 class echecs: ########################### Terminé ##
     if oui: ## Dessin des pièces ######## Terminé ##
         if oui: ### Anciens ###

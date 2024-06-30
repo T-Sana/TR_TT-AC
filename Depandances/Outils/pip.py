@@ -12,7 +12,7 @@ def get_installed_packages():
     r = str(subprocess.check_output([sys.executable, "-m", "pip", "freeze"]))
     pckgs = []; pckg = ''; t = False
     for i in r[2:len(r)-1]:
-        if i == '\\':
+        if i == '/':
             t = True
             if pckg == 'r' or pckg == 'n': pckg = ''
             elif pckg != '':

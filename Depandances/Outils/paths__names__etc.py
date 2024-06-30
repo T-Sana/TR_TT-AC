@@ -12,7 +12,7 @@ def create_dir_if_unexisting(name, path='./') -> None:
     :name: name of the file/folder to check existance of\n
     :path: where the file is supposed to be and would be created the file
     '''
-    try: os.mkdir(f"{path}\\{name}")
+    try: os.mkdir(f"{path}/{name}")
     except: return
 
 if True: ## Format.vars ##
@@ -58,15 +58,15 @@ if True: ## Paths ##
     imgs = 'Imgs'
     config = 'Config'
     depts_path = 'Depandances' ## Do NOT change ! (unless you know what you are doing) ##
-    imgs_path = f'{depts_path}\\{imgs}'
-    trash_path = f'{depts_path}\\{trash}'
-    config_path = f'{depts_path}\\{config}'
-    create_dir_if_unexisting(imgs, f'{dir}\\{depts_path}')
+    imgs_path = f'{depts_path}/{imgs}'
+    trash_path = f'{depts_path}/{trash}'
+    config_path = f'{depts_path}/{config}'
+    create_dir_if_unexisting(imgs, f'{dir}/{depts_path}')
 if True: ## Exceptions ##
     class invalidPlace(Exception):
         def __init__(self, file, line):
-            path = f'{BOLD_BLUE}{os.getcwd()}\\{imgs_path}{NORMAL}'
-            path_here = f'{BOLD_BLUE}{os.getcwd()}\\TR_setup.py, line {line}{NORMAL}'
+            path = f'{BOLD_BLUE}{os.getcwd()}/{imgs_path}{NORMAL}'
+            path_here = f'{BOLD_BLUE}{os.getcwd()}/TR_setup.py, line {line}{NORMAL}'
             filename = f'{UNDERLINED+BOLD_GREEN}{file}{NORMAL}'
             file = f'{BOLD_RED}FILE{NORMAL}'
             error = f'{BOLD_RED}ERROR WHILE SCANING DIRECTORY{NORMAL}'
@@ -113,10 +113,10 @@ if True: ## Keys.vars ##
     keys_set = "{'keysj1': [2490368, 2621440, 2555904, 2424832], 'keysj2': [119, 115, 100, 97], 'pause':[112]}"
     keys = ''
     try:
-        with open(f'.\\{config_path}\\keys.txt', 'r') as file: keys = file.read()
+        with open(f'./{config_path}/keys.txt', 'r') as file: keys = file.read()
     except:
         create_dir_if_unexisting(config, depts_path)
-        with open(f'.\\{config_path}\\keys.txt', 'x') as file: file.write(keys_set)
+        with open(f'./{config_path}/keys.txt', 'x') as file: file.write(keys_set)
     if keys == '': keys = keys_set
     configKeys = eval(keys)
 j1 = joueur('j1', clrs=[rouge, bleu], t=1.5, keys=configKeys['keysj1'])

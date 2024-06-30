@@ -410,17 +410,17 @@ if True:  # Img2 ## @@ Ville @@
 
 
 def img_cart1() -> None:
-    sauve_image(n_img1, img1(), f'{dir}\\{imgs_path}')
+    sauve_image(n_img1, img1(), f'{dir}/{imgs_path}')
 
 
 def img_cart2() -> None:
-    sauve_image(n_img2, img2(), f'{dir}\\{imgs_path}')
+    sauve_image(n_img2, img2(), f'{dir}/{imgs_path}')
 
 
 def demo_img2():
     img_cart2()
     d = [haut*2, long, 3]
-    im2 = ouvre_image(f'{dir}\\{imgs_path}\\{n_img2}')
+    im2 = ouvre_image(f'{dir}/{imgs_path}/{n_img2}')
     for i in range(0, d[0]-haut+1, 2):
         wk = montre_part(im2, pto=[0, i], attente=1, destroy=non)
         if wk == 27:
@@ -434,16 +434,16 @@ def demo_img2():
 
 def img_chrg() -> None:  # MAIN ##
     try:
-        img = ouvre_image(f'{dir}\\{imgs_path}\\{n_img1}')
+        img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
     except:
         img_cart1()
-        img = ouvre_image(f'{dir}\\{imgs_path}\\{n_img1}')
+        img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
     try:
         if type(img) == None:
             img_cart1()
             raise Exception
     except:
-        img = ouvre_image(f'{dir}\\{imgs_path}\\{n_img1}')
+        img = ouvre_image(f'{dir}/{imgs_path}/{n_img1}')
     marron = nouvelle_couleur('122336')
     t = 9
     t2 = 5
@@ -471,10 +471,10 @@ def img_chrg() -> None:  # MAIN ##
     ecris(img, f'{aut1}', pg, bd, t-t2, turquoise, 5)
     ecris(img, f'{aut2}', pg2, bd, t-t2, noir, 15)
     ecris(img, f'{aut2}', pg2, bd, t-t2, turquoise, 5)
-    sauve_image(n_img_chargement, img, f'{dir}\\{imgs_path}')
+    sauve_image(n_img_chargement, img, f'{dir}/{imgs_path}')
 
 
 if __name__ == '__main__':
     img_chrg()
-    img = ouvre_image(f'{imgs_path}\\{n_img_chargement}')
+    img = ouvre_image(f'{imgs_path}/{n_img_chargement}')
     montre(img)
